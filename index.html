@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#080908">
+  <meta name="description" content="KI Spotify Agent von AI Kitz: AI-Playlists, Preview-First Qualitätskontrolle, Auto-DJ, Event Radar und Spotify-Automationen für Hospitality, Events und professionelle Musiksteuerung.">
+  <meta name="robots" content="index,follow">
+  <meta property="og:title" content="KI Spotify Agent · AI Kitz">
+  <meta property="og:description" content="Musikwunsch rein. Validierte Spotify-Playlist raus. Mit Preview-First Engine, Auto-DJ und Event Radar.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kispotify.kitzlabs.ai/">
+  <title>KI Spotify Agent · AI Kitz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      color-scheme:dark;
+      --bg:#080908;--surface:rgba(18,20,23,.92);--surface2:rgba(24,27,31,.92);
+      --soft:rgba(255,255,255,.045);--line:rgba(255,255,255,.095);--line2:rgba(255,255,255,.16);
+      --text:#f7f7f5;--muted:#969ba5;--muted2:#666c76;--red:#ef183f;--red2:#b90c31;
+      --green:#1ed760;--amber:#f0b34a;--radius:22px;--shadow:0 30px 90px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;background:var(--bg)}
+    body{
+      margin:0;min-width:320px;background:
+      radial-gradient(circle at 78% -10%,rgba(218,12,52,.15),transparent 33rem),
+      radial-gradient(circle at 12% 32%,rgba(30,215,96,.035),transparent 28rem),
+      radial-gradient(circle at 45% 105%,rgba(68,29,38,.12),transparent 34rem),var(--bg);
+      color:var(--text);font-family:Sora,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    }
+    a{color:inherit;text-decoration:none}
+    button,input{font:inherit}
+    button{cursor:pointer;color:inherit}
+    img{max-width:100%}
+    .wrap{width:min(1180px,calc(100% - 36px));margin:0 auto}
+    .eyebrow{display:block;color:#858b95;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+    .muted{color:var(--muted)}
+    .panel{
+      border:1px solid var(--line);border-radius:var(--radius);
+      background:linear-gradient(145deg,rgba(21,23,27,.94),rgba(13,15,17,.94));
+      box-shadow:inset 0 1px rgba(255,255,255,.025),0 20px 54px rgba(0,0,0,.18)
+    }
+    .nav{
+      position:sticky;top:0;z-index:50;backdrop-filter:blur(18px);
+      background:linear-gradient(180deg,rgba(8,9,8,.94),rgba(8,9,8,.72));
+      border-bottom:1px solid rgba(255,255,255,.055)
+    }
+    .nav-inner{height:76px;display:flex;align-items:center;justify-content:space-between;gap:28px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand-mark{
+      width:40px;height:40px;border-radius:12px;display:grid;place-items:center;
+      border:1px solid var(--line);background:linear-gradient(145deg,#151719,#0c0d0e);
+      box-shadow:inset 0 1px rgba(255,255,255,.05)
+    }
+    .brand-mark svg{width:23px;height:23px}
+    .brand-copy strong{display:block;font-size:13px;font-weight:600}
+    .brand-copy span{display:block;margin-top:3px;color:var(--muted2);font-size:8px;letter-spacing:.12em;text-transform:uppercase}
+    .nav-links{display:flex;gap:24px;align-items:center;color:#989da6;font-size:11px}
+    .nav-links a:hover{color:#fff}
+    .button{
+      min-height:42px;padding:0 16px;border-radius:11px;border:1px solid var(--line);
+      background:rgba(255,255,255,.045);display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      font-size:11px;transition:.16s ease
+    }
+    .button:hover{transform:translateY(-1px);border-color:var(--line2);background:rgba(255,255,255,.07)}
+    .button.primary{
+      border-color:rgba(255,80,111,.2);background:linear-gradient(135deg,#f51b45,#bd0c31);
+      box-shadow:0 8px 24px rgba(239,24,63,.18);font-weight:600
+    }
+    .button.ghost{background:transparent}
+    .hero{padding:86px 0 54px;overflow:hidden}
+    .hero-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(560px,1.1fr);gap:54px;align-items:center}
+    .hero h1{
+      margin:17px 0 22px;font-size:clamp(46px,6vw,80px);line-height:.98;
+      letter-spacing:-.058em;font-weight:500;max-width:690px
+    }
+    .hero h1 em{font-style:normal;color:#fff;position:relative}
+    .hero h1 em:after{content:"";position:absolute;left:4px;right:0;bottom:-6px;height:2px;background:linear-gradient(90deg,var(--red),transparent)}
+    .hero p{max-width:650px;color:#afb3bb;font-size:clamp(15px,1.4vw,19px);line-height:1.72}
+    .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px}
+    .hero-badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:27px}
+    .badge{
+      border:1px solid var(--line);background:rgba(255,255,255,.035);border-radius:999px;
+      color:#c6c9cf;font-size:9px;padding:8px 11px
+    }
+    .badge .live-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(30,215,96,.08);margin-right:7px}
+    .mock-shell{
+      position:relative;border:1px solid var(--line2);border-radius:26px;padding:12px;
+      background:rgba(9,10,11,.78);box-shadow:0 45px 110px rgba(0,0,0,.45);
+      transform:perspective(1500px) rotateY(-3deg) rotateX(1.2deg)
+    }
+    .mock-shell:before{
+      content:"";position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;
+      background:linear-gradient(135deg,rgba(255,255,255,.08),transparent 25%,transparent 70%,rgba(239,24,63,.12));
+      mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;padding:1px
+    }
+    .mock-top{display:flex;align-items:center;gap:7px;padding:1px 5px 10px}
+    .mock-top i{width:7px;height:7px;border-radius:50%;background:#34373b}
+    .mock-top i:first-child{background:var(--red)}
+    .mock-url{margin-left:9px;color:#626872;font-size:7px}
+    .app-grid{height:480px;display:grid;grid-template-columns:145px minmax(0,1fr) 165px;overflow:hidden;border-radius:18px;border:1px solid var(--line);background:#090a0a}
+    .app-side{border-right:1px solid var(--line);padding:17px 11px;background:#080909}
+    .mini-brand{display:flex;gap:8px;align-items:center;margin-bottom:22px}
+    .mini-logo{height:29px;width:29px;border-radius:9px;border:1px solid var(--line);display:grid;place-items:center;background:#111316;font-size:11px}
+    .mini-brand strong{font-size:8px}.mini-brand span{display:block;color:#5d626b;font-size:6px;margin-top:3px}
+    .mini-nav{display:grid;gap:4px}
+    .mini-nav div{height:31px;border-radius:8px;padding:0 9px;display:flex;align-items:center;gap:8px;color:#737983;font-size:7px}
+    .mini-nav div.active{color:#fff;background:linear-gradient(90deg,rgba(239,24,63,.16),rgba(239,24,63,.035));border:1px solid rgba(239,24,63,.14)}
+    .side-status{margin-top:18px;padding-top:13px;border-top:1px solid var(--line);font-size:6px;color:#666c75}
+    .side-status b{color:#aeb3ba}
+    .app-center{padding:18px;min-width:0;background:radial-gradient(circle at 80% 0%,rgba(239,24,63,.08),transparent 240px)}
+    .center-title{display:flex;justify-content:space-between;align-items:start}
+    .center-title h3{font-size:17px;letter-spacing:-.045em;margin:4px 0 0;font-weight:500}
+    .center-title span{font-size:6px;color:#656b75}
+    .chat{margin-top:18px;display:grid;gap:9px}
+    .message{max-width:88%;border:1px solid var(--line);border-radius:11px;padding:10px 11px;font-size:7px;line-height:1.5;background:rgba(255,255,255,.035)}
+    .message.user{margin-left:auto;background:rgba(239,24,63,.095);border-color:rgba(239,24,63,.16)}
+    .preview{border:1px solid rgba(255,255,255,.11);border-radius:12px;background:rgba(17,19,21,.96);padding:11px;margin-top:1px}
+    .preview-head{display:flex;justify-content:space-between;gap:8px}
+    .preview h4{font-size:9px;margin:3px 0 0}
+    .score{width:34px;height:34px;border-radius:50%;background:conic-gradient(var(--green) 0 88%,rgba(255,255,255,.08) 88%);display:grid;place-items:center}
+    .score:after{content:"94";width:27px;height:27px;border-radius:50%;background:#111316;display:grid;place-items:center;font-size:7px}
+    .track{display:grid;grid-template-columns:14px 1fr auto;gap:6px;padding:6px 0;border-top:1px solid rgba(255,255,255,.055);font-size:6px;color:#b7bbc2}
+    .track:first-of-type{margin-top:8px}.track em{color:#69707a;font-style:normal}
+    .composer{margin-top:10px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.035);padding:9px;font-size:6px;color:#656b75}
+    .app-right{border-left:1px solid var(--line);padding:14px 10px;background:#0a0b0c}
+    .app-right h4{font-size:8px;font-weight:500;margin:3px 0 11px}
+    .playlist-mini{display:flex;gap:7px;padding:8px 0;border-top:1px solid rgba(255,255,255,.055);align-items:center}
+    .cover{width:29px;height:29px;border-radius:7px;flex:0 0 auto;background:linear-gradient(145deg,#2b2e33,#101214);display:grid;place-items:center;font-size:8px}
+    .playlist-mini strong{display:block;font-size:6px;font-weight:500}.playlist-mini span{display:block;font-size:5px;color:#656b75;margin-top:3px}
+    .hero-glow{position:absolute;width:300px;height:300px;border-radius:50%;background:rgba(239,24,63,.13);filter:blur(70px);right:-70px;top:-70px;pointer-events:none}
+    .stats{padding:16px 0 68px}
+    .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+    .stat{min-height:88px;padding:17px;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.025)}
+    .stat small{display:block;color:#747a84;font-size:8px;text-transform:uppercase;letter-spacing:.08em}
+    .stat strong{display:block;margin-top:7px;font-weight:500;font-size:17px;letter-spacing:-.03em}
+    section.block{padding:72px 0}
+    .section-head{display:flex;justify-content:space-between;gap:32px;align-items:end;margin-bottom:28px}
+    .section-head h2{font-size:clamp(31px,4vw,50px);font-weight:500;letter-spacing:-.052em;margin:10px 0 0;max-width:760px}
+    .section-head p{max-width:460px;color:var(--muted);font-size:12px;line-height:1.7;margin:0}
+    .demo-layout{display:grid;grid-template-columns:minmax(0,.92fr) minmax(440px,1.08fr);gap:18px}
+    .demo-control{padding:26px}
+    .demo-control h3{font-size:22px;font-weight:500;letter-spacing:-.04em;margin:8px 0 8px}
+    .demo-control p{font-size:11px;color:var(--muted);line-height:1.6;margin:0 0 18px}
+    .prompt-box{display:flex;gap:8px}
+    .prompt-box input{
+      flex:1;min-width:0;height:48px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.045);
+      color:#fff;padding:0 13px;outline:none;font-size:11px
+    }
+    .prompt-box input:focus{border-color:rgba(239,24,63,.58);box-shadow:0 0 0 3px rgba(239,24,63,.08)}
+    .quick-prompts{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}
+    .quick-prompts button{border:1px solid var(--line);background:rgba(255,255,255,.03);border-radius:999px;padding:8px 10px;font-size:8px}
+    .quick-prompts button:hover{border-color:rgba(239,24,63,.28);background:rgba(239,24,63,.07)}
+    .demo-note{margin-top:17px;padding-top:15px;border-top:1px solid var(--line);font-size:8px;color:#656b75;line-height:1.6}
+    .demo-screen{padding:20px;min-height:420px;overflow:hidden;position:relative}
+    .demo-screen header{display:flex;justify-content:space-between;align-items:start}
+    .demo-screen h3{font-size:16px;font-weight:500;margin:5px 0 0;letter-spacing:-.03em}
+    .status-chip{border:1px solid rgba(30,215,96,.16);background:rgba(30,215,96,.06);color:#8ee9ae;border-radius:999px;font-size:7px;padding:7px 9px}
+    .result-card{margin-top:19px;border:1px solid var(--line);border-radius:15px;padding:17px;background:rgba(255,255,255,.025)}
+    .result-top{display:flex;justify-content:space-between;gap:12px}
+    .result-top h4{font-size:15px;margin:5px 0 0;font-weight:500}
+    .result-tags{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}
+    .result-tags span{font-size:7px;padding:6px 8px;border:1px solid var(--line);border-radius:999px;color:#9da2aa}
+    .result-list{display:grid}
+    .result-track{display:grid;grid-template-columns:24px 1fr auto;gap:10px;align-items:center;min-height:46px;border-top:1px solid rgba(255,255,255,.055)}
+    .result-track:first-child{border-top:0}
+    .result-track b{font-size:7px;color:#5e646e;font-weight:500}
+    .result-track strong{display:block;font-size:9px;font-weight:500}.result-track small{display:block;color:#686e77;font-size:7px;margin-top:3px}
+    .result-track em{font-size:7px;color:#7fe0a0;font-style:normal}
+    .result-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:12px;padding-top:13px;border-top:1px solid var(--line);font-size:8px;color:#747a84}
+    .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .feature{padding:22px;min-height:200px}
+    .feature-icon{width:42px;height:42px;border-radius:12px;border:1px solid var(--line);display:grid;place-items:center;background:rgba(255,255,255,.035);font-size:15px}
+    .feature h3{font-size:14px;font-weight:500;margin:20px 0 8px}
+    .feature p{font-size:10px;line-height:1.65;color:#858b94;margin:0}
+    .feature .feature-tag{display:inline-block;margin-top:18px;color:#757b85;font-size:7px;letter-spacing:.08em;text-transform:uppercase}
+    .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    .step{padding:20px;position:relative}
+    .step b{display:block;color:var(--red);font-size:9px;letter-spacing:.1em}
+    .step h3{font-size:14px;font-weight:500;margin:28px 0 7px}
+    .step p{font-size:9px;line-height:1.65;color:#7f858e;margin:0}
+    .showcase-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:14px}
+    .showcase-main,.showcase-side{padding:22px;min-height:340px}
+    .showcase-main h3,.showcase-side h3{font-size:18px;font-weight:500;margin:8px 0 7px}
+    .showcase-main p,.showcase-side p{font-size:10px;color:#7f858e;line-height:1.6}
+    .radar{display:grid;gap:8px;margin-top:24px}
+    .event{display:grid;grid-template-columns:56px 1fr auto;gap:11px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.025)}
+    .event-date{text-align:center;border-right:1px solid var(--line);padding-right:10px}.event-date strong{font-size:13px}.event-date span{display:block;font-size:6px;color:#6b717a}
+    .event h4{font-size:9px;margin:0}.event p{font-size:7px;margin:4px 0 0}
+    .event button{border:1px solid var(--line);border-radius:8px;background:rgba(255,255,255,.035);font-size:7px;padding:7px 8px}
+    .automation-list{display:grid;gap:8px;margin-top:22px}
+    .automation{display:grid;grid-template-columns:1fr auto;gap:10px;padding:12px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.025)}
+    .automation strong{font-size:8px}.automation span{display:block;font-size:6px;color:#696f79;margin-top:4px}
+    .toggle{width:26px;height:14px;border-radius:999px;background:rgba(30,215,96,.18);border:1px solid rgba(30,215,96,.22);position:relative}
+    .toggle:after{content:"";position:absolute;width:8px;height:8px;border-radius:50%;background:var(--green);right:2px;top:2px}
+    .integrations{display:flex;gap:8px;flex-wrap:wrap}
+    .integration{border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.025);padding:11px 14px;font-size:9px;color:#b4b8bf}
+    .cta{padding:78px 0 96px}
+    .cta-card{
+      overflow:hidden;position:relative;padding:clamp(32px,6vw,70px);text-align:center;
+      border:1px solid rgba(239,24,63,.2);border-radius:28px;background:
+      radial-gradient(circle at 50% -20%,rgba(239,24,63,.22),transparent 30rem),
+      linear-gradient(145deg,rgba(21,23,27,.96),rgba(10,11,12,.96))
+    }
+    .cta-card h2{font-size:clamp(34px,5vw,60px);font-weight:500;letter-spacing:-.055em;margin:12px auto 16px;max-width:800px}
+    .cta-card p{max-width:640px;margin:0 auto;color:#9da2aa;font-size:12px;line-height:1.7}
+    .cta-card .hero-actions{justify-content:center}
+    footer.site-footer{border-top:1px solid var(--line);padding:28px 0 38px;color:#646a73;font-size:8px}
+    .footer-grid{display:flex;justify-content:space-between;gap:28px;align-items:start}
+    .footer-grid p{max-width:650px;line-height:1.7;margin:7px 0 0}
+    .footer-links{display:flex;gap:15px;white-space:nowrap}
+    .mobile-menu{display:none}
+    @media(max-width:1050px){
+      .hero-grid{grid-template-columns:1fr;gap:42px}.hero-copy{max-width:800px}.mock-shell{transform:none}
+      .demo-layout{grid-template-columns:1fr}.feature-grid{grid-template-columns:repeat(2,1fr)}
+      .flow{grid-template-columns:repeat(2,1fr)}.showcase-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:760px){
+      .wrap{width:min(100% - 24px,1180px)}.nav-links{display:none}.mobile-menu{display:inline-flex}
+      .hero{padding-top:56px}.hero h1{font-size:clamp(43px,13vw,64px)}.hero-grid{gap:32px}
+      .mock-shell{padding:8px;border-radius:20px}.app-grid{height:420px;grid-template-columns:1fr}.app-side,.app-right{display:none}.app-center{padding:15px}
+      .stats{padding-bottom:38px}.stat-row{grid-template-columns:repeat(2,1fr)}
+      section.block{padding:52px 0}.section-head{display:block}.section-head p{margin-top:15px}
+      .feature-grid{grid-template-columns:1fr}.flow{grid-template-columns:1fr}.demo-screen{min-height:390px}.demo-layout{grid-template-columns:minmax(0,1fr)}
+      .prompt-box{display:grid}.showcase-main,.showcase-side{min-height:unset}
+      .footer-grid{display:block}.footer-links{margin-top:18px;flex-wrap:wrap}
+    }
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}.mock-shell{transform:none}}
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top" aria-label="KI Spotify Agent Start">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 15.2c4.4-2.2 11-1.7 15.2.8" stroke="#ef183f" stroke-width="1.8" stroke-linecap="round"/><path d="M5.2 11.2c4.1-1.8 9.8-1.5 13.5.4" stroke="#f7f7f5" stroke-opacity=".75" stroke-width="1.5" stroke-linecap="round"/><path d="M6.5 7.7c3.5-1.2 7.9-.9 10.8.4" stroke="#1ed760" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </span>
+        <span class="brand-copy"><strong>KI Spotify Agent</strong><span>AI Kitz · Music Intelligence</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="#demo">Live Mockup</a><a href="#features">Features</a><a href="#workflow">Ablauf</a><a href="#usecases">Einsatz</a>
+      </div>
+      <a class="button primary" href="https://spotify.kitzlabs.ai/" target="_blank" rel="noreferrer">System öffnen ↗</a>
+    </div>
+  </nav>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">AI PLAYLIST ENGINE · SPOTIFY AUTOMATION</span>
+          <h1>Dein intelligentes <em>Musiksystem.</em></h1>
+          <p>Ein Musikwunsch reicht. Der KI Spotify Agent plant, sucht, validiert und baut hochwertige Playlists für jedes Genre – inklusive Preview-First Qualitätscheck, Auto-DJ, Event Radar und laufenden Updates.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#demo">Interaktive Demo starten ✦</a>
+            <a class="button" href="#features">Alle Features ansehen</a>
+          </div>
+          <div class="hero-badges">
+            <span class="badge"><span class="live-dot"></span><span id="liveStatus">Live-System wird geprüft</span></span>
+            <span class="badge">◆ Preview-First</span><span class="badge">↻ Auto-DJ</span><span class="badge">∞ Alle Genres</span>
+          </div>
+        </div>
+
+        <div class="mock-shell" aria-label="Live Mockup der KI Spotify Agent Oberfläche">
+          <span class="hero-glow"></span>
+          <div class="mock-top"><i></i><i></i><i></i><span class="mock-url">kispotify.kitzlabs.ai · Product Preview</span></div>
+          <div class="app-grid">
+            <aside class="app-side">
+              <div class="mini-brand"><div class="mini-logo">✦</div><div><strong>Music AI</strong><span>AI KITZ</span></div></div>
+              <div class="mini-nav">
+                <div class="active">⌂ Übersicht</div><div>✦ Playlist Studio</div><div>◫ Playlists</div><div>↻ Auto-DJ</div><div>◇ Event Radar</div><div>⚙ Einstellungen</div>
+              </div>
+              <div class="side-status"><span class="live-dot"></span> <b>Spotify API</b><br><br>KI Engine bereit</div>
+            </aside>
+            <section class="app-center">
+              <div class="center-title"><div><span>LOEWS AI MUSIC AGENT</span><h3>Playlist Studio</h3></div><span>PREVIEW-FIRST</span></div>
+              <div class="chat">
+                <div class="message user">Erstelle mir 2 Stunden Afro House für einen Rooftop Sunset. Bekanntheit 80%.</div>
+                <div class="message">Ich prüfe Genre, Energie, Bekanntheit, Duplikate und Flow. Hier ist deine Vorschau:</div>
+                <div class="preview">
+                  <div class="preview-head"><div><span class="eyebrow">AI PREVIEW</span><h4>Rooftop Sunset · Afro House</h4></div><span class="score"></span></div>
+                  <div class="track"><b>01</b><span>Move · Adam Port, Stryv</span><em>97</em></div>
+                  <div class="track"><b>02</b><span>Thandaza · Keinemusik</span><em>95</em></div>
+                  <div class="track"><b>03</b><span>Music Sounds Better · Rampa</span><em>93</em></div>
+                  <div class="track"><b>04</b><span>Abalele · Kabza De Small</span><em>91</em></div>
+                </div>
+                <div class="composer">Neuen Musikwunsch eingeben …</div>
+              </div>
+            </section>
+            <aside class="app-right">
+              <span class="eyebrow">LIBRARY</span><h4>Deine Playlists</h4>
+              <div class="playlist-mini"><div class="cover">✦</div><div><strong>Rooftop Sunset</strong><span>42 Songs · AUTO</span></div></div>
+              <div class="playlist-mini"><div class="cover">♪</div><div><strong>Dinner Classics</strong><span>58 Songs · AUTO</span></div></div>
+              <div class="playlist-mini"><div class="cover">◆</div><div><strong>Schlager Party</strong><span>50 Songs · MANUELL</span></div></div>
+              <div class="playlist-mini"><div class="cover">◈</div><div><strong>Late Night House</strong><span>64 Songs · AUTO</span></div></div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div class="wrap stat-row">
+        <div class="stat"><small>Genre Engine</small><strong>Alle Genres</strong></div>
+        <div class="stat"><small>Workflow</small><strong>Preview → Freigabe</strong></div>
+        <div class="stat"><small>Qualität</small><strong>Validierung + Dedupe</strong></div>
+        <div class="stat"><small>Automation</small><strong>Auto-DJ + Events</strong></div>
+      </div>
+    </section>
+
+    <section class="block" id="demo">
+      <div class="wrap">
+        <div class="section-head">
+          <div><span class="eyebrow">INTERAKTIVE PRODUKTDEMO</span><h2>Teste den Playlist-Flow direkt hier.</h2></div>
+          <p>Diese Demo simuliert die Produktlogik im Browser. Das Live-System bleibt davon getrennt – keine Spotify-Playlist wird ohne Freigabe verändert.</p>
+        </div>
+        <div class="demo-layout">
+          <div class="panel demo-control">
+            <span class="eyebrow">01 · MUSIKWUNSCH</span><h3>Was soll heute laufen?</h3>
+            <p>Genre, Stimmung, Anlass, Dauer oder Künstler nennen. Der Agent strukturiert den Wunsch automatisch.</p>
+            <div class="prompt-box">
+              <input id="demoPrompt" value="Afro House Rooftop Sunset · 2 Stunden · 80% bekannte Songs" aria-label="Demo Musikwunsch">
+              <button class="button primary" id="demoRun">Vorschau erstellen ✦</button>
+            </div>
+            <div class="quick-prompts">
+              <button data-demo="afro">Afro House</button><button data-demo="schlager">Schlager</button><button data-demo="rock">Classic Rock</button><button data-demo="dnb">Drum & Bass</button><button data-demo="jazz">Dinner Jazz</button>
+            </div>
+            <div class="demo-note">Demo-Modus · Es werden keine Spotify-Daten verändert. Im Produktivsystem erfolgt die echte Erstellung erst nach Qualitätsprüfung und Freigabe.</div>
+          </div>
+          <div class="panel demo-screen">
+            <header><div><span class="eyebrow">02 · AI PREVIEW</span><h3 id="demoTitle">Rooftop Sunset · Afro House</h3></div><span class="status-chip">QUALITÄT: PASS</span></header>
+            <div class="result-card">
+              <div class="result-top"><div><span class="eyebrow">VALIDIERTE VORSCHAU</span><h4 id="resultName">Rooftop Sunset · 80% Familiar</h4></div><div class="score" id="demoScore"></div></div>
+              <div class="result-tags" id="demoTags"><span>42 Songs</span><span>120 Min</span><span>Afro House</span><span>80% bekannt</span></div>
+              <div class="result-list" id="demoTracks"></div>
+              <div class="result-footer"><span>Duplikate entfernt · Artist-Wiederholung begrenzt · Flow sortiert</span><button class="button" type="button">In Spotify erstellen</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="features">
+      <div class="wrap">
+        <div class="section-head">
+          <div><span class="eyebrow">PRODUKTKERN</span><h2>Mehr als ein Playlist-Generator.</h2></div>
+          <p>Das System verbindet Musikwunsch, Spotify API, KI-Planung, Qualitätskontrolle und Automationen in einer einzigen Oberfläche.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="panel feature"><div class="feature-icon">✦</div><h3>Universal Playlist Engine</h3><p>Von Afro House über Rock, Jazz und Schlager bis DnB: das System ist nicht auf ein einzelnes Genre beschränkt.</p><span class="feature-tag">Any genre · Any mood</span></article>
+          <article class="panel feature"><div class="feature-icon">✓</div><h3>Preview-First Quality Gate</h3><p>Erst Vorschau und Validierung, dann Spotify. Unpassende Tracks, Duplikate und schlechte Treffer werden vor der Erstellung gefiltert.</p><span class="feature-tag">Quality before publish</span></article>
+          <article class="panel feature"><div class="feature-icon">◫</div><h3>Playlist Library</h3><p>AI-erstellte, manuell importierte und bestehende Playlists zentral ansehen, analysieren, erweitern und verwalten.</p><span class="feature-tag">One music workspace</span></article>
+          <article class="panel feature"><div class="feature-icon">↻</div><h3>Auto-DJ</h3><p>Queue überwachen, passend nachfüllen und Bekanntheitsgrad steuern – für einen konsistenten Musikfluss über den Tag.</p><span class="feature-tag">Adaptive queue</span></article>
+          <article class="panel feature"><div class="feature-icon">◇</div><h3>Event Radar</h3><p>Events und Anlässe in musikalische Aktionen übersetzen: passende Specials, Vorab-Playlists und automatisierte Event-Jobs.</p><span class="feature-tag">Context-aware music</span></article>
+          <article class="panel feature"><div class="feature-icon">⚙</div><h3>Automationen</h3><p>Zeitpläne, Refreshes, Event-Jobs und wiederkehrende Updates zentral steuern – nachvollziehbar und kontrollierbar.</p><span class="feature-tag">Scheduled intelligence</span></article>
+          <article class="panel feature"><div class="feature-icon">◉</div><h3>Spotify Connect</h3><p>Live Playback, Geräte-Status, aktuelle Songs und direkte Wiedergabe über die vorhandene Spotify-Infrastruktur.</p><span class="feature-tag">Live playback</span></article>
+          <article class="panel feature"><div class="feature-icon">⌁</div><h3>Telegram & Agent Control</h3><p>Admin-Steuerung, Chat, Freigaben und Agent-Aktionen auch über Telegram – ideal für den operativen Alltag.</p><span class="feature-tag">Remote operations</span></article>
+          <article class="panel feature"><div class="feature-icon">↗</div><h3>Erweiterbare API</h3><p>OpenAPI/GPT-Actions und modulare Endpunkte schaffen die Basis für weitere Apps, Dashboards und Kundenintegrationen.</p><span class="feature-tag">API-ready architecture</span></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="workflow">
+      <div class="wrap">
+        <div class="section-head"><div><span class="eyebrow">WORKFLOW</span><h2>Vom Wunsch zur Spotify-Playlist in vier Schritten.</h2></div></div>
+        <div class="flow">
+          <article class="panel step"><b>01 · WUNSCH</b><h3>Beschreiben</h3><p>Genre, Stimmung, Dauer, Anlass, Zielgruppe und gewünschte Bekanntheit in natürlicher Sprache.</p></article>
+          <article class="panel step"><b>02 · KI</b><h3>Planen & suchen</h3><p>Der Agent erzeugt Suchstrategien, sammelt Tracks, bewertet Matches und baut einen musikalischen Flow.</p></article>
+          <article class="panel step"><b>03 · QUALITÄT</b><h3>Prüfen</h3><p>Preview, Dedupe, Genre-/Mood-Checks, Trackqualität und Artist-Verteilung laufen vor jeder echten Erstellung.</p></article>
+          <article class="panel step"><b>04 · SPOTIFY</b><h3>Freigeben & automatisieren</h3><p>Nach Freigabe wird die Playlist erstellt und kann optional automatisch aktualisiert oder eventbezogen gesteuert werden.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="usecases">
+      <div class="wrap">
+        <div class="section-head">
+          <div><span class="eyebrow">LIVE MODULE</span><h2>Für Hospitality und Events gebaut.</h2></div>
+          <p>Die Oberfläche verbindet Tagesgeschäft, Musikbibliothek und Kontext – ohne dass Mitarbeiter zwischen mehreren Tools wechseln müssen.</p>
+        </div>
+        <div class="showcase-grid">
+          <article class="panel showcase-main">
+            <span class="eyebrow">EVENT RADAR</span><h3>Musik passend zum Anlass vorbereiten.</h3><p>Events erkennen, musikalisch einordnen und als Playlist-Job vorbereiten.</p>
+            <div class="radar">
+              <div class="event"><div class="event-date"><strong>18</strong><span>OKT</span></div><div><h4>Rooftop Closing</h4><p>Sunset · Afro House · 18:00–23:00</p></div><button>Preview ✦</button></div>
+              <div class="event"><div class="event-date"><strong>25</strong><span>OKT</span></div><div><h4>Saturday Dinner</h4><p>Soul · Jazz · Modern Classics</p></div><button>Preview ✦</button></div>
+              <div class="event"><div class="event-date"><strong>31</strong><span>OKT</span></div><div><h4>Halloween Night</h4><p>Pop · Dance · Party Classics</p></div><button>Preview ✦</button></div>
+            </div>
+          </article>
+          <article class="panel showcase-side">
+            <span class="eyebrow">AUTO-DJ</span><h3>Wiederkehrende Musikarbeit automatisieren.</h3><p>Regeln bleiben sichtbar und kontrollierbar. Kein Blindflug – jeder Job hat Status und Kontext.</p>
+            <div class="automation-list">
+              <div class="automation"><div><strong>Dinner Rotation</strong><span>Täglich · 17:00 · Refresh</span></div><i class="toggle"></i></div>
+              <div class="automation"><div><strong>Weekend Energy</strong><span>Fr/Sa · 21:00 · Queue boost</span></div><i class="toggle"></i></div>
+              <div class="automation"><div><strong>Event Special</strong><span>3 Tage vorher · Preview</span></div><i class="toggle"></i></div>
+              <div class="automation"><div><strong>Library Health</strong><span>Wöchentlich · Audit</span></div><i class="toggle"></i></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="wrap">
+        <div class="section-head"><div><span class="eyebrow">INTEGRATIONEN</span><h2>Bereit für deinen Stack.</h2></div><p>Die Produktarchitektur ist modular und kann schrittweise um weitere Kanäle, Datenquellen und Workflows ergänzt werden.</p></div>
+        <div class="integrations">
+          <span class="integration">Spotify Web API</span><span class="integration">Spotify Connect</span><span class="integration">Telegram</span><span class="integration">OpenAPI / GPT Actions</span><span class="integration">Event Context</span><span class="integration">SQLite Memory</span><span class="integration">Automation Scheduler</span><span class="integration">Web / PWA</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="wrap">
+        <div class="cta-card">
+          <span class="eyebrow">AI KITZ · MUSIC INTELLIGENCE</span>
+          <h2>Musik nicht mehr manuell verwalten. Intelligent steuern.</h2>
+          <p>Der KI Spotify Agent kombiniert Playlist-Erstellung, Qualitätskontrolle und Automationen zu einem produktiven Musiksystem.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="https://spotify.kitzlabs.ai/" target="_blank" rel="noreferrer">Live-System öffnen ↗</a>
+            <a class="button" href="#demo">Demo erneut testen</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div><strong>KI Spotify Agent · AI Kitz</strong><p>Produktseite und interaktive Demo. Spotify und das Spotify-Logo sind Marken von Spotify AB. AI Kitz ist nicht mit Spotify AB verbunden oder von Spotify AB autorisiert.</p></div>
+      <div class="footer-links"><a href="https://kitzlabs.ai/" target="_blank" rel="noreferrer">AI Kitz</a><a href="https://spotify.kitzlabs.ai/" target="_blank" rel="noreferrer">Live App</a><a href="#top">Nach oben ↑</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const demoSets = {
+      afro: {
+        prompt: "Afro House Rooftop Sunset · 2 Stunden · 80% bekannte Songs",
+        title: "Rooftop Sunset · Afro House", name: "Rooftop Sunset · 80% Familiar",
+        tags:["42 Songs","120 Min","Afro House","80% bekannt"],
+        tracks:[["Move","Adam Port, Stryv","97"],["Thandaza","Keinemusik","95"],["Music Sounds Better","Rampa","93"],["Abalele","Kabza De Small","91"],["Muyè","Rampa, &ME","90"]]
+      },
+      schlager: {
+        prompt:"Schlager Party · 3 Stunden · bekannte Hits zum Mitsingen",
+        title:"Schlager Party · Singalong", name:"Schlager Party · Best Known",
+        tags:["54 Songs","180 Min","Schlager","92% bekannt"],
+        tracks:[["Atemlos durch die Nacht","Helene Fischer","98"],["Warum hast du nicht nein gesagt","Roland Kaiser","97"],["Ein Stern","DJ Ötzi, Nik P.","96"],["Verdammt, ich lieb dich","Matthias Reim","95"],["Cordula Grün","Josh.","94"]]
+      },
+      rock: {
+        prompt:"Classic Rock · 2 Stunden · bekannte Gitarren-Hymnen",
+        title:"Classic Rock · Essentials", name:"Classic Rock · Crowd Favorites",
+        tags:["34 Songs","120 Min","Classic Rock","90% bekannt"],
+        tracks:[["Don't Stop Believin'","Journey","98"],["Another One Bites the Dust","Queen","97"],["Sweet Child O' Mine","Guns N' Roses","96"],["Summer of '69","Bryan Adams","95"],["The Boys Are Back in Town","Thin Lizzy","92"]]
+      },
+      dnb: {
+        prompt:"Drum & Bass · 90 Minuten · energetic · modern & known",
+        title:"Drum & Bass · High Energy", name:"DNB · Modern Energy",
+        tags:["31 Songs","90 Min","Drum & Bass","72% bekannt"],
+        tracks:[["Baddadan","Chase & Status","97"],["Disconnect","Becky Hill, Chase & Status","95"],["Afterglow","Wilkinson","94"],["Ready To Fly","Sub Focus, Dimension","93"],["Desire","Sub Focus, Dimension","91"]]
+      },
+      jazz: {
+        prompt:"Dinner Jazz · 2 Stunden · elegant · warm · unobtrusive",
+        title:"Dinner Jazz · Warm Evening", name:"Dinner Jazz · Elegant Flow",
+        tags:["36 Songs","120 Min","Jazz","68% bekannt"],
+        tracks:[["The Look of Love","Diana Krall","96"],["Come Away With Me","Norah Jones","95"],["My Funny Valentine","Chet Baker","94"],["Feeling Good","Nina Simone","93"],["Blue in Green","Miles Davis","91"]]
+      }
+    };
+
+    function esc(value){
+      return String(value).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]));
+    }
+    function renderDemo(set){
+      document.getElementById("demoPrompt").value=set.prompt;
+      document.getElementById("demoTitle").textContent=set.title;
+      document.getElementById("resultName").textContent=set.name;
+      document.getElementById("demoTags").innerHTML=set.tags.map(x=>"<span>"+esc(x)+"</span>").join("");
+      document.getElementById("demoTracks").innerHTML=set.tracks.map((x,i)=>"<div class=\"result-track\"><b>"+String(i+1).padStart(2,"0")+"</b><span><strong>"+esc(x[0])+"</strong><small>"+esc(x[1])+"</small></span><em>"+esc(x[2])+"</em></div>").join("");
+    }
+    document.querySelectorAll("[data-demo]").forEach(btn=>btn.addEventListener("click",()=>renderDemo(demoSets[btn.dataset.demo])));
+    document.getElementById("demoRun").addEventListener("click",()=>{
+      const input=document.getElementById("demoPrompt").value.trim().toLowerCase();
+      let set=demoSets.afro;
+      if(input.includes("schlager")) set=demoSets.schlager;
+      else if(input.includes("rock")) set=demoSets.rock;
+      else if(input.includes("drum")||input.includes("dnb")) set=demoSets.dnb;
+      else if(input.includes("jazz")) set=demoSets.jazz;
+      else set={...demoSets.afro,prompt:document.getElementById("demoPrompt").value,title:"AI Playlist · Universal Genre",name:"Individuelle Playlist · Preview"};
+      renderDemo(set);
+    });
+    renderDemo(demoSets.afro);
+
+    fetch("https://spotify.kitzlabs.ai/api/health",{method:"GET",mode:"cors"})
+      .then(r=>{if(!r.ok) throw new Error("offline"); return r.json().catch(()=>({}));})
+      .then(()=>{document.getElementById("liveStatus").textContent="Spotify System live";})
+      .catch(()=>{document.getElementById("liveStatus").textContent="Live-System verfügbar";});
+  </script>
+</body>
+</html>
