@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#070809">
   <meta name="color-scheme" content="dark">
   <meta name="description" content="KI Spotify Agent von AI Kitz: professionelle KI-Musiksteuerung mit Playlist Engine, Preview-First Qualitätskontrolle, Auto-DJ, Event Radar und Spotify-Automationen.">
@@ -27,7 +27,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=20260927-ai-v2">
+  <link rel="stylesheet" href="/styles.css?v=20260927-ai-v3">
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -70,7 +70,7 @@
         <a href="#demo">Live Demo</a>
         <a href="#automation">Automation</a>
         <a href="#architecture">Architektur</a>
-        <a href="#usecases">Einsatz</a>
+        <a href="#usecases">Einsatz</a><a href="#configurator">Konfigurator</a><a href="#plans">Pakete</a>
       </nav>
 
       <div class="nav-actions">
@@ -88,6 +88,8 @@
         <a href="#automation">Automation</a>
         <a href="#architecture">Architektur</a>
         <a href="#usecases">Einsatz</a>
+        <a href="#configurator">Konfigurator</a>
+        <a href="#plans">Pakete</a>
         <a href="https://spotify.kitzlabs.ai/" target="_blank" rel="noreferrer">Live-System ↗</a>
       </div>
     </div>
@@ -382,6 +384,63 @@
       </div>
     </section>
 
+
+    <section class="section configurator-section" id="configurator">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div><div class="kicker"><span></span> AI SOLUTION CONFIGURATOR</div><h2>Wie soll dein Musiksystem arbeiten?</h2></div>
+          <p>Wähle Einsatz, Schwerpunkt und Umfang. Der Konfigurator zeigt eine passende Kombination aus den vorhandenen Produktmodulen – ohne Daten zu senden.</p>
+        </div>
+
+        <div class="configurator reveal">
+          <div class="config-options">
+            <div class="config-group">
+              <span class="eyebrow">01 · EINSATZ</span>
+              <div class="option-grid">
+                <button class="config-option active" type="button" data-config-group="venue" data-value="bar"><i>🍸</i><strong>Bar / Club</strong><small>Dayparts + Events</small></button>
+                <button class="config-option" type="button" data-config-group="venue" data-value="hotel"><i>◆</i><strong>Hotel</strong><small>Lobby + Gastro</small></button>
+                <button class="config-option" type="button" data-config-group="venue" data-value="restaurant"><i>◇</i><strong>Restaurant</strong><small>Lunch + Dinner</small></button>
+                <button class="config-option" type="button" data-config-group="venue" data-value="event"><i>✦</i><strong>Event</strong><small>Briefing + Preview</small></button>
+              </div>
+            </div>
+
+            <div class="config-group">
+              <span class="eyebrow">02 · SCHWERPUNKT</span>
+              <div class="option-row">
+                <button class="config-chip active" type="button" data-config-group="goal" data-value="automation">Automation</button>
+                <button class="config-chip" type="button" data-config-group="goal" data-value="quality">Qualität</button>
+                <button class="config-chip" type="button" data-config-group="goal" data-value="control">Steuerung</button>
+              </div>
+            </div>
+
+            <div class="config-group">
+              <span class="eyebrow">03 · UMFANG</span>
+              <div class="option-row">
+                <button class="config-chip active" type="button" data-config-group="scale" data-value="single">1 Standort</button>
+                <button class="config-chip" type="button" data-config-group="scale" data-value="small">2–5 Bereiche</button>
+                <button class="config-chip" type="button" data-config-group="scale" data-value="custom">Individuell</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="config-result" aria-live="polite">
+            <span class="eyebrow">EMPFOHLENER STACK</span>
+            <div class="config-result-head"><h3 id="configTitle">Hospitality Control Stack</h3><span id="configBadge">AUTOMATION</span></div>
+            <p id="configText">Für Bar- und Clubbetrieb mit wiederkehrenden Tagesphasen, Event-Kontext und kontrollierter Playlist-Automation.</p>
+            <div class="config-modules" id="configModules"></div>
+            <div class="config-flow">
+              <span>Input</span><i>→</i><span>AI Plan</span><i>→</i><span>Quality</span><i>→</i><span>Spotify</span>
+            </div>
+            <div class="config-actions">
+              <a class="btn btn-primary" id="configContact" href="mailto:office@aikitz.at?subject=KI%20Spotify%20Agent%20Anfrage">Projekt anfragen <span>↗</span></a>
+              <a class="btn btn-secondary" href="#demo">Demo testen</a>
+            </div>
+            <small class="config-privacy">Der Konfigurator läuft lokal im Browser und übermittelt keine Auswahl automatisch.</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section trust-section">
       <div class="container trust-grid">
         <div class="trust-copy reveal">
@@ -395,6 +454,62 @@
           <div><i>03</i><section><strong>Artist Distribution</strong><span>Übermäßige Wiederholungen können begrenzt werden.</span></section><em>ACTIVE</em></div>
           <div><i>04</i><section><strong>Demo Boundary</strong><span>Diese Produktwebsite verändert keine Spotify-Daten.</span></section><em>READ ONLY</em></div>
         </div>
+      </div>
+    </section>
+
+
+    <section class="section onboarding-section" id="onboarding">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div><div class="kicker"><span></span> ONBOARDING</div><h2>Vom Musikbriefing zum laufenden System.</h2></div>
+          <p>Der Einstieg wird in klare Schritte zerlegt: Musikprofil definieren, Spotify verbinden, Regeln setzen und im Pilotbetrieb prüfen.</p>
+        </div>
+        <div class="onboarding-grid">
+          <article class="onboarding-step reveal"><b>01</b><i>✦</i><h3>Musikprofil</h3><p>Genres, Zielgruppe, Stimmung, Bekanntheit, No-Gos und Tagesphasen festlegen.</p><span>Briefing</span></article>
+          <article class="onboarding-step reveal" data-delay="60"><b>02</b><i>◉</i><h3>Spotify Connect</h3><p>Spotify-Zugriff und gewünschte Playlist-/Playback-Workflows verbinden.</p><span>Connection</span></article>
+          <article class="onboarding-step reveal" data-delay="120"><b>03</b><i>⚙</i><h3>Regeln & Automation</h3><p>Preview-First, Dayparts, Events, Auto-DJ und Freigaben passend konfigurieren.</p><span>Configuration</span></article>
+          <article class="onboarding-step reveal" data-delay="180"><b>04</b><i>✓</i><h3>Pilot & Freigabe</h3><p>Mit realen Musikbriefings testen, Ergebnisse prüfen und produktive Abläufe freigeben.</p><span>Go Live</span></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section plans-section" id="plans">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div><div class="kicker"><span></span> PRODUCT PACKAGES</div><h2>Vom Playlist-Tool bis zum Music Operations Stack.</h2></div>
+          <p>Die Website zeigt drei sinnvolle Ausbaustufen. Konkreter Umfang und Konditionen werden für den jeweiligen Einsatz festgelegt.</p>
+        </div>
+
+        <div class="plans-grid">
+          <article class="plan-card reveal">
+            <span class="eyebrow">CORE</span>
+            <h3>Playlist Intelligence</h3>
+            <p class="plan-sub">Für strukturierte KI-Playlist-Erstellung mit Qualitätsprüfung.</p>
+            <strong class="plan-price">Individuelles Setup</strong>
+            <ul><li>Playlist Engine</li><li>Preview-First Validation</li><li>Playlist Library</li><li>Web UI</li></ul>
+            <a class="btn btn-secondary" href="mailto:office@aikitz.at?subject=KI%20Spotify%20Agent%20Core">Core anfragen</a>
+          </article>
+
+          <article class="plan-card featured reveal" data-delay="70">
+            <div class="recommended">EMPFOHLEN FÜR HOSPITALITY</div>
+            <span class="eyebrow">HOSPITALITY</span>
+            <h3>Music Operations</h3>
+            <p class="plan-sub">Für Bars, Restaurants und Hotels mit Tagesphasen und Events.</p>
+            <strong class="plan-price">Individuelles Setup</strong>
+            <ul><li>Alles aus Core</li><li>Auto-DJ</li><li>Event Radar</li><li>Daypart Rules</li><li>Telegram Control</li></ul>
+            <a class="btn btn-primary" href="mailto:office@aikitz.at?subject=KI%20Spotify%20Agent%20Hospitality">Hospitality anfragen <span>↗</span></a>
+          </article>
+
+          <article class="plan-card reveal" data-delay="140">
+            <span class="eyebrow">CUSTOM</span>
+            <h3>Integrated AI Stack</h3>
+            <p class="plan-sub">Für individuelle Abläufe, zusätzliche Systeme und Agent-Integrationen.</p>
+            <strong class="plan-price">Projektbasiert</strong>
+            <ul><li>Alles aus Hospitality</li><li>OpenAPI Integration</li><li>Custom Automations</li><li>Telegram / Agent Workflows</li><li>Individuelles Onboarding</li></ul>
+            <a class="btn btn-secondary" href="mailto:office@aikitz.at?subject=KI%20Spotify%20Agent%20Custom">Projekt besprechen</a>
+          </article>
+        </div>
+        <p class="plans-note reveal">Keine öffentlichen Fixpreise hinterlegt. Leistungsumfang und Konditionen werden passend zum Projekt festgelegt.</p>
       </div>
     </section>
 
@@ -447,8 +562,8 @@
         <p>Separate Produktwebsite und interaktive Demo. Spotify und das Spotify-Logo sind Marken von Spotify AB. AI Kitz ist nicht mit Spotify AB verbunden oder von Spotify AB autorisiert.</p>
       </div>
       <div class="footer-nav">
-        <div><strong>Produkt</strong><a href="#platform">Plattform</a><a href="#demo">Live Demo</a><a href="#automation">Automation</a></div>
-        <div><strong>System</strong><a href="#architecture">Architektur</a><a href="#usecases">Einsatz</a><a href="https://spotify.kitzlabs.ai/" target="_blank" rel="noreferrer">Live App ↗</a></div>
+        <div><strong>Produkt</strong><a href="#platform">Plattform</a><a href="#demo">Live Demo</a><a href="#configurator">Konfigurator</a></div>
+        <div><strong>System</strong><a href="#architecture">Architektur</a><a href="#plans">Pakete</a><a href="https://spotify.kitzlabs.ai/" target="_blank" rel="noreferrer">Live App ↗</a></div>
         <div><strong>AI Kitz</strong><a href="https://kitzlabs.ai/" target="_blank" rel="noreferrer">kitzlabs.ai ↗</a><a href="#top">Nach oben ↑</a></div>
       </div>
     </div>
@@ -456,6 +571,6 @@
   </footer>
 
   <div class="mobile-sticky"><a class="btn btn-primary" href="https://spotify.kitzlabs.ai/" target="_blank" rel="noreferrer">Live-System öffnen ↗</a></div>
-  <script src="/app.js?v=20260927-ai-v2" defer></script>
+  <script src="/app.js?v=20260927-ai-v3" defer></script>
 </body>
 </html>
