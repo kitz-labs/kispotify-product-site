@@ -19,8 +19,10 @@ Separate Produkt-Landingpage für den bestehenden Spotify AI Agent.
 - Quality / Guardrail Erklärung
 - erweiterte Feature-Sektion und FAQ
 - Mobile Sticky CTA
-- Accessibility-Verbesserungen: Skip-Link, Focus States, ARIA Live, Keyboard Enter
+- Accessibility: Skip-Link, Focus States, ARIA Live, Keyboard Enter
 - SEO: Canonical, OpenGraph, Twitter Meta, SoftwareApplication JSON-LD
+- Discovery: robots.txt + sitemap.xml
+- PWA-Basis: Web App Manifest, Theme/Standalone Meta, App Icon
 - responsive Layout für Desktop, Tablet und iPhone
 - Reduced-Motion Support
 
@@ -36,7 +38,17 @@ Live:
 
 Nginx liefert die Live-Datei statisch aus.
 
-## Backup
-Vor dem Upgrade wurde eine lokale Kopie abgelegt:
+## Assets
+- `manifest.webmanifest`
+- `icon.svg`
+- `robots.txt`
+- `sitemap.xml`
+
+## Backups
+Vor dem großen Upgrade:
 - Source: `/prosystem/Projects/Websites/KiSpotify-Product-Site/backups/index.pre-upgrade-20260927.html`
 - Live: `/var/www/kispotify.kitzlabs.ai/backups/index.pre-upgrade-20260927.html`
+
+Vor dem PWA/SEO-Polish:
+- Source: `/prosystem/Projects/Websites/KiSpotify-Product-Site/backups/index.pre-pwa-polish-20260927.html`
+- Live: `/var/www/kispotify.kitzlabs.ai/backups/index.pre-pwa-polish-20260927.html`
