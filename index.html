@@ -4,292 +4,360 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#080908">
-  <meta name="description" content="KI Spotify Agent von AI Kitz: AI-Playlists, Preview-First Qualitätskontrolle, Auto-DJ, Event Radar und Spotify-Automationen für Hospitality, Events und professionelle Musiksteuerung.">
-  <meta name="robots" content="index,follow">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="KI Spotify Agent von AI Kitz: intelligente Playlist-Erstellung, Preview-First Qualitätskontrolle, Auto-DJ, Event Radar und Spotify-Automationen für Hospitality, Events und professionelle Musiksteuerung.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://kispotify.kitzlabs.ai/">
   <meta property="og:title" content="KI Spotify Agent · AI Kitz">
-  <meta property="og:description" content="Musikwunsch rein. Validierte Spotify-Playlist raus. Mit Preview-First Engine, Auto-DJ und Event Radar.">
+  <meta property="og:description" content="Musikwunsch rein. Validierte Spotify-Playlist raus. Mit Preview-First Engine, Auto-DJ, Event Radar und Automationen.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://kispotify.kitzlabs.ai/">
+  <meta property="og:site_name" content="AI Kitz">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="KI Spotify Agent · AI Kitz">
+  <meta name="twitter:description" content="Intelligente Musiksteuerung für Hospitality, Events und professionelle Workflows.">
   <title>KI Spotify Agent · AI Kitz</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"KI Spotify Agent",
+    "applicationCategory":"MultimediaApplication",
+    "operatingSystem":"Web",
+    "url":"https://kispotify.kitzlabs.ai/",
+    "description":"KI-gestütztes Musiksystem für Playlist-Erstellung, Qualitätskontrolle, Auto-DJ, Event-Kontext und Spotify-Automationen.",
+    "creator":{"@type":"Organization","name":"AI Kitz","url":"https://kitzlabs.ai/"}
+  }
+  </script>
   <style>
     :root{
       color-scheme:dark;
-      --bg:#080908;--surface:rgba(18,20,23,.92);--surface2:rgba(24,27,31,.92);
-      --soft:rgba(255,255,255,.045);--line:rgba(255,255,255,.095);--line2:rgba(255,255,255,.16);
-      --text:#f7f7f5;--muted:#969ba5;--muted2:#666c76;--red:#ef183f;--red2:#b90c31;
-      --green:#1ed760;--amber:#f0b34a;--radius:22px;--shadow:0 30px 90px rgba(0,0,0,.35);
+      --bg:#080908;
+      --bg2:#0b0c0d;
+      --surface:rgba(17,19,22,.94);
+      --surface2:rgba(23,26,30,.94);
+      --surface3:rgba(255,255,255,.04);
+      --line:rgba(255,255,255,.095);
+      --line-strong:rgba(255,255,255,.17);
+      --text:#f7f7f5;
+      --muted:#9ca2ac;
+      --muted2:#6d747e;
+      --red:#ef183f;
+      --red2:#b90c31;
+      --red-soft:rgba(239,24,63,.12);
+      --green:#1ed760;
+      --green-soft:rgba(30,215,96,.11);
+      --amber:#f2b64c;
+      --radius:22px;
+      --shadow:0 30px 90px rgba(0,0,0,.38);
+      --max:1220px
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth;background:var(--bg)}
     body{
       margin:0;min-width:320px;background:
-      radial-gradient(circle at 78% -10%,rgba(218,12,52,.15),transparent 33rem),
-      radial-gradient(circle at 12% 32%,rgba(30,215,96,.035),transparent 28rem),
-      radial-gradient(circle at 45% 105%,rgba(68,29,38,.12),transparent 34rem),var(--bg);
+        radial-gradient(circle at 80% -6%,rgba(239,24,63,.15),transparent 31rem),
+        radial-gradient(circle at 11% 34%,rgba(30,215,96,.035),transparent 28rem),
+        radial-gradient(circle at 50% 105%,rgba(91,35,48,.11),transparent 34rem),
+        linear-gradient(180deg,#080908 0%,#090a0a 52%,#070808 100%);
       color:var(--text);font-family:Sora,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility
+    }
+    body:before{
+      content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.23;
+      background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+      background-size:34px 34px;mask-image:linear-gradient(to bottom,black,transparent 76%)
     }
     a{color:inherit;text-decoration:none}
     button,input{font:inherit}
     button{cursor:pointer;color:inherit}
-    img{max-width:100%}
-    .wrap{width:min(1180px,calc(100% - 36px));margin:0 auto}
-    .eyebrow{display:block;color:#858b95;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+    img,svg{display:block;max-width:100%}
+    .wrap{width:min(var(--max),calc(100% - 40px));margin:0 auto}
+    .skip{position:fixed;left:12px;top:12px;z-index:999;transform:translateY(-140%);background:#fff;color:#000;padding:10px 14px;border-radius:10px;font-size:12px}
+    .skip:focus{transform:none}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;color:#8b919c;font-size:10px;font-weight:600;letter-spacing:.13em;text-transform:uppercase}
+    .eyebrow:before{content:"";width:18px;height:1px;background:linear-gradient(90deg,var(--red),transparent)}
     .muted{color:var(--muted)}
     .panel{
       border:1px solid var(--line);border-radius:var(--radius);
-      background:linear-gradient(145deg,rgba(21,23,27,.94),rgba(13,15,17,.94));
-      box-shadow:inset 0 1px rgba(255,255,255,.025),0 20px 54px rgba(0,0,0,.18)
+      background:linear-gradient(145deg,rgba(22,24,28,.95),rgba(12,14,16,.95));
+      box-shadow:inset 0 1px rgba(255,255,255,.028),0 22px 60px rgba(0,0,0,.2)
     }
+    .glass{backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+    .button{
+      min-height:44px;padding:0 17px;border-radius:12px;border:1px solid var(--line);
+      background:rgba(255,255,255,.045);display:inline-flex;align-items:center;justify-content:center;gap:9px;
+      font-size:11px;font-weight:500;transition:transform .16s ease,border-color .16s ease,background .16s ease,box-shadow .16s ease
+    }
+    .button:hover{transform:translateY(-1px);border-color:var(--line-strong);background:rgba(255,255,255,.072)}
+    .button:focus-visible,.quick-prompts button:focus-visible,.tour-tab:focus-visible,input:focus-visible,summary:focus-visible{
+      outline:2px solid rgba(255,255,255,.82);outline-offset:3px
+    }
+    .button.primary{
+      border-color:rgba(255,96,122,.22);background:linear-gradient(135deg,#f51b45,#bd0c31);
+      box-shadow:0 10px 28px rgba(239,24,63,.2);font-weight:600
+    }
+    .button.green{border-color:rgba(30,215,96,.2);background:rgba(30,215,96,.08);color:#aef4c5}
     .nav{
-      position:sticky;top:0;z-index:50;backdrop-filter:blur(18px);
-      background:linear-gradient(180deg,rgba(8,9,8,.94),rgba(8,9,8,.72));
+      position:sticky;top:0;z-index:80;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+      background:linear-gradient(180deg,rgba(8,9,8,.95),rgba(8,9,8,.75));
       border-bottom:1px solid rgba(255,255,255,.055)
     }
-    .nav-inner{height:76px;display:flex;align-items:center;justify-content:space-between;gap:28px}
-    .brand{display:flex;align-items:center;gap:12px}
+    .nav-inner{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:26px}
+    .brand{display:flex;align-items:center;gap:12px;min-width:0}
     .brand-mark{
-      width:40px;height:40px;border-radius:12px;display:grid;place-items:center;
-      border:1px solid var(--line);background:linear-gradient(145deg,#151719,#0c0d0e);
-      box-shadow:inset 0 1px rgba(255,255,255,.05)
+      width:42px;height:42px;border-radius:12px;display:grid;place-items:center;flex:0 0 auto;
+      border:1px solid var(--line);background:linear-gradient(145deg,#16181b,#0b0c0d);
+      box-shadow:inset 0 1px rgba(255,255,255,.055),0 10px 30px rgba(0,0,0,.22)
     }
-    .brand-mark svg{width:23px;height:23px}
-    .brand-copy strong{display:block;font-size:13px;font-weight:600}
-    .brand-copy span{display:block;margin-top:3px;color:var(--muted2);font-size:8px;letter-spacing:.12em;text-transform:uppercase}
-    .nav-links{display:flex;gap:24px;align-items:center;color:#989da6;font-size:11px}
-    .nav-links a:hover{color:#fff}
-    .button{
-      min-height:42px;padding:0 16px;border-radius:11px;border:1px solid var(--line);
-      background:rgba(255,255,255,.045);display:inline-flex;align-items:center;justify-content:center;gap:8px;
-      font-size:11px;transition:.16s ease
-    }
-    .button:hover{transform:translateY(-1px);border-color:var(--line2);background:rgba(255,255,255,.07)}
-    .button.primary{
-      border-color:rgba(255,80,111,.2);background:linear-gradient(135deg,#f51b45,#bd0c31);
-      box-shadow:0 8px 24px rgba(239,24,63,.18);font-weight:600
-    }
-    .button.ghost{background:transparent}
-    .hero{padding:86px 0 54px;overflow:hidden}
-    .hero-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(560px,1.1fr);gap:54px;align-items:center}
+    .brand-mark svg{width:24px;height:24px}
+    .brand-copy strong{display:block;font-size:13px;font-weight:600;white-space:nowrap}
+    .brand-copy span{display:block;margin-top:3px;color:var(--muted2);font-size:8px;letter-spacing:.11em;text-transform:uppercase;white-space:nowrap}
+    .nav-links{display:flex;gap:23px;align-items:center;color:#9aa0aa;font-size:10px}
+    .nav-links a{transition:color .15s ease}.nav-links a:hover{color:#fff}
+    .nav-actions{display:flex;align-items:center;gap:9px}
+    .nav-live{display:flex;align-items:center;gap:7px;color:#8fe9ad;font-size:9px;padding:8px 10px;border:1px solid rgba(30,215,96,.13);border-radius:999px;background:rgba(30,215,96,.045)}
+    .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 5px rgba(30,215,96,.07)}
+    .hero{padding:82px 0 48px;overflow:hidden}
+    .hero-grid{display:grid;grid-template-columns:minmax(0,.93fr) minmax(560px,1.07fr);gap:58px;align-items:center}
     .hero h1{
-      margin:17px 0 22px;font-size:clamp(46px,6vw,80px);line-height:.98;
+      margin:18px 0 22px;font-size:clamp(48px,5.8vw,78px);line-height:.99;
       letter-spacing:-.058em;font-weight:500;max-width:690px
     }
+    .hero h1 span{display:block;color:#767c85}
     .hero h1 em{font-style:normal;color:#fff;position:relative}
-    .hero h1 em:after{content:"";position:absolute;left:4px;right:0;bottom:-6px;height:2px;background:linear-gradient(90deg,var(--red),transparent)}
-    .hero p{max-width:650px;color:#afb3bb;font-size:clamp(15px,1.4vw,19px);line-height:1.72}
-    .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px}
-    .hero-badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:27px}
-    .badge{
-      border:1px solid var(--line);background:rgba(255,255,255,.035);border-radius:999px;
-      color:#c6c9cf;font-size:9px;padding:8px 11px
+    .hero h1 em:after{content:"";position:absolute;left:2px;right:0;bottom:-7px;height:2px;background:linear-gradient(90deg,var(--red),transparent 88%)}
+    .hero p{max-width:660px;color:#afb4bc;font-size:clamp(15px,1.35vw,18px);line-height:1.74;margin:0}
+    .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:29px}
+    .hero-proof{display:flex;flex-wrap:wrap;gap:8px;margin-top:25px}
+    .proof{
+      border:1px solid var(--line);background:rgba(255,255,255,.028);border-radius:999px;
+      color:#c6cad1;font-size:9px;padding:8px 11px;display:inline-flex;align-items:center;gap:7px
     }
-    .badge .live-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(30,215,96,.08);margin-right:7px}
-    .mock-shell{
-      position:relative;border:1px solid var(--line2);border-radius:26px;padding:12px;
-      background:rgba(9,10,11,.78);box-shadow:0 45px 110px rgba(0,0,0,.45);
-      transform:perspective(1500px) rotateY(-3deg) rotateX(1.2deg)
+    .product-frame{
+      position:relative;border:1px solid var(--line-strong);border-radius:28px;padding:11px;
+      background:rgba(8,9,10,.84);box-shadow:0 50px 120px rgba(0,0,0,.48);
+      transform:perspective(1550px) rotateY(-2.2deg) rotateX(1deg)
     }
-    .mock-shell:before{
+    .product-frame:after{
       content:"";position:absolute;inset:-1px;border-radius:inherit;pointer-events:none;
-      background:linear-gradient(135deg,rgba(255,255,255,.08),transparent 25%,transparent 70%,rgba(239,24,63,.12));
+      background:linear-gradient(135deg,rgba(255,255,255,.08),transparent 24%,transparent 70%,rgba(239,24,63,.13));
+      -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;
       mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;padding:1px
     }
-    .mock-top{display:flex;align-items:center;gap:7px;padding:1px 5px 10px}
-    .mock-top i{width:7px;height:7px;border-radius:50%;background:#34373b}
-    .mock-top i:first-child{background:var(--red)}
-    .mock-url{margin-left:9px;color:#626872;font-size:7px}
-    .app-grid{height:480px;display:grid;grid-template-columns:145px minmax(0,1fr) 165px;overflow:hidden;border-radius:18px;border:1px solid var(--line);background:#090a0a}
-    .app-side{border-right:1px solid var(--line);padding:17px 11px;background:#080909}
-    .mini-brand{display:flex;gap:8px;align-items:center;margin-bottom:22px}
+    .frame-top{display:flex;align-items:center;gap:6px;padding:2px 5px 10px;color:#5f6570;font-size:7px}
+    .frame-top i{width:7px;height:7px;border-radius:50%;background:#34373b}.frame-top i:first-child{background:var(--red)}
+    .frame-url{margin-left:8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .app-grid{height:500px;display:grid;grid-template-columns:142px minmax(0,1fr) 165px;overflow:hidden;border-radius:19px;border:1px solid var(--line);background:#090a0a}
+    .app-side{border-right:1px solid var(--line);padding:16px 10px;background:#080909}
+    .mini-brand{display:flex;gap:8px;align-items:center;margin-bottom:20px}
     .mini-logo{height:29px;width:29px;border-radius:9px;border:1px solid var(--line);display:grid;place-items:center;background:#111316;font-size:11px}
     .mini-brand strong{font-size:8px}.mini-brand span{display:block;color:#5d626b;font-size:6px;margin-top:3px}
     .mini-nav{display:grid;gap:4px}
-    .mini-nav div{height:31px;border-radius:8px;padding:0 9px;display:flex;align-items:center;gap:8px;color:#737983;font-size:7px}
-    .mini-nav div.active{color:#fff;background:linear-gradient(90deg,rgba(239,24,63,.16),rgba(239,24,63,.035));border:1px solid rgba(239,24,63,.14)}
-    .side-status{margin-top:18px;padding-top:13px;border-top:1px solid var(--line);font-size:6px;color:#666c75}
-    .side-status b{color:#aeb3ba}
-    .app-center{padding:18px;min-width:0;background:radial-gradient(circle at 80% 0%,rgba(239,24,63,.08),transparent 240px)}
-    .center-title{display:flex;justify-content:space-between;align-items:start}
-    .center-title h3{font-size:17px;letter-spacing:-.045em;margin:4px 0 0;font-weight:500}
-    .center-title span{font-size:6px;color:#656b75}
-    .chat{margin-top:18px;display:grid;gap:9px}
-    .message{max-width:88%;border:1px solid var(--line);border-radius:11px;padding:10px 11px;font-size:7px;line-height:1.5;background:rgba(255,255,255,.035)}
+    .mini-nav div{height:30px;border-radius:8px;padding:0 8px;display:flex;align-items:center;gap:8px;color:#737983;font-size:7px}
+    .mini-nav div.active{color:#fff;background:linear-gradient(90deg,rgba(239,24,63,.16),rgba(239,24,63,.03));border:1px solid rgba(239,24,63,.14)}
+    .side-status{margin-top:17px;padding-top:12px;border-top:1px solid var(--line);font-size:6px;color:#666c75;line-height:1.8}
+    .app-center{padding:18px;min-width:0;background:radial-gradient(circle at 86% 0%,rgba(239,24,63,.085),transparent 245px)}
+    .center-title{display:flex;justify-content:space-between;align-items:start;gap:12px}
+    .center-title h3{font-size:17px;letter-spacing:-.045em;margin:4px 0 0;font-weight:500}.center-title span{font-size:6px;color:#656b75}
+    .live-process{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:14px}
+    .process-step{padding:7px 5px;border:1px solid var(--line);border-radius:7px;color:#6b727c;font-size:5px;text-align:center;background:rgba(255,255,255,.025)}
+    .process-step.active{color:#b9f5ca;border-color:rgba(30,215,96,.15);background:rgba(30,215,96,.05)}
+    .chat{margin-top:10px;display:grid;gap:8px}
+    .message{max-width:90%;border:1px solid var(--line);border-radius:11px;padding:10px 11px;font-size:7px;line-height:1.5;background:rgba(255,255,255,.035)}
     .message.user{margin-left:auto;background:rgba(239,24,63,.095);border-color:rgba(239,24,63,.16)}
-    .preview{border:1px solid rgba(255,255,255,.11);border-radius:12px;background:rgba(17,19,21,.96);padding:11px;margin-top:1px}
-    .preview-head{display:flex;justify-content:space-between;gap:8px}
-    .preview h4{font-size:9px;margin:3px 0 0}
-    .score{width:34px;height:34px;border-radius:50%;background:conic-gradient(var(--green) 0 88%,rgba(255,255,255,.08) 88%);display:grid;place-items:center}
-    .score:after{content:"94";width:27px;height:27px;border-radius:50%;background:#111316;display:grid;place-items:center;font-size:7px}
-    .track{display:grid;grid-template-columns:14px 1fr auto;gap:6px;padding:6px 0;border-top:1px solid rgba(255,255,255,.055);font-size:6px;color:#b7bbc2}
-    .track:first-of-type{margin-top:8px}.track em{color:#69707a;font-style:normal}
-    .composer{margin-top:10px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.035);padding:9px;font-size:6px;color:#656b75}
+    .preview{border:1px solid rgba(255,255,255,.11);border-radius:12px;background:rgba(17,19,21,.96);padding:11px}
+    .preview-head{display:flex;justify-content:space-between;gap:8px}.preview h4{font-size:9px;margin:3px 0 0}
+    .score{width:36px;height:36px;border-radius:50%;background:conic-gradient(var(--green) 0 94%,rgba(255,255,255,.08) 94%);display:grid;place-items:center}
+    .score:after{content:"94";width:28px;height:28px;border-radius:50%;background:#111316;display:grid;place-items:center;font-size:7px}
+    .track{display:grid;grid-template-columns:15px 1fr auto;gap:6px;padding:6px 0;border-top:1px solid rgba(255,255,255,.055);font-size:6px;color:#b7bbc2}
+    .track:first-of-type{margin-top:8px}.track em{color:#77d897;font-style:normal}
+    .composer{margin-top:1px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.035);padding:9px;font-size:6px;color:#656b75}
     .app-right{border-left:1px solid var(--line);padding:14px 10px;background:#0a0b0c}
-    .app-right h4{font-size:8px;font-weight:500;margin:3px 0 11px}
+    .app-right h4{font-size:8px;font-weight:500;margin:3px 0 10px}
     .playlist-mini{display:flex;gap:7px;padding:8px 0;border-top:1px solid rgba(255,255,255,.055);align-items:center}
     .cover{width:29px;height:29px;border-radius:7px;flex:0 0 auto;background:linear-gradient(145deg,#2b2e33,#101214);display:grid;place-items:center;font-size:8px}
     .playlist-mini strong{display:block;font-size:6px;font-weight:500}.playlist-mini span{display:block;font-size:5px;color:#656b75;margin-top:3px}
-    .hero-glow{position:absolute;width:300px;height:300px;border-radius:50%;background:rgba(239,24,63,.13);filter:blur(70px);right:-70px;top:-70px;pointer-events:none}
-    .stats{padding:16px 0 68px}
-    .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-    .stat{min-height:88px;padding:17px;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.025)}
-    .stat small{display:block;color:#747a84;font-size:8px;text-transform:uppercase;letter-spacing:.08em}
-    .stat strong{display:block;margin-top:7px;font-weight:500;font-size:17px;letter-spacing:-.03em}
-    section.block{padding:72px 0}
-    .section-head{display:flex;justify-content:space-between;gap:32px;align-items:end;margin-bottom:28px}
-    .section-head h2{font-size:clamp(31px,4vw,50px);font-weight:500;letter-spacing:-.052em;margin:10px 0 0;max-width:760px}
-    .section-head p{max-width:460px;color:var(--muted);font-size:12px;line-height:1.7;margin:0}
-    .demo-layout{display:grid;grid-template-columns:minmax(0,.92fr) minmax(440px,1.08fr);gap:18px}
-    .demo-control{padding:26px}
-    .demo-control h3{font-size:22px;font-weight:500;letter-spacing:-.04em;margin:8px 0 8px}
-    .demo-control p{font-size:11px;color:var(--muted);line-height:1.6;margin:0 0 18px}
-    .prompt-box{display:flex;gap:8px}
-    .prompt-box input{
-      flex:1;min-width:0;height:48px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.045);
-      color:#fff;padding:0 13px;outline:none;font-size:11px
+    .floating-health{
+      position:absolute;right:-18px;bottom:34px;z-index:4;min-width:180px;padding:12px 13px;border:1px solid rgba(30,215,96,.16);border-radius:14px;
+      background:rgba(11,14,12,.92);box-shadow:0 18px 50px rgba(0,0,0,.4);backdrop-filter:blur(16px)
     }
+    .floating-health strong{display:flex;align-items:center;gap:8px;font-size:9px;color:#b8efc9}.floating-health span{display:block;margin-top:5px;color:#66706a;font-size:7px}
+    .stats{padding:14px 0 70px}
+    .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+    .stat{min-height:92px;padding:17px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.025)}
+    .stat small{display:block;color:#747a84;font-size:8px;text-transform:uppercase;letter-spacing:.08em}.stat strong{display:block;margin-top:8px;font-weight:500;font-size:17px;letter-spacing:-.03em}
+    section.block{padding:74px 0}
+    .section-head{display:flex;justify-content:space-between;gap:34px;align-items:end;margin-bottom:30px}
+    .section-head h2{font-size:clamp(32px,4vw,52px);font-weight:500;letter-spacing:-.052em;margin:10px 0 0;max-width:790px}
+    .section-head p{max-width:470px;color:var(--muted);font-size:12px;line-height:1.72;margin:0}
+    .status-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:14px}
+    .status-main{padding:26px}.status-main-top{display:flex;justify-content:space-between;gap:20px;align-items:start}
+    .status-main h3{font-size:24px;font-weight:500;letter-spacing:-.04em;margin:9px 0 8px}
+    .status-main p{color:var(--muted);font-size:10px;line-height:1.65;margin:0;max-width:650px}
+    .health-pill{border:1px solid rgba(30,215,96,.16);background:rgba(30,215,96,.055);border-radius:999px;padding:9px 11px;font-size:8px;color:#9cebb6;display:flex;align-items:center;gap:8px;white-space:nowrap}
+    .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:22px}
+    .metric{padding:14px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.023)}
+    .metric span{display:block;color:#6f7680;font-size:7px;text-transform:uppercase;letter-spacing:.08em}.metric strong{display:block;font-size:13px;font-weight:500;margin-top:7px}
+    .status-side{padding:24px}
+    .status-side h3{font-size:16px;font-weight:500;margin:8px 0 16px}
+    .check-list{display:grid;gap:9px}.check{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-top:1px solid rgba(255,255,255,.055);font-size:9px}
+    .check:first-child{border-top:0}.check b{font-weight:500}.check span{color:#83dfa1;font-size:7px}
+    .demo-layout{display:grid;grid-template-columns:minmax(0,.9fr) minmax(460px,1.1fr);gap:16px}
+    .demo-control{padding:27px}.demo-control h3{font-size:23px;font-weight:500;letter-spacing:-.04em;margin:8px 0 8px}.demo-control p{font-size:11px;color:var(--muted);line-height:1.65;margin:0 0 18px}
+    .prompt-box{display:flex;gap:8px}.prompt-box input{flex:1;min-width:0;height:50px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.045);color:#fff;padding:0 14px;outline:none;font-size:11px}
     .prompt-box input:focus{border-color:rgba(239,24,63,.58);box-shadow:0 0 0 3px rgba(239,24,63,.08)}
-    .quick-prompts{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}
-    .quick-prompts button{border:1px solid var(--line);background:rgba(255,255,255,.03);border-radius:999px;padding:8px 10px;font-size:8px}
-    .quick-prompts button:hover{border-color:rgba(239,24,63,.28);background:rgba(239,24,63,.07)}
-    .demo-note{margin-top:17px;padding-top:15px;border-top:1px solid var(--line);font-size:8px;color:#656b75;line-height:1.6}
-    .demo-screen{padding:20px;min-height:420px;overflow:hidden;position:relative}
-    .demo-screen header{display:flex;justify-content:space-between;align-items:start}
-    .demo-screen h3{font-size:16px;font-weight:500;margin:5px 0 0;letter-spacing:-.03em}
-    .status-chip{border:1px solid rgba(30,215,96,.16);background:rgba(30,215,96,.06);color:#8ee9ae;border-radius:999px;font-size:7px;padding:7px 9px}
-    .result-card{margin-top:19px;border:1px solid var(--line);border-radius:15px;padding:17px;background:rgba(255,255,255,.025)}
-    .result-top{display:flex;justify-content:space-between;gap:12px}
-    .result-top h4{font-size:15px;margin:5px 0 0;font-weight:500}
-    .result-tags{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}
-    .result-tags span{font-size:7px;padding:6px 8px;border:1px solid var(--line);border-radius:999px;color:#9da2aa}
-    .result-list{display:grid}
-    .result-track{display:grid;grid-template-columns:24px 1fr auto;gap:10px;align-items:center;min-height:46px;border-top:1px solid rgba(255,255,255,.055)}
-    .result-track:first-child{border-top:0}
-    .result-track b{font-size:7px;color:#5e646e;font-weight:500}
-    .result-track strong{display:block;font-size:9px;font-weight:500}.result-track small{display:block;color:#686e77;font-size:7px;margin-top:3px}
-    .result-track em{font-size:7px;color:#7fe0a0;font-style:normal}
+    .quick-prompts{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}.quick-prompts button{border:1px solid var(--line);background:rgba(255,255,255,.03);border-radius:999px;padding:8px 10px;font-size:8px}
+    .quick-prompts button:hover,.quick-prompts button.active{border-color:rgba(239,24,63,.3);background:rgba(239,24,63,.08);color:#fff}
+    .demo-pipeline{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:18px}
+    .pipe{padding:10px 6px;border-radius:10px;border:1px solid var(--line);text-align:center;color:#69707a;font-size:7px;background:rgba(255,255,255,.02);transition:.2s ease}
+    .pipe.active{border-color:rgba(30,215,96,.2);color:#9cebb6;background:rgba(30,215,96,.05)}
+    .demo-note{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);font-size:8px;color:#656b75;line-height:1.6}
+    .demo-screen{padding:20px;min-height:450px;overflow:hidden;position:relative}
+    .demo-screen header{display:flex;justify-content:space-between;align-items:start;gap:12px}.demo-screen h3{font-size:16px;font-weight:500;margin:5px 0 0;letter-spacing:-.03em}
+    .status-chip{border:1px solid rgba(30,215,96,.16);background:rgba(30,215,96,.06);color:#8ee9ae;border-radius:999px;font-size:7px;padding:7px 9px;white-space:nowrap}
+    .result-card{margin-top:18px;border:1px solid var(--line);border-radius:15px;padding:17px;background:rgba(255,255,255,.025)}
+    .result-top{display:flex;justify-content:space-between;gap:12px}.result-top h4{font-size:15px;margin:5px 0 0;font-weight:500}
+    .result-tags{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}.result-tags span{font-size:7px;padding:6px 8px;border:1px solid var(--line);border-radius:999px;color:#9da2aa}
+    .result-list{display:grid}.result-track{display:grid;grid-template-columns:24px 1fr auto;gap:10px;align-items:center;min-height:46px;border-top:1px solid rgba(255,255,255,.055)}
+    .result-track:first-child{border-top:0}.result-track b{font-size:7px;color:#5e646e;font-weight:500}.result-track strong{display:block;font-size:9px;font-weight:500}.result-track small{display:block;color:#686e77;font-size:7px;margin-top:3px}.result-track em{font-size:7px;color:#7fe0a0;font-style:normal}
     .result-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:12px;padding-top:13px;border-top:1px solid var(--line);font-size:8px;color:#747a84}
     .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-    .feature{padding:22px;min-height:200px}
-    .feature-icon{width:42px;height:42px;border-radius:12px;border:1px solid var(--line);display:grid;place-items:center;background:rgba(255,255,255,.035);font-size:15px}
-    .feature h3{font-size:14px;font-weight:500;margin:20px 0 8px}
-    .feature p{font-size:10px;line-height:1.65;color:#858b94;margin:0}
-    .feature .feature-tag{display:inline-block;margin-top:18px;color:#757b85;font-size:7px;letter-spacing:.08em;text-transform:uppercase}
-    .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-    .step{padding:20px;position:relative}
-    .step b{display:block;color:var(--red);font-size:9px;letter-spacing:.1em}
-    .step h3{font-size:14px;font-weight:500;margin:28px 0 7px}
-    .step p{font-size:9px;line-height:1.65;color:#7f858e;margin:0}
-    .showcase-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:14px}
-    .showcase-main,.showcase-side{padding:22px;min-height:340px}
-    .showcase-main h3,.showcase-side h3{font-size:18px;font-weight:500;margin:8px 0 7px}
-    .showcase-main p,.showcase-side p{font-size:10px;color:#7f858e;line-height:1.6}
-    .radar{display:grid;gap:8px;margin-top:24px}
-    .event{display:grid;grid-template-columns:56px 1fr auto;gap:11px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.025)}
-    .event-date{text-align:center;border-right:1px solid var(--line);padding-right:10px}.event-date strong{font-size:13px}.event-date span{display:block;font-size:6px;color:#6b717a}
-    .event h4{font-size:9px;margin:0}.event p{font-size:7px;margin:4px 0 0}
-    .event button{border:1px solid var(--line);border-radius:8px;background:rgba(255,255,255,.035);font-size:7px;padding:7px 8px}
-    .automation-list{display:grid;gap:8px;margin-top:22px}
-    .automation{display:grid;grid-template-columns:1fr auto;gap:10px;padding:12px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.025)}
-    .automation strong{font-size:8px}.automation span{display:block;font-size:6px;color:#696f79;margin-top:4px}
-    .toggle{width:26px;height:14px;border-radius:999px;background:rgba(30,215,96,.18);border:1px solid rgba(30,215,96,.22);position:relative}
-    .toggle:after{content:"";position:absolute;width:8px;height:8px;border-radius:50%;background:var(--green);right:2px;top:2px}
-    .integrations{display:flex;gap:8px;flex-wrap:wrap}
-    .integration{border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.025);padding:11px 14px;font-size:9px;color:#b4b8bf}
-    .cta{padding:78px 0 96px}
-    .cta-card{
-      overflow:hidden;position:relative;padding:clamp(32px,6vw,70px);text-align:center;
-      border:1px solid rgba(239,24,63,.2);border-radius:28px;background:
-      radial-gradient(circle at 50% -20%,rgba(239,24,63,.22),transparent 30rem),
-      linear-gradient(145deg,rgba(21,23,27,.96),rgba(10,11,12,.96))
+    .feature{padding:23px;min-height:214px;position:relative;overflow:hidden}.feature:after{content:"";position:absolute;inset:auto -40px -60px auto;width:140px;height:140px;border-radius:50%;background:rgba(239,24,63,.045);filter:blur(18px)}
+    .feature-icon{width:43px;height:43px;border-radius:12px;border:1px solid var(--line);display:grid;place-items:center;background:rgba(255,255,255,.035);font-size:15px;position:relative;z-index:1}
+    .feature h3{font-size:14px;font-weight:500;margin:20px 0 8px;position:relative;z-index:1}.feature p{font-size:10px;line-height:1.68;color:#858b94;margin:0;position:relative;z-index:1}.feature .feature-tag{display:inline-block;margin-top:18px;color:#757b85;font-size:7px;letter-spacing:.08em;text-transform:uppercase;position:relative;z-index:1}
+    .tour-shell{padding:12px}
+    .tour-nav{display:flex;gap:7px;overflow:auto;padding:3px 3px 12px;scrollbar-width:none}.tour-nav::-webkit-scrollbar{display:none}
+    .tour-tab{border:1px solid var(--line);background:rgba(255,255,255,.025);border-radius:999px;padding:9px 12px;color:#8d939c;font-size:8px;white-space:nowrap}
+    .tour-tab.active{color:#fff;border-color:rgba(239,24,63,.25);background:rgba(239,24,63,.08)}
+    .tour-stage{display:grid;grid-template-columns:.82fr 1.18fr;min-height:390px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#0b0c0d}
+    .tour-copy{padding:30px;border-right:1px solid var(--line);display:flex;flex-direction:column;justify-content:center}.tour-copy h3{font-size:28px;font-weight:500;letter-spacing:-.045em;margin:10px 0 10px}.tour-copy p{color:#8d939c;font-size:11px;line-height:1.72;margin:0}.tour-bullets{display:grid;gap:10px;margin-top:22px}.tour-bullet{display:flex;gap:9px;font-size:9px;color:#b5b9c0;align-items:start}.tour-bullet i{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;background:rgba(30,215,96,.07);color:#77d897;font-style:normal;font-size:8px;flex:0 0 auto}
+    .tour-visual{padding:24px;background:radial-gradient(circle at 70% 20%,rgba(239,24,63,.08),transparent 240px);display:flex;align-items:center}
+    .visual-stack{width:100%;display:grid;gap:9px}.visual-row{display:grid;grid-template-columns:42px 1fr auto;gap:11px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.025)}
+    .visual-icon{width:42px;height:42px;border-radius:10px;background:linear-gradient(145deg,#25282d,#111316);display:grid;place-items:center;font-size:12px}.visual-row strong{display:block;font-size:9px;font-weight:500}.visual-row span{display:block;color:#6f7680;font-size:7px;margin-top:4px}.visual-state{font-size:7px;color:#7fe0a0}
+    .daypart-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:14px}
+    .daypart-copy{padding:29px}.daypart-copy h3{font-size:28px;font-weight:500;letter-spacing:-.045em;margin:10px 0 10px}.daypart-copy p{font-size:11px;color:#8d939c;line-height:1.72;margin:0}
+    .daypart-list{padding:18px}.daypart{display:grid;grid-template-columns:82px 1fr auto;gap:14px;align-items:center;padding:14px;border-top:1px solid var(--line)}.daypart:first-child{border-top:0}
+    .daypart time{font-size:10px;color:#777e88}.daypart strong{display:block;font-size:10px;font-weight:500}.daypart span{display:block;color:#6f7680;font-size:8px;margin-top:4px}.daypart .auto{border:1px solid rgba(30,215,96,.14);color:#83dfa1;background:rgba(30,215,96,.05);border-radius:999px;padding:6px 8px;font-size:6px}
+    .arch{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+    .arch-node{padding:18px;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.025);position:relative}.arch-node:not(:last-child):after{content:"→";position:absolute;right:-8px;top:50%;transform:translate(50%,-50%);z-index:3;color:#4f555e;font-size:13px}
+    .arch-node b{display:block;color:var(--red);font-size:8px;letter-spacing:.08em}.arch-node h3{font-size:12px;font-weight:500;margin:18px 0 6px}.arch-node p{font-size:8px;line-height:1.55;color:#747b85;margin:0}
+    .quality-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.quality-main,.quality-side{padding:26px}
+    .quality-main h3,.quality-side h3{font-size:21px;font-weight:500;letter-spacing:-.04em;margin:9px 0 9px}.quality-main p,.quality-side p{color:#858b94;font-size:10px;line-height:1.7;margin:0}
+    .quality-list{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:20px}.qitem{padding:12px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.024)}.qitem strong{display:block;font-size:9px;font-weight:500}.qitem span{display:block;font-size:7px;color:#6d747d;margin-top:5px;line-height:1.5}
+    .guardrails{display:grid;gap:9px;margin-top:19px}.guardrail{display:flex;gap:11px;align-items:start;padding:12px 0;border-top:1px solid var(--line)}.guardrail:first-child{border-top:0}.guardrail i{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;background:rgba(239,24,63,.07);color:#ff7991;font-style:normal;font-size:10px;flex:0 0 auto}.guardrail strong{display:block;font-size:9px;font-weight:500}.guardrail span{display:block;color:#717781;font-size:7px;margin-top:4px;line-height:1.5}
+    .integration-cloud{display:flex;flex-wrap:wrap;gap:8px}.integration{border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.025);padding:12px 15px;font-size:9px;color:#b4b8bf}
+    .faq{display:grid;gap:8px}.faq details{border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.022);padding:0 18px}.faq summary{cursor:pointer;list-style:none;padding:18px 28px 18px 0;font-size:11px;font-weight:500;position:relative}.faq summary::-webkit-details-marker{display:none}.faq summary:after{content:"+";position:absolute;right:0;top:17px;color:#777d86;font-size:16px}.faq details[open] summary:after{content:"–"}.faq p{margin:0 0 18px;color:#838a94;font-size:9px;line-height:1.72;max-width:920px}
+    .cta{padding:80px 0 96px}
+    .cta-card{overflow:hidden;position:relative;padding:clamp(34px,6vw,74px);text-align:center;border:1px solid rgba(239,24,63,.2);border-radius:29px;background:radial-gradient(circle at 50% -20%,rgba(239,24,63,.23),transparent 30rem),linear-gradient(145deg,rgba(21,23,27,.96),rgba(10,11,12,.96))}
+    .cta-card:before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 0 42%,rgba(255,255,255,.025) 48%,transparent 55%);pointer-events:none}
+    .cta-card h2{font-size:clamp(35px,5vw,62px);font-weight:500;letter-spacing:-.055em;margin:12px auto 16px;max-width:850px}.cta-card p{max-width:670px;margin:0 auto;color:#9da2aa;font-size:12px;line-height:1.72}.cta-card .hero-actions{justify-content:center}
+    footer.site-footer{border-top:1px solid var(--line);padding:30px 0 calc(38px + env(safe-area-inset-bottom));color:#646a73;font-size:8px}.footer-grid{display:flex;justify-content:space-between;gap:28px;align-items:start}.footer-grid p{max-width:690px;line-height:1.72;margin:7px 0 0}.footer-links{display:flex;gap:15px;white-space:nowrap}
+    .reveal{opacity:0;transform:translateY(14px);transition:opacity .45s ease,transform .45s ease}.reveal.in{opacity:1;transform:none}
+    .mobile-cta{display:none}
+    @media(max-width:1080px){
+      .hero-grid{grid-template-columns:1fr;gap:44px}.hero-copy{max-width:820px}.product-frame{transform:none}
+      .floating-health{right:18px}.status-grid,.daypart-grid,.quality-grid{grid-template-columns:1fr}.demo-layout{grid-template-columns:1fr}.feature-grid{grid-template-columns:repeat(2,1fr)}
+      .tour-stage{grid-template-columns:1fr}.tour-copy{border-right:0;border-bottom:1px solid var(--line)}.arch{grid-template-columns:repeat(3,1fr)}.arch-node:nth-child(3):after{display:none}
     }
-    .cta-card h2{font-size:clamp(34px,5vw,60px);font-weight:500;letter-spacing:-.055em;margin:12px auto 16px;max-width:800px}
-    .cta-card p{max-width:640px;margin:0 auto;color:#9da2aa;font-size:12px;line-height:1.7}
-    .cta-card .hero-actions{justify-content:center}
-    footer.site-footer{border-top:1px solid var(--line);padding:28px 0 38px;color:#646a73;font-size:8px}
-    .footer-grid{display:flex;justify-content:space-between;gap:28px;align-items:start}
-    .footer-grid p{max-width:650px;line-height:1.7;margin:7px 0 0}
-    .footer-links{display:flex;gap:15px;white-space:nowrap}
-    .mobile-menu{display:none}
-    @media(max-width:1050px){
-      .hero-grid{grid-template-columns:1fr;gap:42px}.hero-copy{max-width:800px}.mock-shell{transform:none}
-      .demo-layout{grid-template-columns:1fr}.feature-grid{grid-template-columns:repeat(2,1fr)}
-      .flow{grid-template-columns:repeat(2,1fr)}.showcase-grid{grid-template-columns:1fr}
+    @media(max-width:780px){
+      .wrap{width:min(100% - 24px,var(--max))}.nav-inner{min-height:66px}.nav-links,.nav-live{display:none}.nav-actions .button{min-height:40px;padding:0 13px;font-size:9px}.brand-mark{width:38px;height:38px}.brand-copy span{display:none}
+      .hero{padding-top:56px}.hero h1{font-size:clamp(43px,13vw,64px)}.hero-grid{gap:32px}.hero p{font-size:14px}.product-frame{padding:8px;border-radius:21px}.app-grid{height:430px;grid-template-columns:1fr}.app-side,.app-right{display:none}.app-center{padding:15px}.floating-health{right:12px;bottom:18px;min-width:160px}
+      .stats{padding-bottom:42px}.stat-row{grid-template-columns:repeat(2,1fr)}section.block{padding:54px 0}.section-head{display:block}.section-head p{margin-top:15px}.metrics{grid-template-columns:repeat(2,1fr)}.status-main-top{display:block}.health-pill{display:inline-flex;margin-top:14px}
+      .prompt-box{display:grid}.demo-pipeline{grid-template-columns:repeat(2,1fr)}.demo-screen{min-height:420px}.result-footer{display:block}.result-footer .button{margin-top:10px;width:100%}.feature-grid{grid-template-columns:1fr}.tour-copy,.tour-visual{padding:22px}.tour-copy h3{font-size:24px}.daypart{grid-template-columns:66px 1fr}.daypart .auto{grid-column:2;justify-self:start}.arch{grid-template-columns:1fr}.arch-node:not(:last-child):after{content:"↓";right:auto;left:50%;top:auto;bottom:-13px;transform:translate(-50%,50%)}.quality-list{grid-template-columns:1fr}.footer-grid{display:block}.footer-links{margin-top:18px;flex-wrap:wrap}.mobile-cta{display:flex;position:fixed;left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:75;padding:7px;border:1px solid var(--line);border-radius:15px;background:rgba(10,11,12,.9);backdrop-filter:blur(18px);box-shadow:0 18px 55px rgba(0,0,0,.45)}.mobile-cta .button{width:100%}footer.site-footer{padding-bottom:calc(96px + env(safe-area-inset-bottom))}
     }
-    @media(max-width:760px){
-      .wrap{width:min(100% - 24px,1180px)}.nav-links{display:none}.mobile-menu{display:inline-flex}
-      .hero{padding-top:56px}.hero h1{font-size:clamp(43px,13vw,64px)}.hero-grid{gap:32px}
-      .mock-shell{padding:8px;border-radius:20px}.app-grid{height:420px;grid-template-columns:1fr}.app-side,.app-right{display:none}.app-center{padding:15px}
-      .stats{padding-bottom:38px}.stat-row{grid-template-columns:repeat(2,1fr)}
-      section.block{padding:52px 0}.section-head{display:block}.section-head p{margin-top:15px}
-      .feature-grid{grid-template-columns:1fr}.flow{grid-template-columns:1fr}.demo-screen{min-height:390px}.demo-layout{grid-template-columns:minmax(0,1fr)}
-      .prompt-box{display:grid}.showcase-main,.showcase-side{min-height:unset}
-      .footer-grid{display:block}.footer-links{margin-top:18px;flex-wrap:wrap}
+    @media(max-width:460px){
+      .hero h1{font-size:42px}.hero-actions .button{width:100%}.stat-row{grid-template-columns:1fr}.metrics{grid-template-columns:1fr 1fr}.tour-copy h3,.daypart-copy h3{font-size:22px}.event-hide{display:none}
     }
-    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}.mock-shell{transform:none}}
+    @media(prefers-reduced-motion:reduce){
+      *{scroll-behavior:auto!important;transition:none!important;animation:none!important}.product-frame{transform:none}.reveal{opacity:1;transform:none}
+    }
   </style>
 </head>
 <body>
+  <a class="skip" href="#main">Zum Inhalt springen</a>
+
   <nav class="nav">
     <div class="wrap nav-inner">
       <a class="brand" href="#top" aria-label="KI Spotify Agent Start">
         <span class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none"><path d="M4 15.2c4.4-2.2 11-1.7 15.2.8" stroke="#ef183f" stroke-width="1.8" stroke-linecap="round"/><path d="M5.2 11.2c4.1-1.8 9.8-1.5 13.5.4" stroke="#f7f7f5" stroke-opacity=".75" stroke-width="1.5" stroke-linecap="round"/><path d="M6.5 7.7c3.5-1.2 7.9-.9 10.8.4" stroke="#1ed760" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M4 15.2c4.4-2.2 11-1.7 15.2.8" stroke="#ef183f" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M5.2 11.2c4.1-1.8 9.8-1.5 13.5.4" stroke="#f7f7f5" stroke-opacity=".75" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M6.5 7.7c3.5-1.2 7.9-.9 10.8.4" stroke="#1ed760" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
         </span>
         <span class="brand-copy"><strong>KI Spotify Agent</strong><span>AI Kitz · Music Intelligence</span></span>
       </a>
-      <div class="nav-links">
-        <a href="#demo">Live Mockup</a><a href="#features">Features</a><a href="#workflow">Ablauf</a><a href="#usecases">Einsatz</a>
+
+      <div class="nav-links" aria-label="Hauptnavigation">
+        <a href="#demo">Live Demo</a>
+        <a href="#features">Features</a>
+        <a href="#tour">Produkt-Tour</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#faq">FAQ</a>
       </div>
-      <a class="button primary" href="https://spotify.kitzlabs.ai/" target="_blank" rel="noreferrer">System öffnen ↗</a>
+
+      <div class="nav-actions">
+        <span class="nav-live"><i class="dot"></i><span id="navStatus">System prüfen</span></span>
+        <a class="button primary" href="https://spotify.kitzlabs.ai/" target="_blank" rel="noreferrer">System öffnen ↗</a>
+      </div>
     </div>
   </nav>
 
-  <main id="top">
-    <section class="hero">
+  <main id="main">
+    <section class="hero" id="top">
       <div class="wrap hero-grid">
         <div class="hero-copy">
-          <span class="eyebrow">AI PLAYLIST ENGINE · SPOTIFY AUTOMATION</span>
-          <h1>Dein intelligentes <em>Musiksystem.</em></h1>
-          <p>Ein Musikwunsch reicht. Der KI Spotify Agent plant, sucht, validiert und baut hochwertige Playlists für jedes Genre – inklusive Preview-First Qualitätscheck, Auto-DJ, Event Radar und laufenden Updates.</p>
+          <span class="eyebrow">AI PLAYLIST ENGINE · MUSIC OPERATIONS</span>
+          <h1>Musik wird zum <em>System.</em><span>Nicht zur Handarbeit.</span></h1>
+          <p>Der KI Spotify Agent übersetzt einen Musikwunsch in eine validierte Playlist: Genre, Stimmung, Dauer, Bekanntheit, Flow und Duplikate werden strukturiert geprüft – anschließend steuerst du Erstellung, Auto-DJ, Event Radar und laufende Updates in einer Oberfläche.</p>
           <div class="hero-actions">
-            <a class="button primary" href="#demo">Interaktive Demo starten ✦</a>
-            <a class="button" href="#features">Alle Features ansehen</a>
+            <a class="button primary" href="#demo">Live Mockup testen ✦</a>
+            <a class="button" href="#tour">Produkt ansehen</a>
+            <a class="button green" href="https://spotify.kitzlabs.ai/" target="_blank" rel="noreferrer">Live-System ↗</a>
           </div>
-          <div class="hero-badges">
-            <span class="badge"><span class="live-dot"></span><span id="liveStatus">Live-System wird geprüft</span></span>
-            <span class="badge">◆ Preview-First</span><span class="badge">↻ Auto-DJ</span><span class="badge">∞ Alle Genres</span>
+          <div class="hero-proof">
+            <span class="proof"><i class="dot"></i><span id="heroStatus">Live-Status wird geprüft</span></span>
+            <span class="proof">Alle Genres</span>
+            <span class="proof">Preview vor Erstellung</span>
+            <span class="proof">Responsive Web UI</span>
           </div>
         </div>
 
-        <div class="mock-shell" aria-label="Live Mockup der KI Spotify Agent Oberfläche">
-          <span class="hero-glow"></span>
-          <div class="mock-top"><i></i><i></i><i></i><span class="mock-url">kispotify.kitzlabs.ai · Product Preview</span></div>
+        <div class="product-frame" aria-label="Produkt-Mockup des KI Spotify Agent">
+          <div class="frame-top"><i></i><i></i><i></i><span class="frame-url">spotify.kitzlabs.ai · Playlist Studio</span></div>
           <div class="app-grid">
             <aside class="app-side">
               <div class="mini-brand"><div class="mini-logo">✦</div><div><strong>Music AI</strong><span>AI KITZ</span></div></div>
               <div class="mini-nav">
-                <div class="active">⌂ Übersicht</div><div>✦ Playlist Studio</div><div>◫ Playlists</div><div>↻ Auto-DJ</div><div>◇ Event Radar</div><div>⚙ Einstellungen</div>
+                <div>⌂ Übersicht</div><div class="active">✦ Playlist Studio</div><div>◫ Playlists</div><div>↻ Auto-DJ</div><div>◇ Event Radar</div><div>⚙ Einstellungen</div>
               </div>
-              <div class="side-status"><span class="live-dot"></span> <b>Spotify API</b><br><br>KI Engine bereit</div>
+              <div class="side-status"><span class="dot"></span> <b>Spotify API</b><br>KI Engine bereit</div>
             </aside>
+
             <section class="app-center">
-              <div class="center-title"><div><span>LOEWS AI MUSIC AGENT</span><h3>Playlist Studio</h3></div><span>PREVIEW-FIRST</span></div>
+              <div class="center-title"><div><span>AI MUSIC AGENT</span><h3>Playlist Studio</h3></div><span>PREVIEW-FIRST</span></div>
+              <div class="live-process">
+                <div class="process-step active">Intent</div><div class="process-step active">Search</div><div class="process-step active">Validate</div><div class="process-step active">Flow</div>
+              </div>
               <div class="chat">
-                <div class="message user">Erstelle mir 2 Stunden Afro House für einen Rooftop Sunset. Bekanntheit 80%.</div>
-                <div class="message">Ich prüfe Genre, Energie, Bekanntheit, Duplikate und Flow. Hier ist deine Vorschau:</div>
+                <div class="message user">2 Stunden Afro House für Rooftop Sunset. 80% bekannte Songs, guter Flow.</div>
+                <div class="message">Verstanden. Ich prüfe Genre, Energie, Bekanntheit, Duplikate und Artist-Verteilung. Hier ist die validierte Vorschau.</div>
                 <div class="preview">
                   <div class="preview-head"><div><span class="eyebrow">AI PREVIEW</span><h4>Rooftop Sunset · Afro House</h4></div><span class="score"></span></div>
                   <div class="track"><b>01</b><span>Move · Adam Port, Stryv</span><em>97</em></div>
                   <div class="track"><b>02</b><span>Thandaza · Keinemusik</span><em>95</em></div>
-                  <div class="track"><b>03</b><span>Music Sounds Better · Rampa</span><em>93</em></div>
-                  <div class="track"><b>04</b><span>Abalele · Kabza De Small</span><em>91</em></div>
+                  <div class="track"><b>03</b><span>Muyè · Rampa, &amp;ME</span><em>94</em></div>
+                  <div class="track"><b>04</b><span>Abalele · Kabza De Small</span><em>92</em></div>
                 </div>
                 <div class="composer">Neuen Musikwunsch eingeben …</div>
               </div>
             </section>
+
             <aside class="app-right">
               <span class="eyebrow">LIBRARY</span><h4>Deine Playlists</h4>
               <div class="playlist-mini"><div class="cover">✦</div><div><strong>Rooftop Sunset</strong><span>42 Songs · AUTO</span></div></div>
@@ -298,126 +366,251 @@
               <div class="playlist-mini"><div class="cover">◈</div><div><strong>Late Night House</strong><span>64 Songs · AUTO</span></div></div>
             </aside>
           </div>
+          <div class="floating-health">
+            <strong><i class="dot"></i><span id="floatHealth">Live-System</span></strong>
+            <span id="floatLatency">Healthcheck läuft …</span>
+          </div>
         </div>
       </div>
     </section>
 
     <section class="stats">
       <div class="wrap stat-row">
-        <div class="stat"><small>Genre Engine</small><strong>Alle Genres</strong></div>
-        <div class="stat"><small>Workflow</small><strong>Preview → Freigabe</strong></div>
-        <div class="stat"><small>Qualität</small><strong>Validierung + Dedupe</strong></div>
+        <div class="stat"><small>Genre Engine</small><strong>Genre-unabhängig</strong></div>
+        <div class="stat"><small>Qualität</small><strong>Preview → Freigabe</strong></div>
         <div class="stat"><small>Automation</small><strong>Auto-DJ + Events</strong></div>
+        <div class="stat"><small>Steuerung</small><strong>Web + Telegram</strong></div>
       </div>
     </section>
 
-    <section class="block" id="demo">
+    <section class="block reveal" id="status">
       <div class="wrap">
         <div class="section-head">
-          <div><span class="eyebrow">INTERAKTIVE PRODUKTDEMO</span><h2>Teste den Playlist-Flow direkt hier.</h2></div>
-          <p>Diese Demo simuliert die Produktlogik im Browser. Das Live-System bleibt davon getrennt – keine Spotify-Playlist wird ohne Freigabe verändert.</p>
+          <div><span class="eyebrow">LIVE SYSTEM STATUS</span><h2>Produktseite und Agent sauber getrennt.</h2></div>
+          <p>Diese Seite demonstriert das Produkt. Der eigentliche Spotify-Agent läuft separat. Der Healthcheck ist ausschließlich lesend und verändert keine Playlist-Daten.</p>
+        </div>
+        <div class="status-grid">
+          <article class="panel status-main">
+            <div class="status-main-top">
+              <div><span class="eyebrow">READ-ONLY HEALTHCHECK</span><h3>Live-System Verbindung</h3><p>Der Browser prüft den öffentlichen Health-Endpunkt der Produktiv-App. Fehler im Demo-Bereich können dadurch keine Spotify-Daten verändern.</p></div>
+              <span class="health-pill"><i class="dot"></i><span id="healthState">Prüfung läuft</span></span>
+            </div>
+            <div class="metrics">
+              <div class="metric"><span>Status</span><strong id="metricStatus">Prüfen …</strong></div>
+              <div class="metric"><span>Latenz</span><strong id="metricLatency">–</strong></div>
+              <div class="metric"><span>Demo</span><strong>Sandboxed UI</strong></div>
+              <div class="metric"><span>Write Access</span><strong>Keine</strong></div>
+            </div>
+          </article>
+          <article class="panel status-side">
+            <span class="eyebrow">SAFETY BOUNDARY</span><h3>Was diese Produktseite macht.</h3>
+            <div class="check-list">
+              <div class="check"><b>Produkt erklären</b><span>AKTIV</span></div>
+              <div class="check"><b>Playlist-Flow simulieren</b><span>AKTIV</span></div>
+              <div class="check"><b>Live-Health lesen</b><span>READ ONLY</span></div>
+              <div class="check"><b>Spotify verändern</b><span>DEAKTIVIERT</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="block reveal" id="demo">
+      <div class="wrap">
+        <div class="section-head">
+          <div><span class="eyebrow">INTERAKTIVE PRODUKTDEMO</span><h2>Teste den Playlist-Flow direkt im Browser.</h2></div>
+          <p>Wähle ein Genre oder gib einen eigenen Musikwunsch ein. Die Demo zeigt, wie Intent, Suche, Qualitätsprüfung und Flow zusammenspielen – ohne echte Spotify-Änderung.</p>
         </div>
         <div class="demo-layout">
           <div class="panel demo-control">
-            <span class="eyebrow">01 · MUSIKWUNSCH</span><h3>Was soll heute laufen?</h3>
-            <p>Genre, Stimmung, Anlass, Dauer oder Künstler nennen. Der Agent strukturiert den Wunsch automatisch.</p>
+            <span class="eyebrow">01 · MUSIKWUNSCH</span>
+            <h3>Was soll heute laufen?</h3>
+            <p>Genre, Stimmung, Anlass, Dauer oder Künstler nennen. Der Agent strukturiert den Wunsch und bereitet die Vorschau vor.</p>
             <div class="prompt-box">
               <input id="demoPrompt" value="Afro House Rooftop Sunset · 2 Stunden · 80% bekannte Songs" aria-label="Demo Musikwunsch">
-              <button class="button primary" id="demoRun">Vorschau erstellen ✦</button>
+              <button class="button primary" id="demoRun" type="button">Vorschau erstellen ✦</button>
             </div>
-            <div class="quick-prompts">
-              <button data-demo="afro">Afro House</button><button data-demo="schlager">Schlager</button><button data-demo="rock">Classic Rock</button><button data-demo="dnb">Drum & Bass</button><button data-demo="jazz">Dinner Jazz</button>
+            <div class="quick-prompts" aria-label="Demo Presets">
+              <button type="button" class="active" data-demo="afro">Afro House</button>
+              <button type="button" data-demo="schlager">Schlager</button>
+              <button type="button" data-demo="rock">Classic Rock</button>
+              <button type="button" data-demo="dnb">Drum &amp; Bass</button>
+              <button type="button" data-demo="jazz">Dinner Jazz</button>
+              <button type="button" data-demo="pop">Pop Hits</button>
             </div>
-            <div class="demo-note">Demo-Modus · Es werden keine Spotify-Daten verändert. Im Produktivsystem erfolgt die echte Erstellung erst nach Qualitätsprüfung und Freigabe.</div>
+            <div class="demo-pipeline" aria-label="Demo Verarbeitungsstufen">
+              <div class="pipe active">Intent</div><div class="pipe active">Search</div><div class="pipe active">Validate</div><div class="pipe active">Flow</div>
+            </div>
+            <div class="demo-note">Demo-Modus · Keine Playlist wird erstellt oder verändert. Im Live-System erfolgt die tatsächliche Erstellung erst nach Qualitätsprüfung und Freigabe.</div>
           </div>
-          <div class="panel demo-screen">
-            <header><div><span class="eyebrow">02 · AI PREVIEW</span><h3 id="demoTitle">Rooftop Sunset · Afro House</h3></div><span class="status-chip">QUALITÄT: PASS</span></header>
+
+          <div class="panel demo-screen" aria-live="polite">
+            <header><div><span class="eyebrow">02 · AI PREVIEW</span><h3 id="demoTitle">Rooftop Sunset · Afro House</h3></div><span class="status-chip" id="demoQuality">QUALITÄT: PASS</span></header>
             <div class="result-card">
               <div class="result-top"><div><span class="eyebrow">VALIDIERTE VORSCHAU</span><h4 id="resultName">Rooftop Sunset · 80% Familiar</h4></div><div class="score" id="demoScore"></div></div>
               <div class="result-tags" id="demoTags"><span>42 Songs</span><span>120 Min</span><span>Afro House</span><span>80% bekannt</span></div>
               <div class="result-list" id="demoTracks"></div>
-              <div class="result-footer"><span>Duplikate entfernt · Artist-Wiederholung begrenzt · Flow sortiert</span><button class="button" type="button">In Spotify erstellen</button></div>
+              <div class="result-footer"><span id="demoFooter">Duplikate entfernt · Artist-Wiederholung begrenzt · Flow sortiert</span><button class="button" type="button" id="fakeCreate">In Spotify erstellen</button></div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="block" id="features">
+    <section class="block reveal" id="features">
       <div class="wrap">
         <div class="section-head">
           <div><span class="eyebrow">PRODUKTKERN</span><h2>Mehr als ein Playlist-Generator.</h2></div>
-          <p>Das System verbindet Musikwunsch, Spotify API, KI-Planung, Qualitätskontrolle und Automationen in einer einzigen Oberfläche.</p>
+          <p>Das System verbindet Musikwunsch, Spotify API, KI-Planung, Qualitätskontrolle, Library und wiederkehrende Automationen in einer operativen Oberfläche.</p>
         </div>
         <div class="feature-grid">
-          <article class="panel feature"><div class="feature-icon">✦</div><h3>Universal Playlist Engine</h3><p>Von Afro House über Rock, Jazz und Schlager bis DnB: das System ist nicht auf ein einzelnes Genre beschränkt.</p><span class="feature-tag">Any genre · Any mood</span></article>
-          <article class="panel feature"><div class="feature-icon">✓</div><h3>Preview-First Quality Gate</h3><p>Erst Vorschau und Validierung, dann Spotify. Unpassende Tracks, Duplikate und schlechte Treffer werden vor der Erstellung gefiltert.</p><span class="feature-tag">Quality before publish</span></article>
-          <article class="panel feature"><div class="feature-icon">◫</div><h3>Playlist Library</h3><p>AI-erstellte, manuell importierte und bestehende Playlists zentral ansehen, analysieren, erweitern und verwalten.</p><span class="feature-tag">One music workspace</span></article>
-          <article class="panel feature"><div class="feature-icon">↻</div><h3>Auto-DJ</h3><p>Queue überwachen, passend nachfüllen und Bekanntheitsgrad steuern – für einen konsistenten Musikfluss über den Tag.</p><span class="feature-tag">Adaptive queue</span></article>
-          <article class="panel feature"><div class="feature-icon">◇</div><h3>Event Radar</h3><p>Events und Anlässe in musikalische Aktionen übersetzen: passende Specials, Vorab-Playlists und automatisierte Event-Jobs.</p><span class="feature-tag">Context-aware music</span></article>
-          <article class="panel feature"><div class="feature-icon">⚙</div><h3>Automationen</h3><p>Zeitpläne, Refreshes, Event-Jobs und wiederkehrende Updates zentral steuern – nachvollziehbar und kontrollierbar.</p><span class="feature-tag">Scheduled intelligence</span></article>
-          <article class="panel feature"><div class="feature-icon">◉</div><h3>Spotify Connect</h3><p>Live Playback, Geräte-Status, aktuelle Songs und direkte Wiedergabe über die vorhandene Spotify-Infrastruktur.</p><span class="feature-tag">Live playback</span></article>
-          <article class="panel feature"><div class="feature-icon">⌁</div><h3>Telegram & Agent Control</h3><p>Admin-Steuerung, Chat, Freigaben und Agent-Aktionen auch über Telegram – ideal für den operativen Alltag.</p><span class="feature-tag">Remote operations</span></article>
-          <article class="panel feature"><div class="feature-icon">↗</div><h3>Erweiterbare API</h3><p>OpenAPI/GPT-Actions und modulare Endpunkte schaffen die Basis für weitere Apps, Dashboards und Kundenintegrationen.</p><span class="feature-tag">API-ready architecture</span></article>
+          <article class="panel feature"><div class="feature-icon">✦</div><h3>Universal Playlist Engine</h3><p>Afro House, Rock, Jazz, Schlager, Pop, DnB und weitere Genres werden über denselben Intent- und Validierungsprozess verarbeitet.</p><span class="feature-tag">Any genre · Any mood</span></article>
+          <article class="panel feature"><div class="feature-icon">✓</div><h3>Preview-First Quality Gate</h3><p>Erst Vorschau und Prüfung, dann Erstellung. Unpassende Treffer, Duplikate und schlechte Artist-Verteilungen werden vor dem Publish gefiltert.</p><span class="feature-tag">Quality before publish</span></article>
+          <article class="panel feature"><div class="feature-icon">◫</div><h3>Playlist Library</h3><p>AI-erstellte, importierte und bestehende Playlists zentral ansehen, analysieren, erweitern und verwalten.</p><span class="feature-tag">One music workspace</span></article>
+          <article class="panel feature"><div class="feature-icon">↻</div><h3>Auto-DJ</h3><p>Queue überwachen, passend nachfüllen und gewünschte Energie oder Bekanntheit über Zeitfenster steuern.</p><span class="feature-tag">Adaptive queue</span></article>
+          <article class="panel feature"><div class="feature-icon">◇</div><h3>Event Radar</h3><p>Anlässe und Events in vorbereitete Musik-Jobs übersetzen: von der Vorab-Playlist bis zum zeitgesteuerten Special.</p><span class="feature-tag">Context-aware music</span></article>
+          <article class="panel feature"><div class="feature-icon">⚙</div><h3>Automationen</h3><p>Zeitpläne, Refreshes, Event-Jobs und wiederkehrende Updates sichtbar und kontrollierbar orchestrieren.</p><span class="feature-tag">Scheduled intelligence</span></article>
+          <article class="panel feature"><div class="feature-icon">◉</div><h3>Spotify Connect</h3><p>Playback-Kontext, verfügbare Geräte und Musiksteuerung können mit der vorhandenen Spotify-Infrastruktur verbunden werden.</p><span class="feature-tag">Playback context</span></article>
+          <article class="panel feature"><div class="feature-icon">⌁</div><h3>Telegram &amp; Agent Control</h3><p>Admin-Steuerung, Freigaben und Agent-Aktionen zusätzlich über Telegram – passend für den operativen Alltag.</p><span class="feature-tag">Remote operations</span></article>
+          <article class="panel feature"><div class="feature-icon">↗</div><h3>Erweiterbare API</h3><p>Modulare Endpunkte und OpenAPI-basierte Integrationen bilden die Basis für weitere Apps, Dashboards und Kunden-Workflows.</p><span class="feature-tag">API-ready architecture</span></article>
         </div>
       </div>
     </section>
 
-    <section class="block" id="workflow">
-      <div class="wrap">
-        <div class="section-head"><div><span class="eyebrow">WORKFLOW</span><h2>Vom Wunsch zur Spotify-Playlist in vier Schritten.</h2></div></div>
-        <div class="flow">
-          <article class="panel step"><b>01 · WUNSCH</b><h3>Beschreiben</h3><p>Genre, Stimmung, Dauer, Anlass, Zielgruppe und gewünschte Bekanntheit in natürlicher Sprache.</p></article>
-          <article class="panel step"><b>02 · KI</b><h3>Planen & suchen</h3><p>Der Agent erzeugt Suchstrategien, sammelt Tracks, bewertet Matches und baut einen musikalischen Flow.</p></article>
-          <article class="panel step"><b>03 · QUALITÄT</b><h3>Prüfen</h3><p>Preview, Dedupe, Genre-/Mood-Checks, Trackqualität und Artist-Verteilung laufen vor jeder echten Erstellung.</p></article>
-          <article class="panel step"><b>04 · SPOTIFY</b><h3>Freigeben & automatisieren</h3><p>Nach Freigabe wird die Playlist erstellt und kann optional automatisch aktualisiert oder eventbezogen gesteuert werden.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="block" id="usecases">
+    <section class="block reveal" id="tour">
       <div class="wrap">
         <div class="section-head">
-          <div><span class="eyebrow">LIVE MODULE</span><h2>Für Hospitality und Events gebaut.</h2></div>
-          <p>Die Oberfläche verbindet Tagesgeschäft, Musikbibliothek und Kontext – ohne dass Mitarbeiter zwischen mehreren Tools wechseln müssen.</p>
+          <div><span class="eyebrow">PRODUKT-TOUR</span><h2>Ein System. Mehrere operative Module.</h2></div>
+          <p>Die Tour zeigt die Kernmodule als interaktiven Mockup. Du kannst zwischen Playlist Engine, Auto-DJ, Event Radar und Integrationen wechseln.</p>
         </div>
-        <div class="showcase-grid">
-          <article class="panel showcase-main">
-            <span class="eyebrow">EVENT RADAR</span><h3>Musik passend zum Anlass vorbereiten.</h3><p>Events erkennen, musikalisch einordnen und als Playlist-Job vorbereiten.</p>
-            <div class="radar">
-              <div class="event"><div class="event-date"><strong>18</strong><span>OKT</span></div><div><h4>Rooftop Closing</h4><p>Sunset · Afro House · 18:00–23:00</p></div><button>Preview ✦</button></div>
-              <div class="event"><div class="event-date"><strong>25</strong><span>OKT</span></div><div><h4>Saturday Dinner</h4><p>Soul · Jazz · Modern Classics</p></div><button>Preview ✦</button></div>
-              <div class="event"><div class="event-date"><strong>31</strong><span>OKT</span></div><div><h4>Halloween Night</h4><p>Pop · Dance · Party Classics</p></div><button>Preview ✦</button></div>
+        <div class="panel tour-shell">
+          <div class="tour-nav" role="tablist" aria-label="Produktmodule">
+            <button class="tour-tab active" type="button" data-tour="engine" role="tab" aria-selected="true">Playlist Engine</button>
+            <button class="tour-tab" type="button" data-tour="autodj" role="tab" aria-selected="false">Auto-DJ</button>
+            <button class="tour-tab" type="button" data-tour="events" role="tab" aria-selected="false">Event Radar</button>
+            <button class="tour-tab" type="button" data-tour="integrations" role="tab" aria-selected="false">Integrationen</button>
+          </div>
+          <div class="tour-stage">
+            <div class="tour-copy">
+              <span class="eyebrow" id="tourEyebrow">PLAYLIST ENGINE</span>
+              <h3 id="tourTitle">Vom Prompt zur validierten Playlist.</h3>
+              <p id="tourText">Der Agent versteht Absicht, sucht passende Tracks, bewertet Qualität und baut daraus einen konsistenten Flow.</p>
+              <div class="tour-bullets" id="tourBullets"></div>
             </div>
-          </article>
-          <article class="panel showcase-side">
-            <span class="eyebrow">AUTO-DJ</span><h3>Wiederkehrende Musikarbeit automatisieren.</h3><p>Regeln bleiben sichtbar und kontrollierbar. Kein Blindflug – jeder Job hat Status und Kontext.</p>
-            <div class="automation-list">
-              <div class="automation"><div><strong>Dinner Rotation</strong><span>Täglich · 17:00 · Refresh</span></div><i class="toggle"></i></div>
-              <div class="automation"><div><strong>Weekend Energy</strong><span>Fr/Sa · 21:00 · Queue boost</span></div><i class="toggle"></i></div>
-              <div class="automation"><div><strong>Event Special</strong><span>3 Tage vorher · Preview</span></div><i class="toggle"></i></div>
-              <div class="automation"><div><strong>Library Health</strong><span>Wöchentlich · Audit</span></div><i class="toggle"></i></div>
-            </div>
-          </article>
+            <div class="tour-visual"><div class="visual-stack" id="tourVisual"></div></div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="block">
+    <section class="block reveal" id="workflow">
       <div class="wrap">
-        <div class="section-head"><div><span class="eyebrow">INTEGRATIONEN</span><h2>Bereit für deinen Stack.</h2></div><p>Die Produktarchitektur ist modular und kann schrittweise um weitere Kanäle, Datenquellen und Workflows ergänzt werden.</p></div>
-        <div class="integrations">
-          <span class="integration">Spotify Web API</span><span class="integration">Spotify Connect</span><span class="integration">Telegram</span><span class="integration">OpenAPI / GPT Actions</span><span class="integration">Event Context</span><span class="integration">SQLite Memory</span><span class="integration">Automation Scheduler</span><span class="integration">Web / PWA</span>
+        <div class="section-head">
+          <div><span class="eyebrow">DAYPART AUTOMATION</span><h2>Musik über den Tag intelligent organisieren.</h2></div>
+          <p>Für Hospitality zählt nicht nur die Playlist, sondern wann welche Stimmung läuft. Das System kann Tagesphasen und Event-Kontext als Arbeitsgrundlage nutzen.</p>
+        </div>
+        <div class="daypart-grid">
+          <article class="panel daypart-copy">
+            <span class="eyebrow">HOSPITALITY FLOW</span><h3>Vom Lunch bis Late Night.</h3>
+            <p>Statt für jede Schicht manuell neue Musik zu suchen, werden Regeln, Playlists und Jobs nachvollziehbar organisiert. Mitarbeiter sehen, was läuft und warum.</p>
+            <div class="hero-actions"><a class="button" href="#demo">Flow testen</a><a class="button primary" href="https://spotify.kitzlabs.ai/" target="_blank" rel="noreferrer">Live-System ↗</a></div>
+          </article>
+          <article class="panel daypart-list">
+            <div class="daypart"><time>11:30</time><div><strong>Lunch · Warm &amp; easy</strong><span>Soul · Acoustic · Light Pop</span></div><span class="auto">AUTO</span></div>
+            <div class="daypart"><time>17:00</time><div><strong>Dinner · Elegant</strong><span>Jazz · Modern Classics · Soul</span></div><span class="auto">AUTO</span></div>
+            <div class="daypart"><time>20:30</time><div><strong>Bar · More energy</strong><span>House · Pop · Familiar</span></div><span class="auto">AUTO</span></div>
+            <div class="daypart"><time>23:00</time><div><strong>Late Night · Peak</strong><span>Dance · House · Party</span></div><span class="auto">AUTO</span></div>
+          </article>
         </div>
       </div>
     </section>
 
-    <section class="cta">
+    <section class="block reveal">
+      <div class="wrap">
+        <div class="section-head">
+          <div><span class="eyebrow">SYSTEM WORKFLOW</span><h2>Vom Wunsch bis zur Freigabe in klaren Stufen.</h2></div>
+          <p>Die Qualitätsstufen bleiben sichtbar. Das reduziert Blindflug und macht das Ergebnis vor der tatsächlichen Spotify-Erstellung prüfbar.</p>
+        </div>
+        <div class="arch">
+          <article class="arch-node"><b>01</b><h3>Intent</h3><p>Genre, Anlass, Dauer, Energie, Bekanntheit und Präferenzen aus natürlicher Sprache ableiten.</p></article>
+          <article class="arch-node"><b>02</b><h3>Search</h3><p>Mehrere Suchstrategien aufbauen und Kandidaten aus dem Spotify-Kontext sammeln.</p></article>
+          <article class="arch-node"><b>03</b><h3>Validate</h3><p>Treffer auf Relevanz, Duplikate, Artist-Verteilung und gewünschte Parameter prüfen.</p></article>
+          <article class="arch-node"><b>04</b><h3>Flow</h3><p>Tracks für einen musikalisch sinnvollen Verlauf sortieren und als Preview aufbereiten.</p></article>
+          <article class="arch-node"><b>05</b><h3>Approve</h3><p>Erst nach Freigabe wird im Live-System die eigentliche Spotify-Aktion ausgeführt.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="block reveal">
+      <div class="wrap">
+        <div class="section-head">
+          <div><span class="eyebrow">CONTROL &amp; QUALITY</span><h2>Automatisieren – ohne Kontrolle abzugeben.</h2></div>
+          <p>Der Kern ist nicht „AI macht irgendwas“, sondern ein nachvollziehbarer Prozess mit Preview, Regeln und klarer Trennung zwischen Simulation und Produktivaktion.</p>
+        </div>
+        <div class="quality-grid">
+          <article class="panel quality-main">
+            <span class="eyebrow">QUALITY CHECKS</span><h3>Vor der Playlist kommt die Prüfung.</h3><p>Mehrere Kontrollschritte erhöhen die Chance, dass das Ergebnis zum eigentlichen Wunsch passt.</p>
+            <div class="quality-list">
+              <div class="qitem"><strong>Dedupe</strong><span>Doppelte Songs entfernen.</span></div>
+              <div class="qitem"><strong>Genre / Mood</strong><span>Treffer gegen Intent prüfen.</span></div>
+              <div class="qitem"><strong>Artist Balance</strong><span>Übermäßige Wiederholung begrenzen.</span></div>
+              <div class="qitem"><strong>Flow</strong><span>Reihenfolge musikalisch ordnen.</span></div>
+              <div class="qitem"><strong>Familiarity</strong><span>Gewünschte Bekanntheit berücksichtigen.</span></div>
+              <div class="qitem"><strong>Preview Gate</strong><span>Vor Publish sichtbar machen.</span></div>
+            </div>
+          </article>
+          <article class="panel quality-side">
+            <span class="eyebrow">GUARDRAILS</span><h3>Produktive Aktionen bewusst auslösen.</h3><p>Die Produktseite selbst bleibt read-only. Das Live-System kann Aktionen ausführen, aber nicht durch diese Demo.</p>
+            <div class="guardrails">
+              <div class="guardrail"><i>1</i><div><strong>Demo bleibt isoliert</strong><span>Browser-Mockup und echte Spotify-Aktionen sind voneinander getrennt.</span></div></div>
+              <div class="guardrail"><i>2</i><div><strong>Freigabe vor Publish</strong><span>Preview und Ergebnis können vor der Erstellung kontrolliert werden.</span></div></div>
+              <div class="guardrail"><i>3</i><div><strong>Status sichtbar</strong><span>Health, Modulstatus und Job-Kontext können als operative Signale angezeigt werden.</span></div></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="block reveal">
+      <div class="wrap">
+        <div class="section-head">
+          <div><span class="eyebrow">INTEGRATIONEN</span><h2>Bereit für den bestehenden AI-Kitz Stack.</h2></div>
+          <p>Die Architektur ist modular. Aktive und geplante Integrationen können schrittweise angebunden werden, ohne die Produktseite mit dem Live-Agent zu vermischen.</p>
+        </div>
+        <div class="integration-cloud">
+          <span class="integration">Spotify Web API</span>
+          <span class="integration">Spotify Connect</span>
+          <span class="integration">Telegram</span>
+          <span class="integration">OpenAPI / GPT Actions</span>
+          <span class="integration">Event Context</span>
+          <span class="integration">Automation Scheduler</span>
+          <span class="integration">Web / PWA</span>
+          <span class="integration">Agent Workflows</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="block reveal" id="faq">
+      <div class="wrap">
+        <div class="section-head">
+          <div><span class="eyebrow">FAQ</span><h2>Was die Produktseite zeigt – und was nicht.</h2></div>
+        </div>
+        <div class="faq">
+          <details><summary>Kann der Agent nur Afro House?</summary><p>Nein. Die Produktlogik ist genre-unabhängig gedacht. Die Demo enthält bewusst unterschiedliche Presets wie Schlager, Classic Rock, Drum &amp; Bass, Dinner Jazz und Pop, damit das sichtbar wird.</p></details>
+          <details><summary>Erstellt die Demo hier echte Spotify-Playlists?</summary><p>Nein. Diese Produktseite simuliert den Flow vollständig im Browser. Die tatsächliche Spotify-Erstellung findet ausschließlich im getrennten Live-System statt.</p></details>
+          <details><summary>Was bedeutet „Preview-First“?</summary><p>Der Nutzer sieht das geplante Ergebnis vor der eigentlichen Erstellung. So können Titel, Tracks, Parameter und Qualität geprüft werden, bevor eine produktive Aktion ausgelöst wird.</p></details>
+          <details><summary>Ist Auto-DJ dasselbe wie zufälliges Abspielen?</summary><p>Nein. Auto-DJ ist als regelbasierter operativer Layer gedacht: Queue, Tagesphase, Playlist-Kontext und definierte Kriterien können berücksichtigt werden, statt nur zufällige Titel zu mischen.</p></details>
+          <details><summary>Wie ist die Produktseite mit dem Agent verbunden?</summary><p>Nur über einen lesenden Healthcheck zum öffentlichen Systemstatus. Die Demo selbst hat keinen Schreibzugriff auf Spotify.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta reveal">
       <div class="wrap">
         <div class="cta-card">
           <span class="eyebrow">AI KITZ · MUSIC INTELLIGENCE</span>
-          <h2>Musik nicht mehr manuell verwalten. Intelligent steuern.</h2>
-          <p>Der KI Spotify Agent kombiniert Playlist-Erstellung, Qualitätskontrolle und Automationen zu einem produktiven Musiksystem.</p>
+          <h2>Musik nicht mehr einzeln verwalten. Intelligent steuern.</h2>
+          <p>Playlist-Erstellung, Qualitätskontrolle, Event-Kontext und Automationen werden zu einem zusammenhängenden Musiksystem.</p>
           <div class="hero-actions">
             <a class="button primary" href="https://spotify.kitzlabs.ai/" target="_blank" rel="noreferrer">Live-System öffnen ↗</a>
             <a class="button" href="#demo">Demo erneut testen</a>
@@ -429,72 +622,198 @@
 
   <footer class="site-footer">
     <div class="wrap footer-grid">
-      <div><strong>KI Spotify Agent · AI Kitz</strong><p>Produktseite und interaktive Demo. Spotify und das Spotify-Logo sind Marken von Spotify AB. AI Kitz ist nicht mit Spotify AB verbunden oder von Spotify AB autorisiert.</p></div>
-      <div class="footer-links"><a href="https://kitzlabs.ai/" target="_blank" rel="noreferrer">AI Kitz</a><a href="https://spotify.kitzlabs.ai/" target="_blank" rel="noreferrer">Live App</a><a href="#top">Nach oben ↑</a></div>
+      <div>
+        <strong>KI Spotify Agent · AI Kitz</strong>
+        <p>Separate Produktseite und interaktive Demo. Spotify und das Spotify-Logo sind Marken von Spotify AB. AI Kitz ist nicht mit Spotify AB verbunden oder von Spotify AB autorisiert.</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://kitzlabs.ai/" target="_blank" rel="noreferrer">AI Kitz</a>
+        <a href="https://spotify.kitzlabs.ai/" target="_blank" rel="noreferrer">Live App</a>
+        <a href="#top">Nach oben ↑</a>
+      </div>
     </div>
   </footer>
 
+  <div class="mobile-cta"><a class="button primary" href="https://spotify.kitzlabs.ai/" target="_blank" rel="noreferrer">Live-System öffnen ↗</a></div>
+
   <script>
     const demoSets = {
-      afro: {
-        prompt: "Afro House Rooftop Sunset · 2 Stunden · 80% bekannte Songs",
-        title: "Rooftop Sunset · Afro House", name: "Rooftop Sunset · 80% Familiar",
+      afro:{
+        prompt:"Afro House Rooftop Sunset · 2 Stunden · 80% bekannte Songs",
+        title:"Rooftop Sunset · Afro House",name:"Rooftop Sunset · 80% Familiar",
         tags:["42 Songs","120 Min","Afro House","80% bekannt"],
-        tracks:[["Move","Adam Port, Stryv","97"],["Thandaza","Keinemusik","95"],["Music Sounds Better","Rampa","93"],["Abalele","Kabza De Small","91"],["Muyè","Rampa, &ME","90"]]
+        tracks:[["Move","Adam Port, Stryv","97"],["Thandaza","Keinemusik","95"],["Muyè","Rampa, &ME","94"],["Abalele","Kabza De Small","92"],["Yamore","MoBlack, Benja, Franc Fala","90"]]
       },
-      schlager: {
+      schlager:{
         prompt:"Schlager Party · 3 Stunden · bekannte Hits zum Mitsingen",
-        title:"Schlager Party · Singalong", name:"Schlager Party · Best Known",
+        title:"Schlager Party · Singalong",name:"Schlager Party · Best Known",
         tags:["54 Songs","180 Min","Schlager","92% bekannt"],
         tracks:[["Atemlos durch die Nacht","Helene Fischer","98"],["Warum hast du nicht nein gesagt","Roland Kaiser","97"],["Ein Stern","DJ Ötzi, Nik P.","96"],["Verdammt, ich lieb dich","Matthias Reim","95"],["Cordula Grün","Josh.","94"]]
       },
-      rock: {
+      rock:{
         prompt:"Classic Rock · 2 Stunden · bekannte Gitarren-Hymnen",
-        title:"Classic Rock · Essentials", name:"Classic Rock · Crowd Favorites",
+        title:"Classic Rock · Essentials",name:"Classic Rock · Crowd Favorites",
         tags:["34 Songs","120 Min","Classic Rock","90% bekannt"],
         tracks:[["Don't Stop Believin'","Journey","98"],["Another One Bites the Dust","Queen","97"],["Sweet Child O' Mine","Guns N' Roses","96"],["Summer of '69","Bryan Adams","95"],["The Boys Are Back in Town","Thin Lizzy","92"]]
       },
-      dnb: {
+      dnb:{
         prompt:"Drum & Bass · 90 Minuten · energetic · modern & known",
-        title:"Drum & Bass · High Energy", name:"DNB · Modern Energy",
+        title:"Drum & Bass · High Energy",name:"DNB · Modern Energy",
         tags:["31 Songs","90 Min","Drum & Bass","72% bekannt"],
         tracks:[["Baddadan","Chase & Status","97"],["Disconnect","Becky Hill, Chase & Status","95"],["Afterglow","Wilkinson","94"],["Ready To Fly","Sub Focus, Dimension","93"],["Desire","Sub Focus, Dimension","91"]]
       },
-      jazz: {
+      jazz:{
         prompt:"Dinner Jazz · 2 Stunden · elegant · warm · unobtrusive",
-        title:"Dinner Jazz · Warm Evening", name:"Dinner Jazz · Elegant Flow",
+        title:"Dinner Jazz · Warm Evening",name:"Dinner Jazz · Elegant Flow",
         tags:["36 Songs","120 Min","Jazz","68% bekannt"],
         tracks:[["The Look of Love","Diana Krall","96"],["Come Away With Me","Norah Jones","95"],["My Funny Valentine","Chet Baker","94"],["Feeling Good","Nina Simone","93"],["Blue in Green","Miles Davis","91"]]
+      },
+      pop:{
+        prompt:"Pop Hits · 2 Stunden · upbeat · bekannte Songs für Bar & Lounge",
+        title:"Pop Hits · Familiar Energy",name:"Pop · Bar Favorites",
+        tags:["39 Songs","120 Min","Pop","88% bekannt"],
+        tracks:[["Blinding Lights","The Weeknd","98"],["Don't Start Now","Dua Lipa","97"],["As It Was","Harry Styles","96"],["Flowers","Miley Cyrus","95"],["Levitating","Dua Lipa","94"]]
+      }
+    };
+
+    const tours = {
+      engine:{
+        eyebrow:"PLAYLIST ENGINE",
+        title:"Vom Prompt zur validierten Playlist.",
+        text:"Der Agent versteht Absicht, sucht passende Tracks, bewertet Qualität und baut daraus einen konsistenten Flow.",
+        bullets:["Natürlichsprachiger Musikwunsch","Multi-Genre Suche","Preview-First Qualitätsprüfung"],
+        rows:[["✦","Intent erkannt","Afro House · Sunset · 120 Min","READY"],["⌕","Track Search","Mehrere Suchstrategien","DONE"],["✓","Validator","Dedupe · Genre · Artist Balance","PASS"],["↯","Flow Sorter","Energy & Familiarity","READY"]]
+      },
+      autodj:{
+        eyebrow:"AUTO-DJ",
+        title:"Wiederkehrende Musikarbeit automatisieren.",
+        text:"Auto-DJ verbindet Regeln, Queue-Kontext und definierte Zeitfenster, damit Musik operativ planbar bleibt.",
+        bullets:["Queue-Kontext berücksichtigen","Tagesphasen abbilden","Regeln sichtbar halten"],
+        rows:[["11","Lunch Rotation","Warm · light · familiar","ACTIVE"],["17","Dinner Shift","Elegant · unobtrusive","ACTIVE"],["21","Weekend Boost","More energy · known","QUEUED"],["↻","Library Refresh","Geplant · kontrolliert","SCHEDULED"]]
+      },
+      events:{
+        eyebrow:"EVENT RADAR",
+        title:"Events in vorbereitete Musik-Jobs übersetzen.",
+        text:"Anlässe können als Kontext für Vorab-Playlists, Specials und geplante Agent-Jobs dienen.",
+        bullets:["Event-Kontext aufnehmen","Preview vor dem Event","Zeitgesteuerte Jobs vorbereiten"],
+        rows:[["18","Rooftop Closing","Sunset · Afro House","PREVIEW"],["25","Saturday Dinner","Soul · Jazz · Classics","READY"],["31","Halloween Night","Pop · Dance · Party","PLANNED"],["◇","Next Event","Kontext automatisch übernehmen","WAITING"]]
+      },
+      integrations:{
+        eyebrow:"INTEGRATIONEN",
+        title:"Der Musik-Agent als Teil eines größeren Stacks.",
+        text:"Web, Telegram, Spotify und API-basierte Workflows können modular verbunden werden, ohne den Produktkern neu zu bauen.",
+        bullets:["Spotify Web API / Connect","Telegram Admin & Agent Control","OpenAPI-basierte Erweiterung"],
+        rows:[["◉","Spotify","Playback & Playlist Context","CONNECTED"],["⌁","Telegram","Admin & Freigaben","READY"],["↗","OpenAPI","Externe Workflows","EXTENDABLE"],["⚙","Scheduler","Automationen & Jobs","ACTIVE"]]
       }
     };
 
     function esc(value){
-      return String(value).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]));
+      return String(value).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c];});
     }
+
     function renderDemo(set){
       document.getElementById("demoPrompt").value=set.prompt;
       document.getElementById("demoTitle").textContent=set.title;
       document.getElementById("resultName").textContent=set.name;
-      document.getElementById("demoTags").innerHTML=set.tags.map(x=>"<span>"+esc(x)+"</span>").join("");
-      document.getElementById("demoTracks").innerHTML=set.tracks.map((x,i)=>"<div class=\"result-track\"><b>"+String(i+1).padStart(2,"0")+"</b><span><strong>"+esc(x[0])+"</strong><small>"+esc(x[1])+"</small></span><em>"+esc(x[2])+"</em></div>").join("");
+      document.getElementById("demoTags").innerHTML=set.tags.map(function(x){return "<span>"+esc(x)+"</span>";}).join("");
+      document.getElementById("demoTracks").innerHTML=set.tracks.map(function(x,i){
+        return '<div class="result-track"><b>'+String(i+1).padStart(2,"0")+'</b><span><strong>'+esc(x[0])+'</strong><small>'+esc(x[1])+'</small></span><em>'+esc(x[2])+'</em></div>';
+      }).join("");
+      document.getElementById("demoQuality").textContent="QUALITÄT: PASS";
+      document.getElementById("demoFooter").textContent="Duplikate entfernt · Artist-Wiederholung begrenzt · Flow sortiert";
     }
-    document.querySelectorAll("[data-demo]").forEach(btn=>btn.addEventListener("click",()=>renderDemo(demoSets[btn.dataset.demo])));
-    document.getElementById("demoRun").addEventListener("click",()=>{
-      const input=document.getElementById("demoPrompt").value.trim().toLowerCase();
-      let set=demoSets.afro;
-      if(input.includes("schlager")) set=demoSets.schlager;
-      else if(input.includes("rock")) set=demoSets.rock;
-      else if(input.includes("drum")||input.includes("dnb")) set=demoSets.dnb;
-      else if(input.includes("jazz")) set=demoSets.jazz;
-      else set={...demoSets.afro,prompt:document.getElementById("demoPrompt").value,title:"AI Playlist · Universal Genre",name:"Individuelle Playlist · Preview"};
-      renderDemo(set);
-    });
-    renderDemo(demoSets.afro);
 
-    fetch("https://spotify.kitzlabs.ai/api/health",{method:"GET",mode:"cors"})
-      .then(r=>{if(!r.ok) throw new Error("offline"); return r.json().catch(()=>({}));})
-      .then(()=>{document.getElementById("liveStatus").textContent="Spotify System live";})
-      .catch(()=>{document.getElementById("liveStatus").textContent="Live-System verfügbar";});
+    function chooseSet(input){
+      const value=input.toLowerCase();
+      if(value.includes("schlager")) return demoSets.schlager;
+      if(value.includes("rock")||value.includes("gitar")) return demoSets.rock;
+      if(value.includes("drum")||value.includes("dnb")) return demoSets.dnb;
+      if(value.includes("jazz")||value.includes("dinner")) return demoSets.jazz;
+      if(value.includes("pop")||value.includes("charts")) return demoSets.pop;
+      if(value.includes("afro")||value.includes("house")||value.includes("sunset")) return demoSets.afro;
+      const base=JSON.parse(JSON.stringify(demoSets.pop));
+      base.prompt=input;
+      base.title="AI Playlist · Universal Genre";
+      base.name="Individuelle Playlist · Preview";
+      base.tags=["Preview","Custom Intent","Validated","Flow ready"];
+      return base;
+    }
+
+    function animatePipeline(callback){
+      const pipes=Array.from(document.querySelectorAll(".pipe"));
+      pipes.forEach(function(p){p.classList.remove("active");});
+      pipes.forEach(function(p,i){setTimeout(function(){p.classList.add("active");},i*120);});
+      setTimeout(callback,Math.max(420,pipes.length*120));
+    }
+
+    document.querySelectorAll("[data-demo]").forEach(function(btn){
+      btn.addEventListener("click",function(){
+        document.querySelectorAll("[data-demo]").forEach(function(b){b.classList.remove("active");});
+        btn.classList.add("active");
+        animatePipeline(function(){renderDemo(demoSets[btn.dataset.demo]);});
+      });
+    });
+
+    document.getElementById("demoRun").addEventListener("click",function(){
+      const input=document.getElementById("demoPrompt").value.trim();
+      if(!input){document.getElementById("demoPrompt").focus();return;}
+      document.querySelectorAll("[data-demo]").forEach(function(b){b.classList.remove("active");});
+      animatePipeline(function(){renderDemo(chooseSet(input));});
+    });
+
+    document.getElementById("demoPrompt").addEventListener("keydown",function(e){
+      if(e.key==="Enter") document.getElementById("demoRun").click();
+    });
+
+    document.getElementById("fakeCreate").addEventListener("click",function(){
+      document.getElementById("demoQuality").textContent="DEMO · KEIN WRITE";
+      document.getElementById("demoFooter").textContent="Produktseite ist read-only · Live-System separat öffnen";
+    });
+
+    function renderTour(key){
+      const t=tours[key];
+      document.getElementById("tourEyebrow").textContent=t.eyebrow;
+      document.getElementById("tourTitle").textContent=t.title;
+      document.getElementById("tourText").textContent=t.text;
+      document.getElementById("tourBullets").innerHTML=t.bullets.map(function(x){return '<div class="tour-bullet"><i>✓</i><span>'+esc(x)+'</span></div>';}).join("");
+      document.getElementById("tourVisual").innerHTML=t.rows.map(function(r){
+        return '<div class="visual-row"><div class="visual-icon">'+esc(r[0])+'</div><div><strong>'+esc(r[1])+'</strong><span>'+esc(r[2])+'</span></div><div class="visual-state">'+esc(r[3])+'</div></div>';
+      }).join("");
+    }
+
+    document.querySelectorAll("[data-tour]").forEach(function(btn){
+      btn.addEventListener("click",function(){
+        document.querySelectorAll("[data-tour]").forEach(function(b){b.classList.remove("active");b.setAttribute("aria-selected","false");});
+        btn.classList.add("active");btn.setAttribute("aria-selected","true");renderTour(btn.dataset.tour);
+      });
+    });
+
+    function setHealth(ok,latency){
+      const state=ok?"Spotify System live":"Live-System erreichbar";
+      document.getElementById("navStatus").textContent=ok?"Live":"Status";
+      document.getElementById("heroStatus").textContent=state;
+      document.getElementById("floatHealth").textContent=state;
+      document.getElementById("healthState").textContent=ok?"ONLINE":"STATUS UNKLAR";
+      document.getElementById("metricStatus").textContent=ok?"Online":"Verfügbar";
+      document.getElementById("metricLatency").textContent=latency?latency+" ms":"–";
+      document.getElementById("floatLatency").textContent=latency?"Healthcheck · "+latency+" ms":"Healthcheck ohne Messwert";
+    }
+
+    (function checkHealth(){
+      const started=performance.now();
+      fetch("https://spotify.kitzlabs.ai/api/health",{method:"GET",mode:"cors",cache:"no-store"})
+        .then(function(r){if(!r.ok) throw new Error("offline"); return r.text();})
+        .then(function(){setHealth(true,Math.max(1,Math.round(performance.now()-started)));})
+        .catch(function(){setHealth(false,null);});
+    })();
+
+    const observer=new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add("in");observer.unobserve(entry.target);}});
+    },{threshold:.08});
+    document.querySelectorAll(".reveal").forEach(function(el){observer.observe(el);});
+
+    renderDemo(demoSets.afro);
+    renderTour("engine");
   </script>
 </body>
 </html>
