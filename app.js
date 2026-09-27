@@ -116,5 +116,53 @@
     revealItems.forEach(function(el){observer.observe(el);});
   }else{revealItems.forEach(function(el){el.classList.add("in");});}
 
+
+  const configState={venue:"bar",goal:"automation",scale:"single"};
+  const configLabels={
+    venue:{bar:"Bar / Club",hotel:"Hotel",restaurant:"Restaurant",event:"Event"},
+    goal:{automation:"Automation",quality:"Qualität",control:"Steuerung"},
+    scale:{single:"1 Standort",small:"2–5 Bereiche",custom:"Individuell"}
+  };
+
+  function configData(state){
+    const venueMap={
+      bar:{title:"Hospitality Control Stack",text:"Für Bar- und Clubbetrieb mit wechselnden Tagesphasen, Event-Kontext und kontrollierter Playlist-Automation.",mods:[["✦","Playlist Engine","Intent + Preview"],["↻","Auto-DJ","Daypart Flow"],["◇","Event Radar","Specials + Termine"]]},
+      hotel:{title:"Hotel Music Operations",text:"Für Lobby, Gastro und wechselnde Tagesphasen mit klarer Musikplanung und steuerbaren Automationen.",mods:[["✦","Playlist Engine","Music profiles"],["↻","Auto-DJ","Daypart rules"],["◉","Spotify Connect","Playback context"]]},
+      restaurant:{title:"Restaurant Daypart Stack",text:"Für Lunch, Dinner und spätere Tagesphasen mit planbaren Musikprofilen und Qualitätskontrolle.",mods:[["✦","Playlist Engine","Lunch + Dinner"],["✓","Quality Gate","Preview-first"],["⚙","Scheduler","Recurring jobs"]]},
+      event:{title:"Event Music Workflow",text:"Für Musikbriefings, Event-Kontext und vorbereitete Playlists mit kontrollierter Freigabe.",mods:[["◇","Event Radar","Event context"],["✦","Playlist Engine","Briefing → Preview"],["⌁","Telegram","Remote approval"]]}
+    };
+    const base=venueMap[state.venue];
+    const extra=state.goal==="quality"?["✓","Quality Gate","Validation + Dedupe"]:state.goal==="control"?["⌁","Telegram Control","Remote control"]:["⚙","Automation Scheduler","Recurring workflows"];
+    const scale=state.scale==="small"?["↗","OpenAPI","Multiple workflows"]:state.scale==="custom"?["↗","OpenAPI","Custom integration"]:["◉","Spotify Connect","Live context"];
+    return {title:base.title,text:base.text,mods:base.mods.concat([extra,scale])};
+  }
+
+  function renderConfigurator(){
+    if(!$("#configModules"))return;
+    const data=configData(configState);
+    $("#configTitle").textContent=data.title;
+    $("#configBadge").textContent=configLabels.goal[configState.goal].toUpperCase();
+    $("#configText").textContent=data.text+" Schwerpunkt: "+configLabels.goal[configState.goal]+". Umfang: "+configLabels.scale[configState.scale]+".";
+    $("#configModules").innerHTML=data.mods.map(function(m){
+      return '<div class="config-module"><i>'+esc(m[0])+'</i><div><strong>'+esc(m[1])+'</strong><small>'+esc(m[2])+'</small></div></div>';
+    }).join("");
+    const subject="KI Spotify Agent Anfrage · "+configLabels.venue[configState.venue]+" · "+configLabels.goal[configState.goal];
+    const body="Hallo AI Kitz,%0D%0A%0D%0Aich interessiere mich für den KI Spotify Agent.%0D%0AEinsatz: "+encodeURIComponent(configLabels.venue[configState.venue])+"%0D%0ASchwerpunkt: "+encodeURIComponent(configLabels.goal[configState.goal])+"%0D%0AUmfang: "+encodeURIComponent(configLabels.scale[configState.scale])+"%0D%0A%0D%0ABitte um weitere Informationen.";
+    $("#configContact").href="mailto:office@aikitz.at?subject="+encodeURIComponent(subject)+"&body="+body;
+  }
+
+  $$("[data-config-group]").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      const group=btn.dataset.configGroup;
+      const value=btn.dataset.value;
+      configState[group]=value;
+      $$('[data-config-group="'+group+'"]').forEach(function(b){b.classList.remove("active");});
+      btn.classList.add("active");
+      renderConfigurator();
+    });
+  });
+
+  renderConfigurator();
+
   renderTour("engine");renderDemo(demoSets.afro);
 })();
