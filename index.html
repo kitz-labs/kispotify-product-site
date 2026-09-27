@@ -750,7 +750,8 @@
       btn.addEventListener("click",function(){
         document.querySelectorAll("[data-demo]").forEach(function(b){b.classList.remove("active");});
         btn.classList.add("active");
-        animatePipeline(function(){renderDemo(demoSets[btn.dataset.demo]);});
+        renderDemo(demoSets[btn.dataset.demo]);
+        animatePipeline(function(){});
       });
     });
 
@@ -758,7 +759,8 @@
       const input=document.getElementById("demoPrompt").value.trim();
       if(!input){document.getElementById("demoPrompt").focus();return;}
       document.querySelectorAll("[data-demo]").forEach(function(b){b.classList.remove("active");});
-      animatePipeline(function(){renderDemo(chooseSet(input));});
+      renderDemo(chooseSet(input));
+      animatePipeline(function(){});
     });
 
     document.getElementById("demoPrompt").addEventListener("keydown",function(e){
