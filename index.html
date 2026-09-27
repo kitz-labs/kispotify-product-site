@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#070809">
   <meta name="color-scheme" content="dark">
-  <meta name="description" content="KI Spotify Agent von AI Kitz: ein intelligentes Musiksystem für Playlist-Erstellung, Preview-First Qualitätskontrolle, Auto-DJ, Event Radar und Spotify-Automationen.">
+  <meta name="description" content="KI Spotify Agent von AI Kitz: professionelle KI-Musiksteuerung mit Playlist Engine, Preview-First Qualitätskontrolle, Auto-DJ, Event Radar und Spotify-Automationen.">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -16,18 +16,18 @@
   <link rel="icon" href="/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/icon.svg">
   <meta property="og:title" content="KI Spotify Agent · AI Kitz">
-  <meta property="og:description" content="Vom Musikwunsch zur validierten Playlist. AI Music Operations für Hospitality, Events und professionelle Workflows.">
+  <meta property="og:description" content="KI-Musiksteuerung für Hospitality, Events und professionelle Workflows. Vom Musikwunsch zur validierten Playlist.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://kispotify.kitzlabs.ai/">
   <meta property="og:site_name" content="AI Kitz">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="KI Spotify Agent · AI Kitz">
-  <meta name="twitter:description" content="AI Music Operations: Playlist Engine, Auto-DJ, Event Radar und kontrollierte Automationen.">
+  <meta name="twitter:description" content="Playlist Engine, Preview-First Quality Gate, Auto-DJ, Event Radar und kontrollierte Automationen.">
   <title>KI Spotify Agent · AI Kitz</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=20260927-pro">
+  <link rel="stylesheet" href="/styles.css?v=20260927-ai-v2">
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -36,25 +36,27 @@
     "applicationCategory":"MultimediaApplication",
     "operatingSystem":"Web",
     "url":"https://kispotify.kitzlabs.ai/",
-    "description":"Intelligente Playlist-Erstellung, Preview-First Qualitätskontrolle, Auto-DJ, Event Radar und Spotify-Automationen.",
+    "description":"KI-Musiksteuerung mit Playlist Engine, Preview-First Qualitätskontrolle, Auto-DJ, Event Radar und Spotify-Automationen.",
     "creator":{"@type":"Organization","name":"AI Kitz","url":"https://kitzlabs.ai/"}
   }
   </script>
 </head>
 <body>
   <a class="skip-link" href="#main">Zum Inhalt springen</a>
+  <div class="scroll-progress" aria-hidden="true"><span id="scrollProgress"></span></div>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+  <div class="page-grid" aria-hidden="true"></div>
   <div class="ambient ambient-red" aria-hidden="true"></div>
   <div class="ambient ambient-green" aria-hidden="true"></div>
-  <div class="page-grid" aria-hidden="true"></div>
 
   <header class="site-header" id="top">
     <div class="container nav-shell">
-      <a class="brand" href="#top" aria-label="KI Spotify Agent Start">
+      <a class="brand" href="#top" aria-label="KI Spotify Agent Startseite">
         <span class="brand-icon" aria-hidden="true">
-          <svg viewBox="0 0 32 32" fill="none">
-            <path d="M5 21c5.8-2.9 14.6-2.2 20.1 1.1" stroke="#ff1744" stroke-width="2.5" stroke-linecap="round"/>
-            <path d="M6.7 15.8c5.3-2.4 12.9-2 17.8.6" stroke="#f7f7f5" stroke-opacity=".78" stroke-width="2.2" stroke-linecap="round"/>
-            <path d="M8.8 10.6c4.4-1.5 10.1-1.2 13.9.6" stroke="#1ed760" stroke-width="2.2" stroke-linecap="round"/>
+          <svg viewBox="0 0 36 36" fill="none">
+            <path d="M6 24c6.7-3.2 16.8-2.6 23.1 1.1" stroke="#ff1744" stroke-width="2.8" stroke-linecap="round"/>
+            <path d="M8 18c6.1-2.7 14.8-2.3 20.4.7" stroke="#f7f7f5" stroke-opacity=".8" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M10.4 12c5.1-1.8 11.7-1.4 16 0.7" stroke="#1ed760" stroke-width="2.4" stroke-linecap="round"/>
           </svg>
         </span>
         <span class="brand-copy">
@@ -64,31 +66,29 @@
       </a>
 
       <nav class="desktop-nav" aria-label="Hauptnavigation">
-        <a href="#product">Produkt</a>
+        <a href="#platform">Plattform</a>
         <a href="#demo">Live Demo</a>
-        <a href="#features">Features</a>
         <a href="#automation">Automation</a>
         <a href="#architecture">Architektur</a>
-        <a href="#faq">FAQ</a>
+        <a href="#usecases">Einsatz</a>
       </nav>
 
       <div class="nav-actions">
-        <span class="live-badge" aria-live="polite"><i></i><span id="navHealth">Live</span></span>
-        <a class="btn btn-primary btn-small" href="https://spotify.kitzlabs.ai/" target="_blank" rel="noreferrer">System öffnen <span>↗</span></a>
+        <span class="nav-status" aria-live="polite"><i></i><span id="navHealth">System live</span></span>
+        <a class="btn btn-primary btn-small" href="https://spotify.kitzlabs.ai/" target="_blank" rel="noreferrer">Live-System <span>↗</span></a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobileNav" aria-label="Navigation öffnen">
           <span></span><span></span>
         </button>
       </div>
     </div>
-
     <div class="mobile-nav" id="mobileNav">
       <div class="container mobile-nav-inner">
-        <a href="#product">Produkt</a>
+        <a href="#platform">Plattform</a>
         <a href="#demo">Live Demo</a>
-        <a href="#features">Features</a>
         <a href="#automation">Automation</a>
         <a href="#architecture">Architektur</a>
-        <a href="#faq">FAQ</a>
+        <a href="#usecases">Einsatz</a>
+        <a href="https://spotify.kitzlabs.ai/" target="_blank" rel="noreferrer">Live-System ↗</a>
       </div>
     </div>
   </header>
@@ -96,191 +96,133 @@
   <main id="main">
     <section class="hero section">
       <div class="container hero-grid">
-        <div class="hero-copy reveal">
-          <div class="kicker"><span></span> AI MUSIC OPERATING SYSTEM</div>
-          <h1>Musiksteuerung.<br><em>Neu gedacht mit KI.</em></h1>
-          <p class="hero-lead">Der KI Spotify Agent verwandelt natürliche Musikwünsche in validierte Playlists, kontrolliert Qualität vor der Veröffentlichung und verbindet Playlist Engine, Auto-DJ, Event Radar und Automationen in einem professionellen Musiksystem.</p>
-
+        <div class="hero-copy hero-visible">
+          <div class="kicker"><span></span> AI MUSIC CONTROL PLATFORM</div>
+          <h1>Steuere Musik<br><em>wie ein System.</em></h1>
+          <p class="hero-lead">Der KI Spotify Agent verwandelt natürliche Musikwünsche in validierte Playlists und verbindet Playlist Engine, Qualitätskontrolle, Auto-DJ, Event Radar und Automationen in einer professionellen Oberfläche.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#demo">Live Mockup testen <span>✦</span></a>
-            <a class="btn btn-secondary" href="#product">Produkt entdecken</a>
+            <a class="btn btn-primary" href="#demo">Live Demo starten <span>✦</span></a>
+            <a class="btn btn-secondary" href="#platform">Produkt ansehen</a>
           </div>
-
-          <div class="hero-trust">
+          <div class="hero-proof">
             <span><i class="status-dot"></i><b id="heroHealth">Spotify System live</b></span>
-            <span>Genre-unabhängig</span>
-            <span>Preview vor Erstellung</span>
+            <span>Alle Genres</span>
+            <span>Preview vor Write</span>
             <span>Web + Telegram</span>
           </div>
         </div>
 
-        <div class="hero-visual reveal" data-delay="120">
-          <div class="orb orb-one" aria-hidden="true"></div>
-          <div class="orb orb-two" aria-hidden="true"></div>
-
-          <div class="ai-console">
-            <div class="console-top">
+        <div class="hero-stage hero-visible">
+          <div class="stage-aura" aria-hidden="true"></div>
+          <div class="command-window" id="commandWindow">
+            <div class="window-bar">
               <div class="window-dots"><i></i><i></i><i></i></div>
-              <span>spotify.kitzlabs.ai · AI Music Console</span>
-              <span class="console-live"><i></i> LIVE</span>
+              <span>AI Music Command Center</span>
+              <div class="window-live"><i></i> LIVE</div>
             </div>
-
-            <div class="console-body">
-              <aside class="console-sidebar">
-                <div class="mini-brand">
+            <div class="window-layout">
+              <aside class="mock-nav">
+                <div class="mock-logo">
                   <span>✦</span>
                   <div><strong>Music AI</strong><small>AI KITZ</small></div>
                 </div>
-                <div class="mini-menu">
-                  <button class="active" type="button">⌂ <span>Übersicht</span></button>
-                  <button type="button">✦ <span>Playlist Studio</span></button>
-                  <button type="button">◫ <span>Playlists</span></button>
-                  <button type="button">↻ <span>Auto-DJ</span></button>
-                  <button type="button">◇ <span>Event Radar</span></button>
-                </div>
-                <div class="mini-engine">
-                  <span>AI ENGINE</span>
-                  <strong><i></i> Ready</strong>
-                </div>
+                <button class="active" type="button">⌂ <span>Overview</span></button>
+                <button type="button">✦ <span>Playlist Studio</span></button>
+                <button type="button">◫ <span>Library</span></button>
+                <button type="button">↻ <span>Auto-DJ</span></button>
+                <button type="button">◇ <span>Event Radar</span></button>
+                <div class="mock-nav-bottom"><i></i><span>AI Engine ready</span></div>
               </aside>
 
-              <div class="console-main">
-                <div class="console-headline">
+              <section class="mock-main">
+                <div class="mock-title">
                   <div><small>PLAYLIST STUDIO</small><h2>Rooftop Sunset</h2></div>
-                  <span class="mode-pill">PREVIEW-FIRST</span>
+                  <span>PREVIEW-FIRST</span>
                 </div>
-
-                <div class="pipeline">
-                  <div class="pipe done"><i>1</i><span>Intent</span></div>
-                  <div class="pipe done"><i>2</i><span>Search</span></div>
-                  <div class="pipe done"><i>3</i><span>Validate</span></div>
-                  <div class="pipe active"><i>4</i><span>Flow</span></div>
+                <div class="mock-pipeline">
+                  <div class="done"><b>1</b><span>Intent</span></div>
+                  <div class="done"><b>2</b><span>Search</span></div>
+                  <div class="done"><b>3</b><span>Validate</span></div>
+                  <div class="active"><b>4</b><span>Flow</span></div>
                 </div>
-
-                <div class="chat-bubble user">2 Stunden Afro House für Rooftop Sunset. 80% bekannte Songs, gute Energie.</div>
-                <div class="chat-bubble agent"><i>✦</i><span>Verstanden. Ich prüfe Genre, Bekanntheit, Artist-Verteilung, Duplikate und Energieverlauf.</span></div>
-
-                <div class="playlist-preview">
-                  <div class="preview-head">
+                <div class="mock-message user">2 Stunden Afro House. Rooftop Sunset. 80% bekannte Songs.</div>
+                <div class="mock-message ai"><b>✦</b><span>Ich prüfe Genre, Bekanntheit, Duplikate, Artist-Verteilung und Energieverlauf.</span></div>
+                <div class="mock-result">
+                  <div class="mock-result-head">
                     <div><small>VALIDIERTE VORSCHAU</small><strong>Rooftop Sunset · Afro House</strong></div>
-                    <div class="quality-ring"><span>94</span></div>
+                    <div class="score-orbit"><span>94</span></div>
                   </div>
-                  <div class="mini-track"><b>01</b><div><strong>Move</strong><small>Adam Port, Stryv</small></div><em>97</em></div>
-                  <div class="mini-track"><b>02</b><div><strong>Thandaza</strong><small>Keinemusik</small></div><em>95</em></div>
-                  <div class="mini-track"><b>03</b><div><strong>Muyè</strong><small>Rampa, &ME</small></div><em>94</em></div>
-                  <div class="preview-footer"><span>42 Songs · 120 Min</span><button type="button">Freigeben</button></div>
+                  <div class="mock-track"><b>01</b><div><strong>Move</strong><small>Adam Port, Stryv</small></div><em>97</em></div>
+                  <div class="mock-track"><b>02</b><div><strong>Thandaza</strong><small>Keinemusik</small></div><em>95</em></div>
+                  <div class="mock-track"><b>03</b><div><strong>Muyè</strong><small>Rampa, &ME</small></div><em>94</em></div>
+                  <div class="mock-result-footer"><span>42 Songs · 120 Min</span><button type="button">Freigeben</button></div>
                 </div>
-              </div>
+              </section>
 
-              <aside class="console-right">
-                <small>LIBRARY</small>
-                <h3>Playlists</h3>
-                <div class="library-item"><i>✦</i><div><strong>Rooftop Sunset</strong><span>42 Songs · AI</span></div></div>
-                <div class="library-item"><i>♪</i><div><strong>Dinner Classics</strong><span>58 Songs · AUTO</span></div></div>
-                <div class="library-item"><i>◆</i><div><strong>Late Night House</strong><span>64 Songs · AUTO</span></div></div>
-                <div class="library-item"><i>◈</i><div><strong>Schlager Party</strong><span>50 Songs</span></div></div>
-                <div class="now-playing">
-                  <span>NOW PLAYING</span>
-                  <strong>Music Sounds Better</strong>
-                  <small>Rampa</small>
-                  <div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+              <aside class="mock-insights">
+                <small>LIVE INSIGHTS</small>
+                <h3>Quality</h3>
+                <div class="insight-score"><strong>94</strong><span>/100</span><small>Preview passed</small></div>
+                <div class="insight-row"><span>Genre Match</span><b>96%</b></div>
+                <div class="insight-row"><span>Familiarity</span><b>88%</b></div>
+                <div class="insight-row"><span>Flow</span><b>93%</b></div>
+                <div class="insight-separator"></div>
+                <small>NOW PLAYING</small>
+                <div class="playing-card">
+                  <i>♪</i>
+                  <div><strong>Music Sounds Better</strong><span>Rampa</span></div>
                 </div>
+                <div class="eq"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
               </aside>
             </div>
           </div>
 
-          <div class="floating-card fc-health">
-            <span>LIVE SYSTEM</span>
-            <strong><i class="status-dot"></i><span id="floatHealth">Online</span></strong>
-            <small id="floatLatency">Healthcheck läuft …</small>
+          <div class="float-card float-live">
+            <span>LIVE HEALTH</span>
+            <strong><i class="status-dot"></i><b id="floatHealth">Online</b></strong>
+            <small id="floatLatency">Read-only Healthcheck</small>
           </div>
-
-          <div class="floating-card fc-quality">
-            <span>QUALITY GATE</span>
-            <strong>94 / 100</strong>
-            <small>Preview passed</small>
+          <div class="float-card float-agent">
+            <span>AI PIPELINE</span>
+            <strong>Intent → Flow</strong>
+            <small>4 Stufen · Preview-first</small>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="logo-strip">
-      <div class="container">
-        <div class="logo-strip-inner">
-          <span>Spotify Web API</span>
-          <i></i>
-          <span>Spotify Connect</span>
-          <i></i>
-          <span>Telegram</span>
-          <i></i>
-          <span>OpenAPI</span>
-          <i></i>
-          <span>Event Context</span>
-          <i></i>
-          <span>Automation Scheduler</span>
-        </div>
+    <section class="signal-strip">
+      <div class="container signal-grid">
+        <div><span>ENGINE</span><strong>Genre-unabhängig</strong></div>
+        <div><span>QUALITY</span><strong>Preview → Freigabe</strong></div>
+        <div><span>AUTOMATION</span><strong>Auto-DJ + Events</strong></div>
+        <div><span>CONTROL</span><strong>Web + Telegram</strong></div>
       </div>
     </section>
 
-    <section class="section product-section" id="product">
+    <section class="section platform-section" id="platform">
       <div class="container">
         <div class="section-heading reveal">
-          <div>
-            <div class="kicker"><span></span> DAS PRODUKT</div>
-            <h2>Ein KI-System für den gesamten Musik-Workflow.</h2>
-          </div>
-          <p>Von der Idee bis zur laufenden Automation: Der Agent bringt die einzelnen Schritte in eine kontrollierbare Oberfläche und macht wiederkehrende Musikarbeit nachvollziehbar.</p>
+          <div><div class="kicker"><span></span> PRODUCT PLATFORM</div><h2>Ein Agent. Vier operative Module.</h2></div>
+          <p>Der KI Spotify Agent bündelt Playlist-Erstellung, laufende Musiksteuerung, Event-Kontext und Automationen. Die Module arbeiten zusammen, bleiben aber nachvollziehbar und kontrollierbar.</p>
         </div>
 
-        <div class="product-bento">
-          <article class="bento-card bento-large reveal">
-            <div class="bento-copy">
-              <span class="eyebrow">01 · AI PLAYLIST ENGINE</span>
-              <h3>Natürliche Sprache statt manueller Track-Suche.</h3>
-              <p>Beschreibe Stimmung, Genre, Dauer, Anlass, Künstler oder Bekanntheitsgrad. Der Agent strukturiert daraus einen Playlist-Plan und liefert zuerst eine prüfbare Vorschau.</p>
-              <div class="mini-tags"><span>Intent Parsing</span><span>Multi-Genre</span><span>Familiarity</span><span>Flow</span></div>
+        <div class="tour-shell reveal">
+          <div class="tour-tabs" role="tablist" aria-label="Produktmodule">
+            <button class="tour-tab active" type="button" data-tour="engine" role="tab" aria-selected="true"><i>✦</i><span>Playlist Engine</span></button>
+            <button class="tour-tab" type="button" data-tour="quality" role="tab" aria-selected="false"><i>✓</i><span>Quality Gate</span></button>
+            <button class="tour-tab" type="button" data-tour="autodj" role="tab" aria-selected="false"><i>↻</i><span>Auto-DJ</span></button>
+            <button class="tour-tab" type="button" data-tour="events" role="tab" aria-selected="false"><i>◇</i><span>Event Radar</span></button>
+          </div>
+          <div class="tour-body">
+            <div class="tour-copy">
+              <span class="eyebrow" id="tourEyebrow">PLAYLIST ENGINE</span>
+              <h3 id="tourTitle">Von natürlicher Sprache zur validierten Playlist.</h3>
+              <p id="tourText">Genre, Stimmung, Dauer, Anlass, Künstler oder Bekanntheitsgrad werden als Intent strukturiert und anschließend in eine prüfbare Playlist-Vorschau übersetzt.</p>
+              <div class="tour-points" id="tourPoints"></div>
             </div>
-            <div class="prompt-card">
-              <span>DEIN MUSIKWUNSCH</span>
-              <p>„3 Stunden Dinner bis Late Night. Start elegant, später mehr Energie. 70% bekannte Songs.“</p>
-              <button type="button">✦ AI Plan erstellen</button>
-            </div>
-          </article>
-
-          <article class="bento-card reveal" data-delay="80">
-            <span class="eyebrow">02 · QUALITY GATE</span>
-            <h3>Erst prüfen. Dann veröffentlichen.</h3>
-            <p>Duplikate, Artist-Wiederholungen, Genre-Matches und musikalischer Flow werden vor der Erstellung kontrolliert.</p>
-            <div class="quality-bars">
-              <div><span>Genre Match</span><b style="--value:96%"></b><em>96</em></div>
-              <div><span>Familiarity</span><b style="--value:88%"></b><em>88</em></div>
-              <div><span>Flow</span><b style="--value:93%"></b><em>93</em></div>
-            </div>
-          </article>
-
-          <article class="bento-card reveal" data-delay="120">
-            <span class="eyebrow">03 · AUTO-DJ</span>
-            <h3>Musikfluss über den Tag.</h3>
-            <p>Regeln für Tagesphasen, Energie und Wiederholungen schaffen eine konsistente Queue – ohne den Überblick zu verlieren.</p>
-            <div class="dayline">
-              <div><i></i><span>12:00</span><strong>Lunch</strong></div>
-              <div><i></i><span>17:00</span><strong>Sunset</strong></div>
-              <div><i></i><span>21:00</span><strong>Peak</strong></div>
-            </div>
-          </article>
-
-          <article class="bento-card bento-wide reveal">
-            <div class="bento-copy">
-              <span class="eyebrow">04 · EVENT RADAR</span>
-              <h3>Kontext wird zur Musikaktion.</h3>
-              <p>Events, Specials und wiederkehrende Termine können in vorbereitete Musik-Jobs übersetzt werden – mit klarer Vorschau und Status.</p>
-            </div>
-            <div class="event-stack">
-              <div class="event-row"><span><b>FR</b><small>18:00</small></span><div><strong>Rooftop Closing</strong><small>Afro House · Sunset</small></div><em>Preview ready</em></div>
-              <div class="event-row"><span><b>SA</b><small>19:00</small></span><div><strong>Dinner Night</strong><small>Soul · Jazz · Classics</small></div><em>Scheduled</em></div>
-              <div class="event-row"><span><b>SO</b><small>11:00</small></span><div><strong>Brunch Session</strong><small>Feel Good · Pop · Acoustic</small></div><em>AI plan</em></div>
-            </div>
-          </article>
+            <div class="tour-visual"><div class="tour-panel" id="tourVisual"></div></div>
+          </div>
         </div>
       </div>
     </section>
@@ -288,65 +230,51 @@
     <section class="section demo-section" id="demo">
       <div class="container">
         <div class="section-heading reveal">
-          <div>
-            <div class="kicker"><span></span> LIVE MOCKUP</div>
-            <h2>Teste den Playlist-Flow direkt im Browser.</h2>
-          </div>
-          <p>Die Demo simuliert Intent, Suche, Qualitätsprüfung und Flow. Sie verändert keine Spotify-Daten und ist vollständig vom Produktivsystem getrennt.</p>
+          <div><div class="kicker"><span></span> INTERACTIVE DEMO</div><h2>Teste den Playlist-Flow.</h2></div>
+          <p>Die Demo läuft vollständig im Browser. Sie simuliert die Produktlogik und verändert keine Spotify-Daten.</p>
         </div>
 
         <div class="demo-shell reveal">
-          <div class="demo-input-panel">
+          <div class="demo-control">
             <span class="eyebrow">01 · MUSIKWUNSCH</span>
             <h3>Was soll heute laufen?</h3>
-            <p>Genre, Stimmung, Anlass, Dauer oder Künstler eingeben.</p>
-
-            <label class="prompt-input">
-              <span class="sr-only">Musikwunsch</span>
-              <textarea id="demoPrompt" rows="4">Afro House Rooftop Sunset · 2 Stunden · 80% bekannte Songs</textarea>
-              <button type="button" id="demoRun" class="prompt-submit" aria-label="Vorschau erstellen">✦</button>
-            </label>
-
+            <p>Beschreibe Genre, Stimmung, Anlass, Dauer, Künstler oder Bekanntheitsgrad.</p>
+            <div class="prompt-wrap">
+              <textarea id="demoPrompt" rows="4" aria-label="Musikwunsch">Afro House Rooftop Sunset · 2 Stunden · 80% bekannte Songs</textarea>
+              <button type="button" id="demoRun" aria-label="Vorschau erstellen">✦</button>
+            </div>
             <div class="preset-row" aria-label="Demo Presets">
-              <button type="button" class="active" data-demo="afro">Afro House</button>
+              <button class="active" type="button" data-demo="afro">Afro House</button>
               <button type="button" data-demo="schlager">Schlager</button>
               <button type="button" data-demo="rock">Classic Rock</button>
               <button type="button" data-demo="dnb">Drum & Bass</button>
               <button type="button" data-demo="jazz">Dinner Jazz</button>
               <button type="button" data-demo="pop">Pop Hits</button>
             </div>
-
-            <div class="demo-process">
-              <div class="process-step active"><i>1</i><span>Intent</span></div>
-              <div class="process-step active"><i>2</i><span>Search</span></div>
-              <div class="process-step active"><i>3</i><span>Validate</span></div>
-              <div class="process-step active"><i>4</i><span>Flow</span></div>
+            <div class="demo-steps">
+              <div class="active"><i>1</i><span>Intent</span></div>
+              <div class="active"><i>2</i><span>Search</span></div>
+              <div class="active"><i>3</i><span>Validate</span></div>
+              <div class="active"><i>4</i><span>Flow</span></div>
             </div>
-
-            <div class="safety-note"><i>✓</i><span><b>Read-only Demo.</b> Keine Playlist wird erstellt oder verändert.</span></div>
+            <div class="read-only-note"><i>✓</i><span><b>Read-only Demo.</b> Keine Playlist wird erstellt oder verändert.</span></div>
           </div>
 
-          <div class="demo-output-panel" aria-live="polite">
-            <div class="demo-output-head">
+          <div class="demo-preview" aria-live="polite">
+            <div class="preview-top">
               <div><span class="eyebrow">02 · AI PREVIEW</span><h3 id="demoTitle">Rooftop Sunset · Afro House</h3></div>
-              <span class="quality-badge" id="demoQuality">QUALITY PASS</span>
+              <span class="quality-pill" id="demoQuality">QUALITY PASS</span>
             </div>
-
-            <div class="demo-result">
-              <div class="result-summary">
+            <div class="preview-card">
+              <div class="preview-summary">
                 <div><small>VALIDIERTE VORSCHAU</small><strong id="resultName">Rooftop Sunset · 80% Familiar</strong></div>
-                <div class="result-score" id="resultScore">94</div>
+                <div class="preview-score" id="resultScore">94</div>
               </div>
-
-              <div class="result-meta" id="resultMeta">
-                <span>42 Songs</span><span>120 Min</span><span>Afro House</span><span>80% bekannt</span>
-              </div>
-
-              <div class="result-tracks" id="resultTracks"></div>
-
-              <div class="result-bottom">
+              <div class="preview-tags" id="resultMeta"><span>42 Songs</span><span>120 Min</span><span>Afro House</span><span>80% bekannt</span></div>
+              <div class="preview-tracks" id="resultTracks"></div>
+              <div class="preview-bottom">
                 <span id="resultFoot">Dedupe aktiv · Artist-Limit aktiv · Flow sortiert</span>
-                <button type="button" id="fakeCreate" class="btn btn-secondary btn-small">In Spotify erstellen</button>
+                <button class="btn btn-secondary btn-small" type="button" id="fakeCreate">In Spotify erstellen</button>
               </div>
             </div>
           </div>
@@ -354,54 +282,49 @@
       </div>
     </section>
 
-    <section class="section feature-section" id="features">
+    <section class="section workflow-section">
       <div class="container">
         <div class="section-heading reveal">
-          <div>
-            <div class="kicker"><span></span> FEATURES</div>
-            <h2>Gebaut für echte Musikprozesse.</h2>
-          </div>
-          <p>Nicht nur Playlists erstellen: Der Agent bildet Planung, Qualitätskontrolle, Library, Wiedergabe-Kontext und Automationen als zusammenhängenden Workflow ab.</p>
+          <div><div class="kicker"><span></span> CONTROLLED WORKFLOW</div><h2>KI dort, wo sie Arbeit abnimmt. Kontrolle dort, wo sie zählt.</h2></div>
+          <p>Das System trennt Analyse, Vorschau und produktive Aktion. Dadurch bleibt sichtbar, was die KI plant, was geprüft wurde und wann ein echter Spotify-Write ausgelöst wird.</p>
         </div>
-
-        <div class="feature-grid">
-          <article class="feature-card reveal"><div class="feature-icon">✦</div><span>AI Engine</span><h3>Universal Playlist Engine</h3><p>Genre-unabhängige Playlist-Planung mit Stimmung, Dauer, Bekanntheit und Künstler-Vorgaben.</p></article>
-          <article class="feature-card reveal" data-delay="60"><div class="feature-icon">✓</div><span>Quality</span><h3>Preview-First Validation</h3><p>Vorschau, Dedupe, Genre-Checks, Artist-Verteilung und Flow vor der finalen Erstellung.</p></article>
-          <article class="feature-card reveal" data-delay="120"><div class="feature-icon">◫</div><span>Library</span><h3>Playlist Workspace</h3><p>AI-erstellte, importierte und bestehende Playlists an einem Ort analysieren und verwalten.</p></article>
-          <article class="feature-card reveal"><div class="feature-icon">↻</div><span>Automation</span><h3>Auto-DJ</h3><p>Queue-Kontext, Tagesphasen, Energie und wiederkehrende Musiklogik kontrolliert automatisieren.</p></article>
-          <article class="feature-card reveal" data-delay="60"><div class="feature-icon">◇</div><span>Context</span><h3>Event Radar</h3><p>Anlässe und Events in vorbereitete Musik-Jobs mit Vorschau und Status übersetzen.</p></article>
-          <article class="feature-card reveal" data-delay="120"><div class="feature-icon">◉</div><span>Playback</span><h3>Spotify Connect</h3><p>Wiedergabe-Kontext, Geräte-Status und aktuelle Musik in die operative Oberfläche integrieren.</p></article>
-          <article class="feature-card reveal"><div class="feature-icon">⌁</div><span>Remote</span><h3>Telegram Control</h3><p>Freigaben, Admin-Aktionen und Agent-Steuerung zusätzlich über Telegram verfügbar machen.</p></article>
-          <article class="feature-card reveal" data-delay="60"><div class="feature-icon">↗</div><span>API</span><h3>OpenAPI-ready</h3><p>Modulare Endpunkte als Basis für weitere Apps, Agenten, Dashboards und Kundenintegrationen.</p></article>
-          <article class="feature-card reveal" data-delay="120"><div class="feature-icon">⚙</div><span>Operations</span><h3>Automation Scheduler</h3><p>Wiederkehrende Jobs sichtbar planen, ausführen und mit Status nachvollziehen.</p></article>
+        <div class="workflow-line reveal">
+          <article><b>01</b><span>WUNSCH</span><h3>Beschreiben</h3><p>Genre, Anlass, Dauer, Stimmung, Künstler und Zielgruppe in natürlicher Sprache.</p></article>
+          <article><b>02</b><span>AI PLAN</span><h3>Verstehen</h3><p>Intent, Suchstrategie, Bekanntheit und musikalische Richtung werden strukturiert.</p></article>
+          <article><b>03</b><span>QUALITY</span><h3>Validieren</h3><p>Duplikate, Artist-Verteilung, Genre-Matches und Flow werden vorab geprüft.</p></article>
+          <article><b>04</b><span>WRITE</span><h3>Freigeben</h3><p>Erst nach Freigabe geht die produktive Aktion an Spotify oder eine Automation.</p></article>
         </div>
       </div>
     </section>
 
     <section class="section automation-section" id="automation">
-      <div class="container">
-        <div class="automation-layout">
-          <div class="automation-copy reveal">
-            <div class="kicker"><span></span> HOSPITALITY AUTOMATION</div>
-            <h2>Vom Lunch bis Late Night – mit einem System.</h2>
-            <p>Für Bars, Restaurants, Hotels und Events verändert sich der Musikbedarf über den Tag. Der Agent kann Tagesphasen, Anlass und Energie als Kontext für wiederkehrende Musik-Workflows nutzen.</p>
-            <ul class="check-list">
-              <li><i>✓</i><span><b>Daypart Rules</b> – andere Musik für Lunch, Dinner, Sunset und Late Night.</span></li>
-              <li><i>✓</i><span><b>Event Context</b> – Specials, Feiertage und Events vorbereiten.</span></li>
-              <li><i>✓</i><span><b>Controlled Automation</b> – Freigaben und Status bleiben sichtbar.</span></li>
-              <li><i>✓</i><span><b>Known vs. Discovery</b> – Bekanntheitsgrad gezielt steuern.</span></li>
-            </ul>
+      <div class="container automation-grid">
+        <div class="automation-copy reveal">
+          <div class="kicker"><span></span> HOSPITALITY AUTOMATION</div>
+          <h2>Musik verändert sich über den Tag. Dein System auch.</h2>
+          <p>Für Bars, Restaurants, Hotels und Events können Tagesphasen, Anlass und Energie als Kontext für wiederkehrende Musik-Workflows genutzt werden.</p>
+          <div class="automation-list">
+            <div><i>✓</i><span><b>Daypart Rules</b><small>Lunch, Dinner, Sunset und Late Night getrennt steuern.</small></span></div>
+            <div><i>✓</i><span><b>Event Context</b><small>Specials und Events als vorbereitete Musik-Jobs behandeln.</small></span></div>
+            <div><i>✓</i><span><b>Controlled Automation</b><small>Regeln, Status und Freigaben bleiben sichtbar.</small></span></div>
+            <div><i>✓</i><span><b>Known vs. Discovery</b><small>Bekanntheitsgrad gezielt pro Zeitfenster steuern.</small></span></div>
           </div>
+        </div>
 
-          <div class="timeline-card reveal" data-delay="120">
-            <div class="timeline-head"><span>DAYPLAN · SATURDAY</span><strong>Auto-DJ Plan</strong></div>
-            <div class="timeline">
-              <div class="timeline-row"><time>11:00</time><i></i><div><strong>Brunch Warm-Up</strong><span>Acoustic · Soul · Soft Pop</span></div><em>LOW</em></div>
-              <div class="timeline-row"><time>16:00</time><i></i><div><strong>Afternoon Lounge</strong><span>Nu Disco · Chill House</span></div><em>MID</em></div>
-              <div class="timeline-row active"><time>19:00</time><i></i><div><strong>Dinner Prime</strong><span>Modern Classics · Soul</span></div><em>MID+</em></div>
-              <div class="timeline-row"><time>22:00</time><i></i><div><strong>Late Night</strong><span>House · Dance · Known Hits</span></div><em>HIGH</em></div>
-            </div>
-            <div class="timeline-footer"><span><i class="status-dot"></i> 4 Automationen bereit</span><button type="button">Regeln ansehen</button></div>
+        <div class="dayplan reveal">
+          <div class="dayplan-head">
+            <div><span>LIVE DAYPLAN</span><strong>Saturday · Hospitality Flow</strong></div>
+            <span class="dayplan-status"><i></i> 4 Regeln bereit</span>
+          </div>
+          <div class="dayplan-timeline">
+            <div><time>11:00</time><i></i><section><strong>Brunch Warm-Up</strong><small>Acoustic · Soul · Soft Pop</small></section><em>LOW</em></div>
+            <div><time>16:00</time><i></i><section><strong>Afternoon Lounge</strong><small>Nu Disco · Chill House</small></section><em>MID</em></div>
+            <div class="active"><time>19:00</time><i></i><section><strong>Dinner Prime</strong><small>Modern Classics · Soul</small></section><em>MID+</em></div>
+            <div><time>22:00</time><i></i><section><strong>Late Night</strong><small>House · Dance · Known Hits</small></section><em>HIGH</em></div>
+          </div>
+          <div class="dayplan-footer">
+            <span>Auto-DJ · Preview-first · Event-aware</span>
+            <button type="button">Regeln anzeigen</button>
           </div>
         </div>
       </div>
@@ -410,122 +333,84 @@
     <section class="section architecture-section" id="architecture">
       <div class="container">
         <div class="section-heading reveal">
-          <div>
-            <div class="kicker"><span></span> SYSTEM ARCHITECTURE</div>
-            <h2>Modular, erweiterbar und kontrolliert.</h2>
-          </div>
-          <p>Die Produktarchitektur trennt Input, AI-Planung, Spotify-Funktionen und Automationen. Dadurch können weitere Kanäle oder Module ergänzt werden, ohne die Kernlogik neu zu bauen.</p>
+          <div><div class="kicker"><span></span> SYSTEM ARCHITECTURE</div><h2>Ein modularer Stack statt einer isolierten Playlist-Funktion.</h2></div>
+          <p>Input, KI-Planung, Qualitätsprüfung und Ausführung sind getrennte Schichten. So können weitere Kanäle, Datenquellen und Workflows ergänzt werden.</p>
         </div>
 
-        <div class="architecture-map reveal">
-          <div class="arch-column">
-            <span class="arch-label">INPUT</span>
+        <div class="architecture-card reveal">
+          <div class="arch-lane">
+            <span class="lane-title">INPUT</span>
             <div class="arch-node"><i>⌁</i><div><strong>Web UI</strong><small>Natural language</small></div></div>
             <div class="arch-node"><i>✈</i><div><strong>Telegram</strong><small>Remote control</small></div></div>
             <div class="arch-node"><i>↗</i><div><strong>OpenAPI</strong><small>External agents</small></div></div>
           </div>
-
-          <div class="arch-arrow" aria-hidden="true">→</div>
-
-          <div class="arch-column center">
-            <span class="arch-label">AI ORCHESTRATION</span>
+          <div class="arch-bridge"><span>→</span></div>
+          <div class="arch-core-wrap">
+            <span class="lane-title">AI ORCHESTRATION</span>
             <div class="arch-core">
-              <div class="core-ring"></div>
-              <span>✦</span>
-              <strong>Music Intelligence</strong>
-              <small>Intent · Search · Validate · Flow</small>
+              <div class="orbit one"></div><div class="orbit two"></div>
+              <i>✦</i><strong>Music Intelligence</strong><small>Intent · Search · Validate · Flow</small>
             </div>
           </div>
-
-          <div class="arch-arrow" aria-hidden="true">→</div>
-
-          <div class="arch-column">
-            <span class="arch-label">EXECUTION</span>
+          <div class="arch-bridge"><span>→</span></div>
+          <div class="arch-lane">
+            <span class="lane-title">EXECUTION</span>
             <div class="arch-node"><i>♫</i><div><strong>Spotify API</strong><small>Playlists</small></div></div>
             <div class="arch-node"><i>◉</i><div><strong>Spotify Connect</strong><small>Playback</small></div></div>
             <div class="arch-node"><i>⚙</i><div><strong>Scheduler</strong><small>Automations</small></div></div>
           </div>
         </div>
 
-        <div class="integration-cloud reveal">
-          <span>Spotify Web API</span>
-          <span>Spotify Connect</span>
-          <span>Telegram</span>
-          <span>OpenAPI / GPT Actions</span>
-          <span>Event Context</span>
-          <span>Automation Scheduler</span>
-          <span>SQLite Memory</span>
-          <span>Web / PWA</span>
+        <div class="integration-row reveal">
+          <span>Spotify Web API</span><span>Spotify Connect</span><span>Telegram</span><span>OpenAPI / GPT Actions</span><span>Event Context</span><span>Automation Scheduler</span><span>SQLite Memory</span><span>Web / PWA</span>
         </div>
       </div>
     </section>
 
-    <section class="section safety-section">
-      <div class="container">
-        <div class="safety-grid">
-          <div class="safety-copy reveal">
-            <div class="kicker"><span></span> QUALITY & CONTROL</div>
-            <h2>Automation ohne Blindflug.</h2>
-            <p>Die Produktlogik ist auf Preview-First ausgelegt: erst analysieren, dann prüfen, dann freigeben. Die Produktseite selbst hat keinen Schreibzugriff auf Spotify.</p>
-          </div>
-          <div class="guardrails reveal" data-delay="100">
-            <div class="guardrail"><i>01</i><div><strong>Preview vor Publish</strong><span>Jede Erstellung kann vor dem Write geprüft werden.</span></div><em>ACTIVE</em></div>
-            <div class="guardrail"><i>02</i><div><strong>Dedupe</strong><span>Doppelte Tracks werden vor der Erstellung gefiltert.</span></div><em>ACTIVE</em></div>
-            <div class="guardrail"><i>03</i><div><strong>Artist Distribution</strong><span>Übermäßige Wiederholungen werden begrenzt.</span></div><em>ACTIVE</em></div>
-            <div class="guardrail"><i>04</i><div><strong>Demo Boundary</strong><span>Diese Produktseite verändert keine Spotify-Daten.</span></div><em>READ ONLY</em></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section usecases-section">
+    <section class="section usecases-section" id="usecases">
       <div class="container">
         <div class="section-heading reveal">
-          <div>
-            <div class="kicker"><span></span> USE CASES</div>
-            <h2>Ein Produkt. Mehrere Einsatzbereiche.</h2>
-          </div>
-          <p>Die gleiche Engine kann unterschiedliche Anforderungen abbilden – von professionellen Hospitality-Abläufen bis zu Event- oder persönlichen Musik-Workflows.</p>
+          <div><div class="kicker"><span></span> BUILT FOR REAL OPERATIONS</div><h2>Ein Produkt. Unterschiedliche Musikprozesse.</h2></div>
+          <p>Die Engine bleibt gleich. Kontext, Regeln und Automationen passen sich an den jeweiligen Einsatz an.</p>
         </div>
-
         <div class="usecase-grid">
-          <article class="usecase reveal"><span>01</span><h3>Bars & Clubs</h3><p>Tagesphasen, Events, bekannte Hits und wechselnde Energielevel als steuerbarer Musikplan.</p><a href="#demo">Demo ansehen →</a></article>
-          <article class="usecase reveal" data-delay="60"><span>02</span><h3>Restaurants & Hotels</h3><p>Lunch, Dinner, Lobby, Terrasse und Late Night mit unterschiedlichen musikalischen Profilen.</p><a href="#automation">Automation ansehen →</a></article>
-          <article class="usecase reveal" data-delay="120"><span>03</span><h3>Events</h3><p>Musikbriefings in Playlist-Previews übersetzen und Specials vorab vorbereiten.</p><a href="#product">Produkt ansehen →</a></article>
-          <article class="usecase reveal" data-delay="180"><span>04</span><h3>Teams & Creators</h3><p>Playlists schneller planen, prüfen, freigeben und über mehrere Kanäle steuern.</p><a href="#architecture">Architektur ansehen →</a></article>
+          <article class="usecase-card reveal"><span>01</span><i>🍸</i><h3>Bars & Clubs</h3><p>Tagesphasen, Events, bekannte Hits und wechselnde Energielevel als steuerbarer Musikplan.</p><a href="#automation">Hospitality Flow →</a></article>
+          <article class="usecase-card reveal" data-delay="60"><span>02</span><i>◆</i><h3>Restaurants & Hotels</h3><p>Lunch, Dinner, Lobby, Terrasse und Late Night mit unterschiedlichen musikalischen Profilen.</p><a href="#platform">Module ansehen →</a></article>
+          <article class="usecase-card reveal" data-delay="120"><span>03</span><i>◇</i><h3>Events</h3><p>Musikbriefings in Playlist-Previews übersetzen und Specials kontrolliert vorbereiten.</p><a href="#demo">Demo testen →</a></article>
+          <article class="usecase-card reveal" data-delay="180"><span>04</span><i>⌁</i><h3>Teams & Creators</h3><p>Playlists schneller planen, prüfen, freigeben und über mehrere Kanäle steuern.</p><a href="#architecture">Architektur →</a></article>
         </div>
       </div>
     </section>
 
-    <section class="section faq-section" id="faq">
-      <div class="container faq-layout">
-        <div class="faq-copy reveal">
-          <div class="kicker"><span></span> FAQ</div>
-          <h2>Die wichtigsten Fragen.</h2>
-          <p>Die Website zeigt das Produktprinzip und eine interaktive Demo. Das produktive Spotify-System läuft separat auf spotify.kitzlabs.ai.</p>
+    <section class="section trust-section">
+      <div class="container trust-grid">
+        <div class="trust-copy reveal">
+          <div class="kicker"><span></span> QUALITY & CONTROL</div>
+          <h2>Automation ohne Blindflug.</h2>
+          <p>Die Produktlogik ist Preview-first. Die Produktwebsite selbst hat keinen Spotify-Schreibzugriff und liest für den Live-Status ausschließlich den öffentlichen Health-Endpunkt.</p>
         </div>
+        <div class="guardrails reveal" data-delay="100">
+          <div><i>01</i><section><strong>Preview vor Publish</strong><span>Plan und Track-Auswahl bleiben vor dem Write sichtbar.</span></section><em>ACTIVE</em></div>
+          <div><i>02</i><section><strong>Dedupe</strong><span>Doppelte Tracks werden vor der finalen Erstellung gefiltert.</span></section><em>ACTIVE</em></div>
+          <div><i>03</i><section><strong>Artist Distribution</strong><span>Übermäßige Wiederholungen können begrenzt werden.</span></section><em>ACTIVE</em></div>
+          <div><i>04</i><section><strong>Demo Boundary</strong><span>Diese Produktwebsite verändert keine Spotify-Daten.</span></section><em>READ ONLY</em></div>
+        </div>
+      </div>
+    </section>
 
+    <section class="section faq-section">
+      <div class="container faq-grid">
+        <div class="faq-intro reveal">
+          <div class="kicker"><span></span> FAQ</div>
+          <h2>Was die Produktwebsite zeigt.</h2>
+          <p>Die Live Demo erklärt den Workflow. Das produktive Spotify-System bleibt separat unter spotify.kitzlabs.ai.</p>
+        </div>
         <div class="faq-list reveal" data-delay="80">
-          <details open>
-            <summary>Ist die Demo mit meinem Spotify-Konto verbunden?</summary>
-            <p>Nein. Die Demo auf dieser Produktseite ist read-only und simuliert den Playlist-Flow im Browser. Sie erstellt oder verändert keine Spotify-Playlist.</p>
-          </details>
-          <details>
-            <summary>Funktioniert der Agent nur für Afro House?</summary>
-            <p>Nein. Die Produktlogik ist genre-unabhängig ausgelegt. Die Demo enthält unter anderem Afro House, Schlager, Rock, Drum & Bass, Jazz und Pop.</p>
-          </details>
-          <details>
-            <summary>Was bedeutet Preview-First?</summary>
-            <p>Der Agent zeigt zuerst eine validierte Vorschau. Erst nach Prüfung und Freigabe wird im Produktivsystem eine echte Playlist erstellt.</p>
-          </details>
-          <details>
-            <summary>Kann das System für Gastro und Hotels eingesetzt werden?</summary>
-            <p>Ja. Dayparts, Events, Auto-DJ, Playlist Library und wiederkehrende Automationen sind genau für solche operativen Musik-Workflows relevant.</p>
-          </details>
-          <details>
-            <summary>Kann das System erweitert werden?</summary>
-            <p>Ja. Die Architektur ist modular und unterstützt zusätzliche Apps, APIs, Agenten, Datenquellen und Automations-Workflows.</p>
-          </details>
+          <details open><summary>Ist die Demo mit meinem Spotify-Konto verbunden?</summary><p>Nein. Die Demo läuft lokal im Browser und schreibt keine Spotify-Daten.</p></details>
+          <details><summary>Funktioniert der Agent für alle Genres?</summary><p>Die Playlist-Engine ist genre-unabhängig konzipiert. In der Demo kannst du unter anderem Afro House, Schlager, Rock, Drum & Bass, Jazz und Pop testen.</p></details>
+          <details><summary>Was bedeutet Preview-first?</summary><p>Der Agent erzeugt zuerst eine prüfbare Vorschau. Die produktive Erstellung oder Automation wird davon getrennt behandelt.</p></details>
+          <details><summary>Kann der Agent für Hospitality eingesetzt werden?</summary><p>Die Module für Dayparts, Auto-DJ, Event Radar und Automationen sind für solche operativen Musik-Workflows ausgelegt.</p></details>
+          <details><summary>Kann die Plattform erweitert werden?</summary><p>Die Architektur ist modular und kann um zusätzliche Apps, APIs, Agenten, Datenquellen und Workflows ergänzt werden.</p></details>
         </div>
       </div>
     </section>
@@ -533,12 +418,12 @@
     <section class="section final-cta">
       <div class="container">
         <div class="cta-card reveal">
-          <div class="cta-glow" aria-hidden="true"></div>
+          <div class="cta-aura" aria-hidden="true"></div>
           <span class="eyebrow">AI KITZ · MUSIC INTELLIGENCE</span>
-          <h2>Von manueller Playlist-Arbeit zu einem intelligenten Musiksystem.</h2>
-          <p>Teste die Produktidee im Live Mockup oder öffne direkt das bestehende Spotify-System.</p>
+          <h2>Weniger Playlist-Handarbeit.<br>Mehr Musiksystem.</h2>
+          <p>Teste die interaktive Produktdemo oder öffne direkt das bestehende Spotify-System.</p>
           <div class="hero-actions centered">
-            <a class="btn btn-primary" href="#demo">Live Mockup testen <span>✦</span></a>
+            <a class="btn btn-primary" href="#demo">Live Demo starten <span>✦</span></a>
             <a class="btn btn-secondary" href="https://spotify.kitzlabs.ai/" target="_blank" rel="noreferrer">Live-System öffnen <span>↗</span></a>
           </div>
         </div>
@@ -547,32 +432,30 @@
   </main>
 
   <footer class="site-footer">
-    <div class="container footer-grid">
+    <div class="container footer-top">
       <div>
         <a class="brand footer-brand" href="#top">
           <span class="brand-icon" aria-hidden="true">
-            <svg viewBox="0 0 32 32" fill="none">
-              <path d="M5 21c5.8-2.9 14.6-2.2 20.1 1.1" stroke="#ff1744" stroke-width="2.5" stroke-linecap="round"/>
-              <path d="M6.7 15.8c5.3-2.4 12.9-2 17.8.6" stroke="#f7f7f5" stroke-opacity=".78" stroke-width="2.2" stroke-linecap="round"/>
-              <path d="M8.8 10.6c4.4-1.5 10.1-1.2 13.9.6" stroke="#1ed760" stroke-width="2.2" stroke-linecap="round"/>
+            <svg viewBox="0 0 36 36" fill="none">
+              <path d="M6 24c6.7-3.2 16.8-2.6 23.1 1.1" stroke="#ff1744" stroke-width="2.8" stroke-linecap="round"/>
+              <path d="M8 18c6.1-2.7 14.8-2.3 20.4.7" stroke="#f7f7f5" stroke-opacity=".8" stroke-width="2.4" stroke-linecap="round"/>
+              <path d="M10.4 12c5.1-1.8 11.7-1.4 16 0.7" stroke="#1ed760" stroke-width="2.4" stroke-linecap="round"/>
             </svg>
           </span>
           <span class="brand-copy"><strong>KI Spotify Agent</strong><small>AI KITZ · MUSIC INTELLIGENCE</small></span>
         </a>
-        <p class="footer-note">Separate Produktwebsite und interaktive Demo. Spotify und das Spotify-Logo sind Marken von Spotify AB. AI Kitz ist nicht mit Spotify AB verbunden oder von Spotify AB autorisiert.</p>
+        <p>Separate Produktwebsite und interaktive Demo. Spotify und das Spotify-Logo sind Marken von Spotify AB. AI Kitz ist nicht mit Spotify AB verbunden oder von Spotify AB autorisiert.</p>
       </div>
-
-      <div class="footer-links">
-        <div><strong>Produkt</strong><a href="#product">Übersicht</a><a href="#demo">Live Demo</a><a href="#features">Features</a></div>
-        <div><strong>System</strong><a href="#automation">Automation</a><a href="#architecture">Architektur</a><a href="#faq">FAQ</a></div>
-        <div><strong>AI Kitz</strong><a href="https://kitzlabs.ai/" target="_blank" rel="noreferrer">kitzlabs.ai ↗</a><a href="https://spotify.kitzlabs.ai/" target="_blank" rel="noreferrer">Live App ↗</a></div>
+      <div class="footer-nav">
+        <div><strong>Produkt</strong><a href="#platform">Plattform</a><a href="#demo">Live Demo</a><a href="#automation">Automation</a></div>
+        <div><strong>System</strong><a href="#architecture">Architektur</a><a href="#usecases">Einsatz</a><a href="https://spotify.kitzlabs.ai/" target="_blank" rel="noreferrer">Live App ↗</a></div>
+        <div><strong>AI Kitz</strong><a href="https://kitzlabs.ai/" target="_blank" rel="noreferrer">kitzlabs.ai ↗</a><a href="#top">Nach oben ↑</a></div>
       </div>
     </div>
-    <div class="container footer-bottom"><span>© 2026 AI Kitz</span><span>Built for intelligent music operations.</span></div>
+    <div class="container footer-bottom"><span>© 2026 AI Kitz</span><span>Intelligent music operations.</span></div>
   </footer>
 
   <div class="mobile-sticky"><a class="btn btn-primary" href="https://spotify.kitzlabs.ai/" target="_blank" rel="noreferrer">Live-System öffnen ↗</a></div>
-
-  <script src="/app.js?v=20260927-pro" defer></script>
+  <script src="/app.js?v=20260927-ai-v2" defer></script>
 </body>
 </html>
