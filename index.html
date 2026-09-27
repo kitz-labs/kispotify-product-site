@@ -4,10 +4,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#080908">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="KI Spotify">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icon.svg">
   <meta name="color-scheme" content="dark">
   <meta name="description" content="KI Spotify Agent von AI Kitz: intelligente Playlist-Erstellung, Preview-First Qualitätskontrolle, Auto-DJ, Event Radar und Spotify-Automationen für Hospitality, Events und professionelle Musiksteuerung.">
   <meta name="robots" content="index,follow,max-image-preview:large">
-  <link rel="canonical" href="https://kispotify.kitzlabs.ai/">
+  <link rel="canonical" href="https://kispotify.kitzlabs.ai/" data-upgrade="seo-discovery">
   <meta property="og:title" content="KI Spotify Agent · AI Kitz">
   <meta property="og:description" content="Musikwunsch rein. Validierte Spotify-Playlist raus. Mit Preview-First Engine, Auto-DJ, Event Radar und Automationen.">
   <meta property="og:type" content="website">
@@ -441,7 +448,7 @@
             <div class="demo-pipeline" aria-label="Demo Verarbeitungsstufen">
               <div class="pipe active">Intent</div><div class="pipe active">Search</div><div class="pipe active">Validate</div><div class="pipe active">Flow</div>
             </div>
-            <div class="demo-note">Demo-Modus · Keine Playlist wird erstellt oder verändert. Im Live-System erfolgt die tatsächliche Erstellung erst nach Qualitätsprüfung und Freigabe.</div>
+            <div class="demo-note">Demo-Modus · Keine Playlist wird erstellt oder verändert. Im Live-System erfolgt die tatsächliche Erstellung erst nach Qualitätsprüfung und Freigabe. <span id="demoWriteNote">Der Button „In Spotify erstellen“ demonstriert hier nur die Safety-Grenze.</span></div>
           </div>
 
           <div class="panel demo-screen" aria-live="polite">
@@ -450,7 +457,7 @@
               <div class="result-top"><div><span class="eyebrow">VALIDIERTE VORSCHAU</span><h4 id="resultName">Rooftop Sunset · 80% Familiar</h4></div><div class="score" id="demoScore"></div></div>
               <div class="result-tags" id="demoTags"><span>42 Songs</span><span>120 Min</span><span>Afro House</span><span>80% bekannt</span></div>
               <div class="result-list" id="demoTracks"></div>
-              <div class="result-footer"><span id="demoFooter">Duplikate entfernt · Artist-Wiederholung begrenzt · Flow sortiert</span><button class="button" type="button" id="fakeCreate">In Spotify erstellen</button></div>
+              <div class="result-footer"><span id="demoFooter">Duplikate entfernt · Artist-Wiederholung begrenzt · Flow sortiert</span><button class="button" type="button" id="fakeCreate" aria-describedby="demoWriteNote">In Spotify erstellen</button></div>
             </div>
           </div>
         </div>
