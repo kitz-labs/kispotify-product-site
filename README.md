@@ -1,6 +1,6 @@
 # KI Spotify Product Site
 
-Professionelle Produktwebsite für den bestehenden KI Spotify Agent von AI Kitz.
+Professionelle KI-Produktwebsite für den bestehenden KI Spotify Agent von AI Kitz.
 
 ## Live
 - Produktwebsite: https://kispotify.kitzlabs.ai/
@@ -8,26 +8,25 @@ Professionelle Produktwebsite für den bestehenden KI Spotify Agent von AI Kitz.
 - Repository: kitz-labs/kispotify-product-site
 - Typ: statische, modulare Produktwebsite ohne Build-Schritt
 
-## Professional AI Website · Upgrade 2026-09-27
-- komplette Neugestaltung als Premium AI Product Website
-- neue Hero Experience mit AI Music Console Mockup
-- Dark Premium Visual System mit AI Kitz Rot und Spotify Grün
-- interaktive Multi-Genre Playlist-Demo
-- sichtbarer Intent → Search → Validate → Flow Prozess
-- AI Playlist Engine, Preview-First Quality Gate, Auto-DJ und Event Radar
+## AI Website V2 · Upgrade 2026-09-27
+- komplett neu strukturierter Premium-Hero
+- AI Music Command Center als hochwertiger Produkt-Mockup
+- Live Health + gemessene Browser-Latenz
+- subtile Cursor-, Parallax- und Scroll-Interaktionen
+- interaktive Produkt-Tour mit Playlist Engine, Quality Gate, Auto-DJ und Event Radar
+- Multi-Genre Live Demo mit Afro House, Schlager, Rock, DnB, Jazz und Pop
+- klarer Intent → Search → Validate → Flow Prozess
+- Controlled Workflow: Wunsch → AI Plan → Quality → Write
 - Hospitality Daypart Automation
-- modular dargestellte Systemarchitektur
-- Integrationsübersicht
+- modulare Architektur für Web, Telegram, OpenAPI, Spotify API, Spotify Connect und Scheduler
 - Use Cases für Bars, Clubs, Restaurants, Hotels, Events und Teams
-- Quality / Control Guardrails
-- FAQ und starke CTAs
-- Live Read-only Healthcheck zu spotify.kitzlabs.ai
+- Preview-First Guardrails und Read-only Demo Boundary
+- FAQ und Conversion-CTAs
 - Mobile Navigation + Sticky Mobile CTA
-- Responsive Desktop / Tablet / iPhone Layout
-- Accessibility: Skip Link, Focus States, ARIA, Reduced Motion
+- responsive Layout für Desktop, Tablet und iPhone
+- Accessibility: Skip-Link, Focus States, ARIA, Reduced Motion
 - SEO: Canonical, OpenGraph, Twitter Meta, SoftwareApplication JSON-LD
-- PWA Basis mit Manifest und App Icon
-- robots.txt + sitemap.xml
+- PWA-Basis, robots.txt und sitemap.xml
 
 ## Dateien
 - index.html
@@ -39,7 +38,7 @@ Professionelle Produktwebsite für den bestehenden KI Spotify Agent von AI Kitz.
 - sitemap.xml
 
 ## Safety
-Die Produktwebsite ist vom produktiven Spotify-Agent getrennt. Die Browser-Demo schreibt keine Playlist-Daten. Der Live-Status liest ausschließlich den öffentlichen Health-Endpunkt.
+Die Produktwebsite ist vom produktiven Spotify-Agent getrennt. Die Demo schreibt keine Playlist-Daten. Der Live-Status liest ausschließlich den öffentlichen Health-Endpunkt.
 
 ## Deployment
 Source:
@@ -48,9 +47,8 @@ Source:
 Live:
 - /var/www/kispotify.kitzlabs.ai/
 
-Nginx liefert die Live-Dateien statisch über HTTPS aus.
-
 ## Rollback
-Backup vor dieser Neugestaltung:
-- Source: /prosystem/Projects/Websites/KiSpotify-Product-Site/backups/index.pre-professional-ai-site-20260927.html
-- Live: /var/www/kispotify.kitzlabs.ai/backups/index.pre-professional-ai-site-20260927.html
+Backup vor AI Website V2:
+- /prosystem/Projects/Websites/KiSpotify-Product-Site/backups/index.html.20260927-0601-v2.bak
+- /prosystem/Projects/Websites/KiSpotify-Product-Site/backups/styles.css.20260927-0601-v2.bak
+- /prosystem/Projects/Websites/KiSpotify-Product-Site/backups/app.js.20260927-0601-v2.bak
