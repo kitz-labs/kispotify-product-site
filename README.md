@@ -8,8 +8,13 @@ Professionelle KI-Produktwebsite für den bestehenden KI Spotify Agent von AI Ki
 - Repository: kitz-labs/kispotify-product-site
 - Typ: statische, modulare Produktwebsite ohne Build-Schritt
 
-## AI Website V2 · Upgrade 2026-09-27
+## AI Website V3 · Upgrade 2026-09-27
 - komplett neu strukturierter Premium-Hero
+- interaktiver AI Solution Configurator für Einsatz, Schwerpunkt und Umfang
+- dynamische Modul-Empfehlung + vorbereiteter Anfrage-Funnel
+- Onboarding-Strecke vom Musikprofil bis Pilot/Go-Live
+- Produktpakete Core, Hospitality und Custom ohne erfundene Fixpreise
+- Conversion-CTAs mit Business-Anfrage an office@aikitz.at
 - AI Music Command Center als hochwertiger Produkt-Mockup
 - Live Health + gemessene Browser-Latenz
 - subtile Cursor-, Parallax- und Scroll-Interaktionen
