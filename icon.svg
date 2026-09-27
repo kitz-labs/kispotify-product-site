@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" role="img" aria-label="KI Spotify Agent">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#17191d"/><stop offset="1" stop-color="#080908"/></linearGradient>
+    <filter id="g"><feGaussianBlur stdDeviation="6"/></filter>
+  </defs>
+  <rect width="180" height="180" rx="42" fill="url(#bg)"/>
+  <circle cx="130" cy="38" r="34" fill="#ef183f" opacity=".16" filter="url(#g)"/>
+  <path d="M39 111c31-16 76-12 104 5" fill="none" stroke="#ef183f" stroke-width="12" stroke-linecap="round"/>
+  <path d="M46 82c28-12 67-10 92 3" fill="none" stroke="#f7f7f5" stroke-opacity=".78" stroke-width="10" stroke-linecap="round"/>
+  <path d="M55 57c23-8 52-6 72 3" fill="none" stroke="#1ed760" stroke-width="10" stroke-linecap="round"/>
+</svg>
