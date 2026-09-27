@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kispotify.kitzlabs.ai/sitemap.xml
