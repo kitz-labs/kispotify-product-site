@@ -1,0 +1,26 @@
+{
+  "name": "KI Spotify Agent · AI Kitz",
+  "short_name": "KI Spotify",
+  "description": "Intelligente Playlist-Erstellung, Preview-First Qualitätskontrolle, Auto-DJ und Event Radar.",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#080908",
+  "theme_color": "#080908",
+  "lang": "de-AT",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}
