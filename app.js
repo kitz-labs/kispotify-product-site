@@ -51,13 +51,23 @@
     const prompt=$("#demoPrompt").value.trim();if(!prompt){$("#demoPrompt").focus();return}
     $("#demoQuality").textContent="KI ERSTELLT …";$("#resultFoot").textContent="Live-Vorschau wird erstellt …";
     try{
-      const h=prompt.match(/(\d+)\s*(?:stunden?|std|hours?)/i);const duration=h?Math.max(30,Math.min(240,Number(h[1])*60)):120;
-      const res=await fetch("/live/preview",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({prompt,durationMinutes:duration,trackCount:30})});
+      const h=prompt.match(/(\d+(?:[.,]\d+)?)\s*(?:stunden?|std|hours?|h)\b/i);
+      const m=prompt.match(/(\d+)\s*(?:minuten?|minutes?|min)\b/i);
+      const requested=h?Number(h[1].replace(",","."))*60:m?Number(m[1]):120;
+      const duration=Math.max(30,Math.min(360,Math.round(requested)));
+      const desiredTracks=Math.max(20,Math.min(80,Math.round(duration/3)));
+      const res=await fetch("/live/preview",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({prompt,durationMinutes:duration,trackCount:desiredTracks})});
       const data=await res.json();if(!res.ok||!data.ok||!data.preview)throw new Error("preview");
-      const p=data.preview;$("#demoTitle").textContent=p.name||"KI Playlist";$("#resultName").textContent=p.name||"Live Preview";$("#resultScore").textContent=String(Math.round(Number(p.premiumScore||90)));
-      const tags=[(p.trackCount||0)+" Songs",(p.durationMinutes||duration)+" Min",Array.isArray(p.genres)&&p.genres[0]?p.genres[0]:"KI Playlist"];$("#resultMeta").innerHTML=tags.map(x=>"<span>"+esc(x)+"</span>").join("");
-      const tracks=Array.isArray(p.tracks)?p.tracks:[];$("#resultTracks").innerHTML=tracks.slice(0,6).map((t,i)=>'<div class="demo-track"><b>'+String(i+1).padStart(2,"0")+'</b><div><strong>'+esc(t.title||"Track")+'</strong><small>'+esc(t.artist||"Spotify")+'</small></div><em>✓</em></div>').join("");
-      $("#demoQuality").textContent="LIVE VORSCHAU";$("#resultFoot").textContent="Echte KI-Vorschau · keine Playlist veröffentlicht";
+      const p=data.preview,tracks=Array.isArray(p.tracks)?p.tracks:[],actualCount=Number(p.trackCount||tracks.length||0),score=Number(p.premiumScore);
+      const isSample=actualCount>0&&actualCount<Math.min(15,desiredTracks);
+      $("#demoTitle").textContent=p.name||"KI Playlist";$("#resultName").textContent=p.name||"Live Preview";
+      $("#resultScore").textContent=Number.isFinite(score)&&score>=80?String(Math.round(score)):"LIVE";
+      const genre=Array.isArray(p.genres)&&p.genres[0]?p.genres[0]:"KI Playlist";
+      const tags=[isSample?actualCount+" Live-Treffer":(actualCount||desiredTracks)+" Songs",duration+" Min Wunsch",genre];
+      $("#resultMeta").innerHTML=tags.map(x=>"<span>"+esc(x)+"</span>").join("");
+      $("#resultTracks").innerHTML=tracks.slice(0,6).map((t,i)=>'<div class="demo-track"><b>'+String(i+1).padStart(2,"0")+'</b><div><strong>'+esc(t.title||"Track")+'</strong><small>'+esc(t.artist||"Spotify")+'</small></div><em>✓</em></div>').join("");
+      $("#demoQuality").textContent=isSample?"LIVE SAMPLE":"LIVE VORSCHAU";
+      $("#resultFoot").textContent=isSample?"Live-Sample aus dem Preview-System · keine Playlist veröffentlicht":"Echte KI-Vorschau · keine Playlist veröffentlicht";
     }catch(e){$("#demoQuality").textContent="DEMO";$("#resultFoot").textContent="Live-Vorschau momentan nicht erreichbar · Demo angezeigt";renderDemo(fallback.afro)}
   }
   $("#demoRun")?.addEventListener("click",livePreview);
@@ -146,9 +156,23 @@
     dayparts:{eyebrow:"AUTOMATION",title:"Musik nach Tageszeit",text:"Der Musikstil verändert sich automatisch mit deinem Betrieb – von Frühstück bis Late Night.",points:["Eigene Musikprofile pro Phase","Events können den normalen Ablauf temporär ersetzen","Ideal für Bars, Restaurants und Hotels"],visual:'<div class="story-event"><div class="story-event-card"><span>08:00</span><strong>Breakfast</strong><em>SOFT</em></div><div class="story-event-card active"><span>17:00</span><strong>Sunset</strong><em>AKTIV</em></div><div class="story-event-card"><span>20:00</span><strong>Dinner</strong><em>NEXT</em></div></div>'},
     event:{eyebrow:"EVENT MODE",title:"Events mit eigenem Musikflow",text:"Special Nights, Rooftop Events oder Brunch können für einen definierten Zeitraum den normalen Musikplan ersetzen.",points:["Event startet und endet gezielt","Normaler Musikflow läuft danach weiter","Eigene Stimmung für jeden Anlass"],visual:'<div class="story-event"><div class="story-event-card"><span>20:00</span><strong>Dinner</strong><em>PAUSED</em></div><div class="story-event-card active"><span>21:00</span><strong>Rooftop Night</strong><em>EVENT</em></div><div class="story-event-card"><span>01:00</span><strong>Late Night</strong><em>RESUMES</em></div></div>'}
   };
-  function openModal(key){const d=modalData[key];if(!d)return;$("#modalEyebrow").textContent=d.eyebrow;$("#modalTitle").textContent=d.title;$("#modalText").textContent=d.text;$("#modalPoints").innerHTML=d.points.map(p=>'<div><i>✓</i><span>'+esc(p)+'</span></div>').join("");$("#modalVisual").innerHTML=d.visual;$("#featureModal").classList.add("open");$("#featureModal").setAttribute("aria-hidden","false");document.body.style.overflow="hidden"}
-  function closeModal(){if(!$("#featureModal"))return;$("#featureModal").classList.remove("open");$("#featureModal").setAttribute("aria-hidden","true");document.body.style.overflow=""}
-  $$(".feature-open").forEach(b=>b.addEventListener("click",()=>openModal(b.dataset.feature)));$(".feature-modal-backdrop")?.addEventListener("click",closeModal);$(".feature-modal-close")?.addEventListener("click",closeModal);addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
+  let modalOpener=null;
+  function openModal(key,opener){
+    const d=modalData[key],modal=$("#featureModal");if(!d||!modal)return;
+    modalOpener=opener||document.activeElement;$("#modalEyebrow").textContent=d.eyebrow;$("#modalTitle").textContent=d.title;$("#modalText").textContent=d.text;$("#modalPoints").innerHTML=d.points.map(p=>'<div><i>✓</i><span>'+esc(p)+'</span></div>').join("");$("#modalVisual").innerHTML=d.visual;modal.classList.add("open");modal.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";requestAnimationFrame(()=>$(".feature-modal-close")?.focus());
+  }
+  function closeModal(){
+    const modal=$("#featureModal");if(!modal||!modal.classList.contains("open"))return;
+    modal.classList.remove("open");modal.setAttribute("aria-hidden","true");document.body.style.overflow="";const restore=modalOpener;modalOpener=null;restore?.focus?.();
+  }
+  $(".feature-open").forEach(b=>b.addEventListener("click",()=>openModal(b.dataset.feature,b)));$(".feature-modal-backdrop")?.addEventListener("click",closeModal);$(".feature-modal-close")?.addEventListener("click",closeModal);$("#modalCta")?.addEventListener("click",closeModal);
+  addEventListener("keydown",e=>{
+    const modal=$("#featureModal");if(!modal?.classList.contains("open"))return;
+    if(e.key==="Escape"){e.preventDefault();closeModal();return}
+    if(e.key==="Tab"){const focusable=$("#featureModal button:not([disabled]), #featureModal a[href]");if(!focusable.length)return;const first=focusable[0],last=focusable[focusable.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}
+  });
+
+  const reducedMotion=matchMedia("(prefers-reduced-motion:reduce)");if(reducedMotion.matches)$("video[autoplay]").forEach(v=>{v.removeAttribute("autoplay");v.pause()});
 
   if(matchMedia("(pointer:fine)").matches && !matchMedia("(prefers-reduced-motion:reduce)").matches){
     const heroProduct=$(".hero-product");if(heroProduct)heroProduct.addEventListener("pointermove",e=>{const r=heroProduct.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;const screen=$(".hero-screen");if(screen)screen.style.transform='perspective(1500px) rotateY('+(x*3)+'deg) rotateX('+(-y*2)+'deg) translateY(-2px)'});
