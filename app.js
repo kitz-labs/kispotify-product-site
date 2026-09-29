@@ -157,7 +157,7 @@
   }
   (function(){
     const started=performance.now();
-    fetch("https://spotify.kitzlabs.ai/api/health",{method:"GET",mode:"cors",cache:"no-store"}).then(function(r){if(!r.ok)throw new Error("offline");return r.text();}).then(function(){setHealth(true,Math.max(1,Math.round(performance.now()-started)));}).catch(function(){setHealth(false,null);});
+    fetch("/live/health",{method:"GET",cache:"no-store"}).then(function(r){if(!r.ok)throw new Error("offline");return r.text();}).then(function(){setHealth(true,Math.max(1,Math.round(performance.now()-started)));}).catch(function(){setHealth(false,null);});
   })();
 
   const revealItems=$$(".reveal");
@@ -236,7 +236,7 @@
       if($("#liveNextUpdates")){
         $("#liveNextUpdates").innerHTML=updates.length
           ? updates.map(function(u){return '<div class="live-update"><strong>'+esc(u.playlistName||u.name||"Automation")+'</strong><span>'+esc(u.cronExpression||"scheduled")+'</span></div>';}).join("")
-          : '<div class="live-update-placeholder">Keine aktive nächste Automation gemeldet.</div>';
+          : '<div class="live-update-placeholder">Zeitplan-Details geschützt · '+String(s.activeAutomationCount??0)+' Automationen aktiv.</div>';
       }
 
       const np=(playing&&playing.nowPlaying)||{};
@@ -262,7 +262,7 @@
       $$(".price-number[data-monthly]").forEach(function(el){
         el.textContent="€"+(annual?el.dataset.annual:el.dataset.monthly);
       });
-      $$(".price-billing").forEach(function(el){el.textContent=annual?"monatlicher Gegenwert · jährlich abgerechnet":"monatlich abgerechnet";});
+      $(".price-billing:not(.fixed-billing)").forEach(function(el){el.textContent=annual?"monatlicher Gegenwert · jährlich abgerechnet":"monatlich abgerechnet";});
     });
   });
 
