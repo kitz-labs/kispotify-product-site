@@ -79,3 +79,9 @@ Die Website lädt diese Bibliotheken nicht als Runtime-Abhängigkeiten. Die Moti
 
 ## Customer-facing Boundary
 Im sichtbaren Frontend werden nur Funktionen erklärt, die ein Kunde verstehen und bewerten soll: Playlist AI, Live Music, Tagesphasen, Events, QR Gäste-Wünsche, Musikprofile, Zonen, Remote Control, Pakete und Onboarding. Interne Admin-, Token-, API-, Debug- und Backend-Ansichten bleiben vollständig ausgeblendet.
+
+
+## Media Policy
+- OpenArt is not used for this project.
+- Video assets and motion references must come from GitHub-based tooling/workflows or Hugging Face models.
+- The live website keeps a native CSS/JS animated fallback so the customer experience never depends on an external video service.
