@@ -168,6 +168,7 @@
       </div>
     </section>
 
+
     <section class="trust-strip">
       <div class="container trust-grid">
         <div><span>PLAYLISTS</span><strong>Mit KI erstellen</strong></div>
@@ -251,6 +252,77 @@
           <div class="story-stage">
             <div class="story-window" id="storyWindow"></div>
           </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="section motion-showcase-section" id="motion">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div><div class="kicker"><span></span> PRODUKT IN BEWEGUNG</div><h2>In wenigen Sekunden sehen, wie das System arbeitet.</h2></div>
+          <p>Drei kurze Loops zeigen den wichtigsten Kunden-Flow: Musik planen, Gäste einbinden und den Tagesverlauf automatisch steuern.</p>
+        </div>
+
+        <div class="motion-showcase-grid">
+          <article class="motion-film motion-film-main reveal">
+            <div class="motion-film-copy">
+              <span class="eyebrow">PRODUCT FLOW · 10 SEK.</span>
+              <h3>Vom Musikwunsch bis zur laufenden Musik.</h3>
+              <p>Playlist, Dinner Mode und Gäste-Wunsch in einer einzigen verständlichen Produktansicht.</p>
+              <div class="motion-tags"><span>Playlist AI</span><span>Live Music</span><span>Guest Wishes</span></div>
+            </div>
+            <div class="motion-video-shell" id="productFilmWrap">
+              <div class="motion-video-fallback motion-video-fallback-product" aria-hidden="true">
+                <span><i></i> LIVE MUSIC</span>
+                <strong>Sunset → Dinner → Guest Wish</strong>
+                <small>Produkt-Animation</small>
+              </div>
+              <video id="productFilm" muted loop playsinline controls preload="metadata" poster="/assets/v6/hospitality-rooftop.webp" aria-label="KI Spotify Agent Product Flow">
+                <source src="/assets/v6/product-film-v6.mp4" type="video/mp4">
+              </video>
+            </div>
+          </article>
+
+          <article class="motion-film reveal" data-delay="70">
+            <div class="motion-film-copy">
+              <span class="eyebrow">QR GUEST WISH · 8 SEK.</span>
+              <h3>Scannen → Wunsch → Bestätigung.</h3>
+              <p>Der komplette Gäste-Flow, ohne dein Team zu unterbrechen.</p>
+            </div>
+            <div class="motion-video-shell compact native-motion-preview motion-qr-preview" aria-label="Animierte Vorschau des QR Gäste-Wunsch Ablaufs">
+              <div class="motion-phone">
+                <span class="motion-phone-notch"></span>
+                <small>Musikwunsch</small>
+                <strong>Beautiful Things</strong>
+                <em>Wunsch senden</em>
+              </div>
+              <div class="motion-arrow">→</div>
+              <div class="motion-accepted"><i>✓</i><strong>Wunsch empfangen</strong><small>passt zum Musikprofil</small></div>
+            </div>
+          </article>
+
+          <article class="motion-film reveal" data-delay="120">
+            <div class="motion-film-copy">
+              <span class="eyebrow">MUSIC TIMELINE · 10 SEK.</span>
+              <h3>Ein Tag. Automatisch die passende Musik.</h3>
+              <p>Breakfast, Lunch, Sunset, Dinner und Event Mode als klarer visueller Ablauf.</p>
+            </div>
+            <div class="motion-video-shell compact native-motion-preview motion-day-preview" aria-label="Animierte Vorschau der automatischen Musik-Timeline">
+              <div class="motion-day-line"><span></span></div>
+              <div class="motion-day-point"><b>08:00</b><small>Breakfast</small></div>
+              <div class="motion-day-point"><b>12:00</b><small>Lunch</small></div>
+              <div class="motion-day-point active"><b>17:00</b><small>Sunset</small></div>
+              <div class="motion-day-point"><b>20:00</b><small>Dinner</small></div>
+              <div class="motion-day-point"><b>23:00</b><small>Late Night</small></div>
+              <div class="motion-event-pill">EVENT MODE</div>
+            </div>
+          </article>
+        </div>
+
+        <div class="motion-note reveal">
+          <span><i></i> Video + native UI-Motion · kurz, leise und fokussiert.</span>
+          <span>Keine externen Video-Dienste · direkt vom AI Kitz Server</span>
         </div>
       </div>
     </section>
@@ -411,6 +483,24 @@
             <p>Ein leuchtender Zeitstrahl zeigt dir, welcher Musikmodus gerade aktiv ist – und was als Nächstes kommt.</p>
           </div>
         </div>
+
+
+        <div class="timeline-video reveal">
+          <div class="timeline-video-copy">
+            <span class="eyebrow">10 SEKUNDEN · DAYPART FLOW</span>
+            <h3>Ein ganzer Musiktag als Animation.</h3>
+            <p>Breakfast, Lunch, Sunset, Dinner und Late Night – inklusive Event Override, wenn ein Special den normalen Ablauf übernimmt.</p>
+          </div>
+          <div class="timeline-video-player" id="daypartFilmWrap">
+            <div class="timeline-video-fallback" aria-hidden="true">
+              <span>08:00</span><i></i><span>12:00</span><i></i><span>17:00</span><i></i><span>20:00</span><i></i><span>23:00</span>
+            </div>
+            <video id="daypartFilm" autoplay muted loop playsinline controls preload="metadata" aria-label="Animation der automatischen Tagesphasen">
+              <source src="/assets/v6/daypart-timeline-v6.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+
         <div class="timeline-shell reveal">
           <div class="timeline-line"><span id="timelineProgress"></span></div>
           <button class="timeline-point" data-time="breakfast" type="button"><time>08:00</time><i></i><strong>Breakfast</strong><small>Soft Pop · Acoustic</small></button>
