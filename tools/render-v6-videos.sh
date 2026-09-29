@@ -24,4 +24,7 @@ DAY_FILTER="drawbox=x=0:y=0:w=1280:h=720:color=0x070809:t=fill,drawtext=fontfile
 
 "$FF" -y -f lavfi -i "color=c=0x070809:s=1280x720:r=30:d=10" -vf "$DAY_FILTER" -an -c:v libx264 -profile:v high -level 4.0 -pix_fmt yuv420p -crf 22 -preset medium -movflags +faststart "$ROOT/daypart-timeline-v6.mp4"
 
-echo "Rendered V6 media to $ROOT"
+"$FF" -y -ss 3.7 -i "$ROOT/qr-guest-wishes-v6.mp4" -frames:v 1 -c:v libwebp -quality 88 "$ROOT/qr-guest-hero.webp"
+"$FF" -y -ss 4.2 -i "$ROOT/product-film-v6.mp4" -frames:v 1 -c:v libwebp -quality 88 "$ROOT/hospitality-rooftop.webp"
+
+echo "Rendered V6 media and posters to $ROOT"
