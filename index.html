@@ -33,7 +33,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=20260929-v6-6">
+  <link rel="stylesheet" href="/styles.css?v=20260929-v6-7">
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -278,9 +278,10 @@
                 <strong>Sunset → Dinner → Guest Wish</strong>
                 <small>Produkt-Animation</small>
               </div>
-              <video id="productFilm" muted loop playsinline controls preload="metadata" poster="/assets/v6/hospitality-rooftop.webp" aria-label="KI Spotify Agent Product Flow">
+              <video id="productFilm" class="smart-loop-video" muted loop playsinline preload="metadata" poster="/assets/v6/hospitality-rooftop.webp" aria-label="KI Spotify Agent Product Flow">
                 <source src="/assets/v6/product-film-v6.mp4" type="video/mp4">
               </video>
+              <button class="video-toggle" type="button" data-video-toggle="#productFilm" aria-label="Produktfilm pausieren">Ⅱ <span>Pause</span></button>
             </div>
           </article>
 
@@ -425,9 +426,10 @@
               <i>→</i>
               <div class="vf-step vf-live"><span>LIVE</span><strong>Wunsch empfangen</strong><small>passt zum Musikprofil</small></div>
             </div>
-            <video id="qrFeatureVideo" autoplay muted loop playsinline controls preload="auto" poster="/assets/v6/qr-guest-hero.webp" aria-label="Demo des QR Gäste-Wunsch-Systems">
+            <video id="qrFeatureVideo" class="smart-loop-video" muted loop playsinline preload="metadata" poster="/assets/v6/qr-guest-hero.webp" aria-label="Demo des QR Gäste-Wunsch-Systems">
               <source src="/assets/v6/qr-guest-wishes-v6.mp4" type="video/mp4">
             </video>
+            <button class="video-toggle" type="button" data-video-toggle="#qrFeatureVideo" aria-label="QR Demo pausieren">Ⅱ <span>Pause</span></button>
           </div>
         </div>
 
@@ -495,9 +497,10 @@
             <div class="timeline-video-fallback" aria-hidden="true">
               <span>08:00</span><i></i><span>12:00</span><i></i><span>17:00</span><i></i><span>20:00</span><i></i><span>23:00</span>
             </div>
-            <video id="daypartFilm" autoplay muted loop playsinline controls preload="metadata" aria-label="Animation der automatischen Tagesphasen">
+            <video id="daypartFilm" class="smart-loop-video" muted loop playsinline preload="metadata" aria-label="Animation der automatischen Tagesphasen">
               <source src="/assets/v6/daypart-timeline-v6.mp4" type="video/mp4">
             </video>
+            <button class="video-toggle" type="button" data-video-toggle="#daypartFilm" aria-label="Tagesphasen-Animation pausieren">Ⅱ <span>Pause</span></button>
           </div>
         </div>
 
@@ -808,6 +811,6 @@
 
   <div class="mobile-sticky"><a class="btn btn-primary" href="#contact">Demo & Setup anfragen ↗</a></div>
 
-  <script src="/app.js?v=20260929-v6-6" defer></script>
+  <script src="/app.js?v=20260929-v6-7" defer></script>
 </body>
 </html>
