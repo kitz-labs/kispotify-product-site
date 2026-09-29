@@ -33,7 +33,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=20260929-v6-7">
+  <link rel="stylesheet" href="/styles.css?v=20260929-v6-8">
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -44,6 +44,20 @@
     "url":"https://kispotify.kitzlabs.ai/",
     "description":"KI-gestützte Musiklösung mit Playlist-Erstellung, Gäste-Wünschen per QR-Code, Tagesphasen, Events und Live-Musiksteuerung.",
     "creator":{"@type":"Organization","name":"AI Kitz","url":"https://kitzlabs.ai/"}
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"Erstellt die Website direkt Spotify-Playlists?","acceptedAnswer":{"@type":"Answer","text":"Die Produktwebsite zeigt Vorschauen und Live-Ansichten. Die produktive Erstellung erfolgt im eigentlichen KI Spotify Agent nach Freigabe."}},
+      {"@type":"Question","name":"Kann ich alle Musikgenres verwenden?","acceptedAnswer":{"@type":"Answer","text":"Ja. Der Agent ist nicht auf ein einzelnes Genre beschränkt. Stimmung, Anlass, Künstler und Musikrichtung können frei beschrieben werden."}},
+      {"@type":"Question","name":"Wie funktionieren Gäste-Wünsche per QR-Code?","acceptedAnswer":{"@type":"Answer","text":"Der Gast scannt einen QR-Code, öffnet eine mobile Wunschansicht und sendet Song, Genre oder Stimmung. Das Feature ist in Hospitality enthalten und in Pro optional verfügbar."}},
+      {"@type":"Question","name":"Kann die Musik automatisch über den Tag wechseln?","acceptedAnswer":{"@type":"Answer","text":"Ja. Zum Beispiel Breakfast, Lunch, Sunset, Dinner und Late Night. Die einzelnen Musikprofile werden vorher abgestimmt."}},
+      {"@type":"Question","name":"Kann ich mehrere Bereiche getrennt planen?","acceptedAnswer":{"@type":"Answer","text":"Ja. Im Hospitality- und Enterprise-Setup können unterschiedliche Bereiche wie Lobby, Restaurant, Terrasse oder Rooftop berücksichtigt werden."}},
+      {"@type":"Question","name":"Was kostet der KI Spotify Agent?","acceptedAnswer":{"@type":"Answer","text":"Core startet bei 49 Euro pro Monat, Pro bei 129 Euro pro Monat und Hospitality bei 249 Euro pro Monat, jeweils netto zuzüglich Umsatzsteuer und einmaligem Setup. Enterprise wird individuell kalkuliert."}}
+    ]
   }
   </script>
 </head>
@@ -754,7 +768,7 @@
           </div>
           <label><span>Unternehmen / Betrieb</span><input id="leadCompany" name="company" maxlength="120" placeholder="Hotel, Bar, Restaurant, Venue …"></label>
           <label><span>Was möchtest du automatisieren?</span><textarea id="leadMessage" name="message" rows="5" required maxlength="1000" placeholder="Zum Beispiel: Dinner + Late Night, Gäste-Wünsche per QR-Code, mehrere Bereiche …"></textarea></label>
-          <label class="consent-line"><input id="leadConsent" type="checkbox" required><span>Ich stimme zu, dass AI Kitz diese Angaben zur Bearbeitung meiner Anfrage verwendet.</span></label>
+          <label class="consent-line"><input id="leadConsent" type="checkbox" required><span>Ich stimme zu, dass AI Kitz diese Angaben zur Bearbeitung meiner Anfrage verwendet. <a href="https://kitzlabs.ai/datenschutz.html" target="_blank" rel="noreferrer">Datenschutz ↗</a></span></label>
           <button class="btn btn-primary lead-submit" id="leadSubmit" type="submit">Projektanfrage senden <span>↗</span></button>
           <div class="form-status" id="leadStatus" aria-live="polite"></div>
           <small>Alternativ: <a href="mailto:office@aikitz.at">office@aikitz.at</a></small>
@@ -787,10 +801,10 @@
       <div class="footer-nav">
         <div><strong>Produkt</strong><a href="#views">Live Ansichten</a><a href="#features">Features</a><a href="#qr">QR Wünsche</a></div>
         <div><strong>Pakete</strong><a href="#plans">Core</a><a href="#plans">Pro</a><a href="#plans">Hospitality</a></div>
-        <div><strong>AI Kitz</strong><a href="#contact">Kontakt</a><a href="https://kitzlabs.ai/" target="_blank" rel="noreferrer">kitzlabs.ai ↗</a></div>
+        <div><strong>AI Kitz</strong><a href="#contact">Kontakt</a><a href="https://kitzlabs.ai/" target="_blank" rel="noreferrer">kitzlabs.ai ↗</a><a href="https://kitzlabs.ai/impressum.html" target="_blank" rel="noreferrer">Impressum ↗</a><a href="https://kitzlabs.ai/datenschutz.html" target="_blank" rel="noreferrer">Datenschutz ↗</a></div>
       </div>
     </div>
-    <div class="container footer-bottom"><span>© 2026 AI Kitz</span><span>Good music brings people together.</span></div>
+    <div class="container footer-bottom"><span>© 2026 AI Kitz</span><span>Good music brings people together.</span><span><a href="https://kitzlabs.ai/impressum.html" target="_blank" rel="noreferrer">Impressum</a> · <a href="https://kitzlabs.ai/datenschutz.html" target="_blank" rel="noreferrer">Datenschutz</a></span></div>
   </footer>
 
 
@@ -811,6 +825,6 @@
 
   <div class="mobile-sticky"><a class="btn btn-primary" href="#contact">Demo & Setup anfragen ↗</a></div>
 
-  <script src="/app.js?v=20260929-v6-7" defer></script>
+  <script src="/app.js?v=20260929-v6-8" defer></script>
 </body>
 </html>
