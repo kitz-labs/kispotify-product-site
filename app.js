@@ -94,12 +94,62 @@
       $$(".preset-row [data-demo]").forEach(function(b){b.classList.remove("active");});btn.classList.add("active");renderDemo(demoSets[btn.dataset.demo]);
     });
   });
+  let livePreviewMode=true;
+
+  async function runLivePreview(input){
+    $("#demoQuality").textContent="LIVE AI · ANALYSING…";
+    $("#resultFoot").textContent="Live Preview wird vom KI Spotify Agent erzeugt …";
+    try{
+      const durationMatch=String(input).match(/(\d+)\s*(?:stunden|std|hours?)/i);
+      const durationMinutes=durationMatch?Math.min(600,Math.max(30,Number(durationMatch[1])*60)):120;
+      const response=await fetch("/live/preview",{
+        method:"POST",
+        headers:{"content-type":"application/json"},
+        body:JSON.stringify({prompt:input,durationMinutes:durationMinutes,trackCount:40,contextMode:"ignore"})
+      });
+      const data=await response.json();
+      if(!response.ok||!data.ok||!data.preview)throw new Error(data.error||"Live Preview fehlgeschlagen");
+      const p=data.preview;
+      $("#demoTitle").textContent=p.name||"AI Playlist Preview";
+      $("#resultName").textContent=p.name||"Live KI Preview";
+      $("#resultScore").textContent=String(Math.round(Number(p.premiumScore||90)));
+      const tags=[
+        (p.trackCount||0)+" Songs",
+        (p.durationMinutes||durationMinutes)+" Min",
+        Array.isArray(p.genres)&&p.genres[0]?p.genres[0]:"Live AI",
+        p.qualityStatus==="pass"?"Quality Pass":"Quality Check"
+      ];
+      $("#resultMeta").innerHTML=tags.map(function(x){return "<span>"+esc(x)+"</span>";}).join("");
+      const tracks=Array.isArray(p.tracks)?p.tracks:[];
+      $("#resultTracks").innerHTML=tracks.slice(0,8).map(function(t,i){
+        return '<div class="preview-track"><b>'+String(i+1).padStart(2,"0")+'</b><div><strong>'+esc(t.title||"Track")+'</strong><small>'+esc(t.artist||"Spotify")+'</small></div><em>'+esc(Math.round(Number(t.premiumScore||p.premiumScore||90)))+'</em></div>';
+      }).join("");
+      $("#demoQuality").textContent="LIVE AI · "+String(p.qualityStatus||"PASS").toUpperCase();
+      $("#resultFoot").textContent="Echte Live Preview · kein Spotify-Write · Quality Gate aktiv";
+    }catch(error){
+      $("#demoQuality").textContent="LIVE FALLBACK";
+      $("#resultFoot").textContent="Live Engine momentan nicht verfügbar · lokale Demo aktiv";
+      setTimeout(function(){renderDemo(chooseSet(input));},220);
+    }
+  }
+
+  $("#engineMode")&&$("#engineMode").addEventListener("click",function(){
+    livePreviewMode=!livePreviewMode;
+    this.classList.toggle("active",livePreviewMode);
+    this.setAttribute("aria-pressed",String(livePreviewMode));
+    $("#engineModeLabel").textContent=livePreviewMode?"LIVE BACKEND":"LOCAL DEMO";
+    $("#demoSafetyNote").innerHTML=livePreviewMode
+      ? '<i>✓</i><span><b>Preview-only.</b> Die Live-KI darf Tracks suchen und validieren, aber diese Website besitzt keinen Spotify-Create-Endpunkt.</span>'
+      : '<i>✓</i><span><b>Lokale Demo.</b> Keine Anfrage wird an das Backend gesendet.</span>';
+  });
+
   $("#demoRun")&&$("#demoRun").addEventListener("click",function(){
     const input=$("#demoPrompt").value.trim();if(!input){$("#demoPrompt").focus();return;}
-    $$(".preset-row [data-demo]").forEach(function(b){b.classList.remove("active");});$("#demoQuality").textContent="ANALYSING…";setTimeout(function(){renderDemo(chooseSet(input));},360);
+    $$(".preset-row [data-demo]").forEach(function(b){b.classList.remove("active");});
+    if(livePreviewMode){runLivePreview(input);}else{$("#demoQuality").textContent="ANALYSING…";setTimeout(function(){renderDemo(chooseSet(input));},300);}
   });
   $("#demoPrompt")&&$("#demoPrompt").addEventListener("keydown",function(e){if((e.metaKey||e.ctrlKey)&&e.key==="Enter"){e.preventDefault();$("#demoRun").click();}});
-  $("#fakeCreate")&&$("#fakeCreate").addEventListener("click",function(){$("#demoQuality").textContent="DEMO · READ ONLY";$("#resultFoot").textContent="Keine Spotify-Daten verändert · Produktivsystem separat öffnen";});
+  $("#fakeCreate")&&$("#fakeCreate").addEventListener("click",function(){$("#demoQuality").textContent="WRITE GESCHÜTZT";$("#resultFoot").textContent="Produktive Erstellung erfolgt ausschließlich im Live-System nach Freigabe";window.open("https://spotify.kitzlabs.ai/","_blank","noopener");});
 
   function setHealth(ok,latency){
     const full=ok?"Spotify System live":"Live-System verfügbar",short=ok?"Online":"Verfügbar";
@@ -161,6 +211,102 @@
       renderConfigurator();
     });
   });
+
+
+  async function refreshLiveSystem(){
+    const started=performance.now();
+    try{
+      const [healthRes,statsRes,playingRes]=await Promise.all([
+        fetch("/live/health",{cache:"no-store"}),
+        fetch("/live/stats",{cache:"no-store"}),
+        fetch("/live/now-playing",{cache:"no-store"})
+      ]);
+      const health=await healthRes.json();
+      const stats=await statsRes.json();
+      const playing=await playingRes.json();
+      const latency=Math.max(1,Math.round(performance.now()-started));
+      if($("#liveApiStatus"))$("#liveApiStatus").textContent=health.ok?"LIVE CONNECTED":"DEGRADED";
+      if($("#liveLatency"))$("#liveLatency").textContent=latency+" ms";
+      if($("#liveMode"))$("#liveMode").textContent=String(health.mode||"live").toUpperCase();
+
+      const s=stats.stats||{};
+      if($("#livePlaylistCount"))$("#livePlaylistCount").textContent=String(s.playlistCount??"—");
+      if($("#liveAutomationCount"))$("#liveAutomationCount").textContent=String(s.activeAutomationCount??"—");
+      const updates=Array.isArray(s.nextUpdates)?s.nextUpdates.slice(0,3):[];
+      if($("#liveNextUpdates")){
+        $("#liveNextUpdates").innerHTML=updates.length
+          ? updates.map(function(u){return '<div class="live-update"><strong>'+esc(u.playlistName||u.name||"Automation")+'</strong><span>'+esc(u.cronExpression||"scheduled")+'</span></div>';}).join("")
+          : '<div class="live-update-placeholder">Keine aktive nächste Automation gemeldet.</div>';
+      }
+
+      const np=(playing&&playing.nowPlaying)||{};
+      const pb=np.playback||{};
+      const item=pb.item||pb.track||{};
+      const track=item.name||np.activePlaylist?.name||"Kein aktiver Track";
+      let artist="Spotify Connect";
+      if(Array.isArray(item.artists)&&item.artists[0])artist=item.artists.map(function(a){return a.name||a;}).join(", ");
+      if($("#liveTrack"))$("#liveTrack").textContent=track;
+      if($("#liveArtist"))$("#liveArtist").textContent=artist;
+      if($("#livePlaybackState"))$("#livePlaybackState").textContent=pb.is_playing?"PLAYING":String(np.status||"IDLE").toUpperCase();
+    }catch(error){
+      if($("#liveApiStatus"))$("#liveApiStatus").textContent="RECONNECTING";
+      if($("#livePlaybackState"))$("#livePlaybackState").textContent="OFFLINE";
+    }
+  }
+
+  $$("[data-billing]").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      $$("[data-billing]").forEach(function(b){b.classList.remove("active");});
+      btn.classList.add("active");
+      const annual=btn.dataset.billing==="annual";
+      $$(".price-number[data-monthly]").forEach(function(el){
+        el.textContent="€"+(annual?el.dataset.annual:el.dataset.monthly);
+      });
+      $$(".price-billing").forEach(function(el){el.textContent=annual?"monatlicher Gegenwert · jährlich abgerechnet":"monatlich abgerechnet";});
+    });
+  });
+
+  $$(".plan-contact").forEach(function(link){
+    link.addEventListener("click",function(){
+      const plan=link.dataset.plan||"";
+      if($("#leadMessage"))$("#leadMessage").value="Ich interessiere mich für den Plan "+plan+". Bitte sendet mir Details zum passenden Setup.";
+    });
+  });
+
+  const leadForm=$("#leadForm");
+  if(leadForm){
+    leadForm.addEventListener("submit",async function(event){
+      event.preventDefault();
+      const honeypot=leadForm.querySelector('input[name="website"]');
+      if(honeypot&&honeypot.value)return;
+      const submit=$("#leadSubmit"),status=$("#leadStatus");
+      const name=$("#leadName").value.trim();
+      const email=$("#leadEmail").value.trim();
+      const company=$("#leadCompany").value.trim();
+      const message=$("#leadMessage").value.trim();
+      if(!name||!email||!message||!$("#leadConsent").checked)return;
+      submit.disabled=true;submit.textContent="Wird gesendet …";status.className="form-status";status.textContent="";
+      try{
+        const response=await fetch("/live/contact",{
+          method:"POST",
+          headers:{"content-type":"application/json"},
+          body:JSON.stringify({name:name,page:"kispotify.kitzlabs.ai · V4",message:"E-Mail: "+email+"\nUnternehmen: "+(company||"—")+"\n\n"+message})
+        });
+        const data=await response.json();
+        if(!response.ok||!data.ok)throw new Error(data.error||"Senden fehlgeschlagen");
+        status.textContent="✓ Anfrage wurde direkt an AI Kitz übermittelt.";
+        leadForm.reset();
+      }catch(error){
+        status.className="form-status error";
+        status.innerHTML='Senden nicht möglich. Bitte direkt an <a href="mailto:office@aikitz.at">office@aikitz.at</a> schreiben.';
+      }finally{
+        submit.disabled=false;submit.innerHTML='Projektanfrage senden <span>↗</span>';
+      }
+    });
+  }
+
+  refreshLiveSystem();
+  window.setInterval(refreshLiveSystem,45000);
 
   renderConfigurator();
 
