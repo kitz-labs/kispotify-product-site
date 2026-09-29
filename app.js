@@ -165,14 +165,24 @@
     const modal=$("#featureModal");if(!modal||!modal.classList.contains("open"))return;
     modal.classList.remove("open");modal.setAttribute("aria-hidden","true");document.body.style.overflow="";const restore=modalOpener;modalOpener=null;restore?.focus?.();
   }
-  $(".feature-open").forEach(b=>b.addEventListener("click",()=>openModal(b.dataset.feature,b)));$(".feature-modal-backdrop")?.addEventListener("click",closeModal);$(".feature-modal-close")?.addEventListener("click",closeModal);$("#modalCta")?.addEventListener("click",closeModal);
+  $$(".feature-open").forEach(b=>b.addEventListener("click",()=>openModal(b.dataset.feature,b)));$(".feature-modal-backdrop")?.addEventListener("click",closeModal);$(".feature-modal-close")?.addEventListener("click",closeModal);$("#modalCta")?.addEventListener("click",closeModal);
   addEventListener("keydown",e=>{
     const modal=$("#featureModal");if(!modal?.classList.contains("open"))return;
     if(e.key==="Escape"){e.preventDefault();closeModal();return}
-    if(e.key==="Tab"){const focusable=$("#featureModal button:not([disabled]), #featureModal a[href]");if(!focusable.length)return;const first=focusable[0],last=focusable[focusable.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}
+    if(e.key==="Tab"){const focusable=$$("#featureModal button:not([disabled]), #featureModal a[href]");if(!focusable.length)return;const first=focusable[0],last=focusable[focusable.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}
   });
 
-  const reducedMotion=matchMedia("(prefers-reduced-motion:reduce)");if(reducedMotion.matches)$("video[autoplay]").forEach(v=>{v.removeAttribute("autoplay");v.pause()});
+  const reducedMotion=matchMedia("(prefers-reduced-motion:reduce)");if(reducedMotion.matches)$$("video[autoplay]").forEach(v=>{v.removeAttribute("autoplay");v.pause()});
+
+  const qrVideo=$("#qrFeatureVideo"),qrVideoWrap=$("#qrVideoWrap");
+  if(qrVideo&&qrVideoWrap){
+    const videoReady=()=>{qrVideoWrap.classList.remove("video-fallback-active");qrVideoWrap.classList.add("video-ready")};
+    const videoFallback=()=>{if(qrVideo.readyState<2)qrVideoWrap.classList.add("video-fallback-active")};
+    qrVideo.addEventListener("loadeddata",videoReady,{once:true});
+    qrVideo.addEventListener("playing",videoReady,{once:true});
+    qrVideo.addEventListener("error",videoFallback,{once:true});
+    setTimeout(videoFallback,2800);
+  }
 
   if(matchMedia("(pointer:fine)").matches && !matchMedia("(prefers-reduced-motion:reduce)").matches){
     const heroProduct=$(".hero-product");if(heroProduct)heroProduct.addEventListener("pointermove",e=>{const r=heroProduct.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;const screen=$(".hero-screen");if(screen)screen.style.transform='perspective(1500px) rotateY('+(x*3)+'deg) rotateX('+(-y*2)+'deg) translateY(-2px)'});
