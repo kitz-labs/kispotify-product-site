@@ -84,7 +84,7 @@ Im sichtbaren Frontend werden nur Funktionen erklärt, die ein Kunde verstehen u
 
 
 ## Media Policy
-- OpenArt is not used for this project.
+- OpenArt is not used by the V6 media pipeline or the live website runtime.
 - Video assets and motion references must come from GitHub-based tooling/workflows or Hugging Face models.
 - The live website keeps a native CSS/JS animated fallback so the customer experience never depends on an external video service.
 
@@ -96,3 +96,10 @@ Im sichtbaren Frontend werden nur Funktionen erklärt, die ein Kunde verstehen u
 - prefers-reduced-motion wird respektiert
 - native CSS/JS Fallbacks bleiben aktiv
 - Render-Workflow verwendet FFmpeg/Open-Source-Tooling; OpenArt ist ausgeschlossen
+
+
+## Reproducible Video Pipeline
+- Renderer script: `tools/render-v6-videos.sh`
+- Pipeline documentation: `docs/V6_MEDIA_PIPELINE.md`
+- Machine-readable asset manifest: `assets/v6/media-manifest.json`
+- Upstream renderer: FFmpeg / GitHub repository `FFmpeg/FFmpeg`
