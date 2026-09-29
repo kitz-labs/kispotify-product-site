@@ -1,49 +1,48 @@
-# KI Spotify Product Site
+# KI Spotify Agent — Product Website V4
 
-Professionelle KI-Produktwebsite für den bestehenden KI Spotify Agent von AI Kitz.
+Fast SaaS Produktwebsite für den bestehenden KI Spotify Agent von AI Kitz.
 
 ## Live
-- Produktwebsite: https://kispotify.kitzlabs.ai/
-- Produktiv-App: https://spotify.kitzlabs.ai/
+- Product Website: https://kispotify.kitzlabs.ai/
+- Product App: https://spotify.kitzlabs.ai/
 - Repository: kitz-labs/kispotify-product-site
-- Typ: statische, modulare Produktwebsite ohne Build-Schritt
+- Architektur: statische HTML/CSS/JS-Site + streng begrenzte Nginx Live-API-Proxies
 
-## AI Website V3 · Upgrade 2026-09-27
-- komplett neu strukturierter Premium-Hero
-- interaktiver AI Solution Configurator für Einsatz, Schwerpunkt und Umfang
-- dynamische Modul-Empfehlung + vorbereiteter Anfrage-Funnel
-- Onboarding-Strecke vom Musikprofil bis Pilot/Go-Live
-- Produktpakete Core, Hospitality und Custom ohne erfundene Fixpreise
-- Conversion-CTAs mit Business-Anfrage an office@aikitz.at
-- AI Music Command Center als hochwertiger Produkt-Mockup
-- Live Health + gemessene Browser-Latenz
-- subtile Cursor-, Parallax- und Scroll-Interaktionen
-- interaktive Produkt-Tour mit Playlist Engine, Quality Gate, Auto-DJ und Event Radar
-- Multi-Genre Live Demo mit Afro House, Schlager, Rock, DnB, Jazz und Pop
-- klarer Intent → Search → Validate → Flow Prozess
-- Controlled Workflow: Wunsch → AI Plan → Quality → Write
-- Hospitality Daypart Automation
-- modulare Architektur für Web, Telegram, OpenAPI, Spotify API, Spotify Connect und Scheduler
-- Use Cases für Bars, Clubs, Restaurants, Hotels, Events und Teams
-- Preview-First Guardrails und Read-only Demo Boundary
-- FAQ und Conversion-CTAs
-- Mobile Navigation + Sticky Mobile CTA
-- responsive Layout für Desktop, Tablet und iPhone
-- Accessibility: Skip-Link, Focus States, ARIA, Reduced Motion
-- SEO: Canonical, OpenGraph, Twitter Meta, SoftwareApplication JSON-LD
-- PWA-Basis, robots.txt und sitemap.xml
+## V4 Upgrade · 2026-09-29
+- Fast-SaaS Informationsarchitektur und Conversion Flow
+- Live System Dashboard aus dem laufenden KI Spotify Agent
+- Live Health, Playlist-/Automation-Stats und Now-Playing Context
+- echte AI Playlist Preview über sicheren Preview-only Proxy
+- kein Create-/Delete-/Playback-Write-Endpunkt auf der Product Website
+- Live/Local Demo Toggle mit Fallback
+- Pricing mit Monats-/Jahres-Toggle
+- Core: ab €49/Monat + Setup ab €299
+- Pro: ab €129/Monat + Setup ab €690
+- Hospitality: ab €249/Monat + Setup ab €1.490
+- Enterprise: individuell
+- AI Solution Configurator
+- B2B Onboarding
+- Live Lead-Formular mit direkter AI-Kitz-Weiterleitung
+- responsive Desktop / Tablet / iPhone
+- SEO / PWA / Accessibility / Reduced Motion
 
-## Dateien
-- index.html
-- styles.css
-- app.js
-- manifest.webmanifest
-- icon.svg
-- robots.txt
-- sitemap.xml
+## Live API Boundary
+Die Product Website stellt ausschließlich folgende Same-Origin-Endpunkte bereit:
+- GET /live/health
+- GET /live/stats
+- GET /live/now-playing
+- POST /live/preview
+- POST /live/contact
 
-## Safety
-Die Produktwebsite ist vom produktiven Spotify-Agent getrennt. Die Demo schreibt keine Playlist-Daten. Der Live-Status liest ausschließlich den öffentlichen Health-Endpunkt.
+Nicht exponiert:
+- Playlist Create
+- Playlist Delete
+- Playback Actions
+- Spotify OAuth
+- Admin APIs
+
+## Pricing
+Preise auf der Website sind B2B-Netto-Startpreise zzgl. USt. Jahresabrechnung zeigt einen um 15% reduzierten monatlichen Gegenwert.
 
 ## Deployment
 Source:
@@ -52,8 +51,13 @@ Source:
 Live:
 - /var/www/kispotify.kitzlabs.ai/
 
+Nginx:
+- /etc/nginx/sites-available/kispotify.kitzlabs.ai.conf
+
 ## Rollback
-Backup vor AI Website V2:
-- /prosystem/Projects/Websites/KiSpotify-Product-Site/backups/index.html.20260927-0601-v2.bak
-- /prosystem/Projects/Websites/KiSpotify-Product-Site/backups/styles.css.20260927-0601-v2.bak
-- /prosystem/Projects/Websites/KiSpotify-Product-Site/backups/app.js.20260927-0601-v2.bak
+Pre-V4 Backups:
+- backups/index.html.pre-v4-20260929.bak
+- backups/styles.css.pre-v4-20260929.bak
+- backups/app.js.pre-v4-20260929.bak
+- backups/README.md.pre-v4-20260929.bak
+- /etc/nginx/sites-available/kispotify.kitzlabs.ai.conf.pre-v4-20260929.bak
