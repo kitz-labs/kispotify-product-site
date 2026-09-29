@@ -172,64 +172,6 @@
     if(e.key==="Tab"){const focusable=$$("#featureModal button:not([disabled]), #featureModal a[href]");if(!focusable.length)return;const first=focusable[0],last=focusable[focusable.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}
   });
 
-  const reducedMotion=matchMedia("(prefers-reduced-motion:reduce)");if(reducedMotion.matches)$$("video[autoplay]").forEach(v=>{v.removeAttribute("autoplay");v.pause()});
-
-  function setupVideoFallback(videoSelector,wrapSelector){
-    const video=$(videoSelector),wrap=$(wrapSelector);if(!video||!wrap)return;
-    const ready=()=>{wrap.classList.remove("video-fallback-active");wrap.classList.add("video-ready")};
-    const fallback=()=>{if(video.readyState<2)wrap.classList.add("video-fallback-active")};
-    video.addEventListener("loadeddata",ready,{once:true});
-    video.addEventListener("playing",ready,{once:true});
-    video.addEventListener("error",fallback,{once:true});
-    setTimeout(fallback,2800);
-  }
-  const smartVideos=$$(".smart-loop-video");
-  const reducedMotionQuery=matchMedia("(prefers-reduced-motion:reduce)");
-  function syncVideoToggle(video){
-    const button=$('[data-video-toggle="#'+video.id+'"]');
-    if(!button)return;
-    const paused=video.paused;
-    button.innerHTML=paused?'▶ <span>Abspielen</span>':'Ⅱ <span>Pause</span>';
-    button.setAttribute("aria-label",paused?"Animation abspielen":"Animation pausieren");
-  }
-  smartVideos.forEach(video=>{
-    video.muted=true;
-    video.dataset.userPaused="false";
-    video.addEventListener("play",()=>syncVideoToggle(video));
-    video.addEventListener("pause",()=>syncVideoToggle(video));
-    video.addEventListener("error",()=>video.closest(".motion-video-shell,.video-wrap,.timeline-video-player")?.classList.add("video-error"));
-    syncVideoToggle(video);
-  });
-  $$("[data-video-toggle]").forEach(button=>button.addEventListener("click",()=>{
-    const video=$(button.dataset.videoToggle);if(!video)return;
-    if(video.paused){video.dataset.userPaused="false";video.play().catch(()=>{});}
-    else{video.dataset.userPaused="true";video.pause();}
-    syncVideoToggle(video);
-  }));
-  if("IntersectionObserver"in window&&!reducedMotionQuery.matches){
-    const mediaObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
-      const video=entry.target;
-      if(entry.isIntersecting&&entry.intersectionRatio>.35&&video.dataset.userPaused!=="true")video.play().catch(()=>{});
-      else if(!entry.isIntersecting||entry.intersectionRatio<=.15)video.pause();
-    }),{threshold:[0,.15,.35,.7]});
-    smartVideos.forEach(video=>mediaObserver.observe(video));
-  }else{
-    smartVideos.forEach(video=>video.pause());
-  }
-
-  setupVideoFallback("#productFilm","#productFilmWrap");
-  setupVideoFallback("#daypartFilm","#daypartFilmWrap");
-
-  const qrVideo=$("#qrFeatureVideo"),qrVideoWrap=$("#qrVideoWrap");
-  if(qrVideo&&qrVideoWrap){
-    const videoReady=()=>{qrVideoWrap.classList.remove("video-fallback-active");qrVideoWrap.classList.add("video-ready")};
-    const videoFallback=()=>{if(qrVideo.readyState<2)qrVideoWrap.classList.add("video-fallback-active")};
-    qrVideo.addEventListener("loadeddata",videoReady,{once:true});
-    qrVideo.addEventListener("playing",videoReady,{once:true});
-    qrVideo.addEventListener("error",videoFallback,{once:true});
-    setTimeout(videoFallback,2800);
-  }
-
   if(matchMedia("(pointer:fine)").matches && !matchMedia("(prefers-reduced-motion:reduce)").matches){
     const heroProduct=$(".hero-product");if(heroProduct)heroProduct.addEventListener("pointermove",e=>{const r=heroProduct.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;const screen=$(".hero-screen");if(screen)screen.style.transform='perspective(1500px) rotateY('+(x*3)+'deg) rotateX('+(-y*2)+'deg) translateY(-2px)'});
     heroProduct?.addEventListener("pointerleave",()=>{const screen=$(".hero-screen");if(screen)screen.style.transform=""});
