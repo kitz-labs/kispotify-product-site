@@ -1,4 +1,4 @@
-# KI Spotify Agent — Product Website V6.8
+# KI Spotify Agent — Product Website V6.9
 
 Premium Customer-facing SaaS Product Website für den KI Spotify Agent von AI Kitz.
 
@@ -7,7 +7,7 @@ Premium Customer-facing SaaS Product Website für den KI Spotify Agent von AI Ki
 - Product App: https://spotify.kitzlabs.ai/
 - Guest Wish Demo: https://kispotify.kitzlabs.ai/guest-wish.html
 
-## V6.8 · Premium Interactive SaaS Experience · 2026-09-29
+## V6.9 · Premium Interactive SaaS Experience · 2026-09-29
 - komplett customer-facing; keine Admin-/Backend-Inhalte im sichtbaren Frontend
 - neuer Cinematic Hero mit Product Window, Floating Cards und Guest Wish Toast
 - interaktiver Venue Selector für Bar, Hotel, Restaurant und Event
@@ -17,7 +17,7 @@ Premium Customer-facing SaaS Product Website für den KI Spotify Agent von AI Ki
 - Feature-Detail-Modals statt überladener Startseite
 - echtes QR Guest Wish Demo UI
 - statische V6-WebP-Poster werden reproduzierbar aus dem GitHub/FFmpeg-Video-Workflow erzeugt
-- animierter QR/Hospitality Produktclip als lokales H.264 MP4 mit CSS-Fallback für Browser ohne Videowiedergabe
+- native QR-, Product- und Hospitality-Motion-Szenen ohne Video-Dateien
 - große interaktive Music Timeline
 - Event Override Visual
 - Vorher/Nachher Vergleich
@@ -44,9 +44,6 @@ Alle Preise netto zzgl. USt.
 ## V6 Assets
 - /assets/v6/qr-guest-hero.webp
 - /assets/v6/hospitality-rooftop.webp
-- /assets/v6/qr-guest-wishes-v6.mp4
-- /assets/v6/product-film-v6.mp4
-- /assets/v6/daypart-timeline-v6.mp4
 - /assets/v5/guest-wish-qr.svg
 
 ## Safety
@@ -89,29 +86,23 @@ Im sichtbaren Frontend werden nur Funktionen erklärt, die ein Kunde verstehen u
 - The live website keeps a native CSS/JS animated fallback so the customer experience never depends on an external video service.
 
 
-## V6 Motion Layer
-- zentraler Showcase mit 10s Product Flow, 8s QR Guest Wish und 10s Daypart/Timeline Film
-- Videos: H.264 / yuv420p / 1280x720 / faststart
-- Wiedergabe wird viewport-basiert gestartet und pausiert, um Mobile-Performance zu schonen
-- prefers-reduced-motion wird respektiert
-- native CSS/JS Fallbacks bleiben aktiv
-- Render-Workflow verwendet FFmpeg/Open-Source-Tooling; OpenArt ist ausgeschlossen
+## V6.9 Native Motion Layer
+- keine MP4-/Video-Dateien im öffentlichen Frontend
+- Produkt-, QR- und Daypart-Abläufe werden mit nativen HTML/CSS/JS-Motion-Szenen dargestellt
+- keine OpenArt-Abhängigkeit und keine externe Video-Runtime
+- prefers-reduced-motion wird weiterhin respektiert
+- geringere Bandbreite und weniger Decoder-Last auf iPhone/Safari
 
-
-## Reproducible Video Pipeline
-- Renderer script: `tools/render-v6-videos.sh`
-- Pipeline documentation: `docs/V6_MEDIA_PIPELINE.md`
+## Reproducible Media Pipeline
 - Machine-readable asset manifest: `assets/v6/media-manifest.json`
 - Upstream renderer: FFmpeg / GitHub repository `FFmpeg/FFmpeg`
 
 
-## V6.6 Media Origin
-- Videos und Poster werden reproduzierbar über den Repository-Workflow erzeugt.
-- Renderer: FFmpeg / upstream GitHub repository `FFmpeg/FFmpeg`.
-- Posters werden aus den finalen Videos extrahiert; keine OpenArt-Runtime oder OpenArt-Generierung ist Teil der V6.6 Pipeline.
-- QR Hero Poster: Frame aus `qr-guest-wishes-v6.mp4`.
-- Hospitality Poster: Frame aus `product-film-v6.mp4`.
-
+## V6.9 Media Origin
+- öffentliche Website verwendet keine Videos
+- visuelle Produktabläufe werden vollständig nativ gerendert
+- Poster/WebP-Assets bleiben als statische Bildflächen erhalten
+- OpenArt ist ausgeschlossen
 
 ## V6.7 Accessibility & Performance Pass
 - alle drei Video-Loops starten nur im sichtbaren Viewport
@@ -127,3 +118,10 @@ Im sichtbaren Frontend werden nur Funktionen erklärt, die ein Kunde verstehen u
 - Datenschutzlink direkt im Lead-Formular ergänzt
 - FAQPage Structured Data aus den sichtbaren FAQ-Inhalten ergänzt
 - keine neuen Marketingbehauptungen oder erfundenen Kundenstimmen
+
+
+## V6.9 OpenArt Video Removal
+- alle öffentlichen MP4-Referenzen entfernt
+- MP4-Dateien aus dem Live-/Source-Asset-Ordner ausgelagert
+- GitHub-MP4s werden entfernt
+- die sichtbaren Produktabläufe bleiben als native Motion-Szenen erhalten
