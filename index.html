@@ -27,7 +27,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=20260927-ai-v3">
+  <link rel="stylesheet" href="/styles.css?v=20260929-v4-1">
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -49,6 +49,15 @@
   <div class="ambient ambient-red" aria-hidden="true"></div>
   <div class="ambient ambient-green" aria-hidden="true"></div>
 
+  
+  <div class="saas-banner">
+    <div class="container saas-banner-inner">
+      <span><i></i> V4 · LIVE BACKEND CONNECTED</span>
+      <p>Playlist Preview, Systemstatus und Betriebsdaten direkt aus dem laufenden KI Spotify Agent.</p>
+      <a href="#live-system">Live ansehen →</a>
+    </div>
+  </div>
+
   <header class="site-header" id="top">
     <div class="container nav-shell">
       <a class="brand" href="#top" aria-label="KI Spotify Agent Startseite">
@@ -66,11 +75,12 @@
       </a>
 
       <nav class="desktop-nav" aria-label="Hauptnavigation">
-        <a href="#platform">Plattform</a>
-        <a href="#demo">Live Demo</a>
+        <a href="#platform">Produkt</a>
+        <a href="#live-system">Live</a>
+        <a href="#demo">Demo</a>
         <a href="#automation">Automation</a>
-        <a href="#architecture">Architektur</a>
-        <a href="#usecases">Einsatz</a><a href="#configurator">Konfigurator</a><a href="#plans">Pakete</a>
+        <a href="#plans">Preise</a>
+        <a href="#contact">Kontakt</a>
       </nav>
 
       <div class="nav-actions">
@@ -83,13 +93,12 @@
     </div>
     <div class="mobile-nav" id="mobileNav">
       <div class="container mobile-nav-inner">
-        <a href="#platform">Plattform</a>
+        <a href="#platform">Produkt</a>
+        <a href="#live-system">Live System</a>
         <a href="#demo">Live Demo</a>
         <a href="#automation">Automation</a>
-        <a href="#architecture">Architektur</a>
-        <a href="#usecases">Einsatz</a>
-        <a href="#configurator">Konfigurator</a>
-        <a href="#plans">Pakete</a>
+        <a href="#plans">Preise</a>
+        <a href="#contact">Kontakt</a>
         <a href="https://spotify.kitzlabs.ai/" target="_blank" rel="noreferrer">Live-System ↗</a>
       </div>
     </div>
@@ -99,12 +108,12 @@
     <section class="hero section">
       <div class="container hero-grid">
         <div class="hero-copy hero-visible">
-          <div class="kicker"><span></span> AI MUSIC CONTROL PLATFORM</div>
-          <h1>Steuere Musik<br><em>wie ein System.</em></h1>
-          <p class="hero-lead">Der KI Spotify Agent verwandelt natürliche Musikwünsche in validierte Playlists und verbindet Playlist Engine, Qualitätskontrolle, Auto-DJ, Event Radar und Automationen in einer professionellen Oberfläche.</p>
+          <div class="kicker"><span></span> AI MUSIC OPERATING SYSTEM · LIVE</div>
+          <h1>Dein KI-Agent für<br><em>Spotify & Music Operations.</em></h1>
+          <p class="hero-lead">Erstelle, validiere und automatisiere Spotify-Playlists mit KI. Von natürlicher Sprache über Quality Gate und Flow bis zu Auto-DJ, Event Radar und laufenden Hospitality-Workflows.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#demo">Live Demo starten <span>✦</span></a>
-            <a class="btn btn-secondary" href="#platform">Produkt ansehen</a>
+            <a class="btn btn-secondary" href="#plans">Preise ansehen</a>
           </div>
           <div class="hero-proof">
             <span><i class="status-dot"></i><b id="heroHealth">Spotify System live</b></span>
@@ -202,6 +211,63 @@
       </div>
     </section>
 
+
+    <section class="section live-system-section" id="live-system">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div><div class="kicker"><span></span> LIVE PRODUCT INTEGRATION</div><h2>Keine Fake-Demo. Das echte System liefert die Daten.</h2></div>
+          <p>Diese Produktwebsite liest ausschließlich freigegebene Live-Endpunkte des laufenden KI Spotify Agent. Playlist-Erstellung bleibt Preview-first und erfordert im Produktivsystem eine separate Freigabe.</p>
+        </div>
+
+        <div class="live-dashboard reveal">
+          <div class="live-dashboard-main">
+            <div class="live-dashboard-head">
+              <div><span class="eyebrow">LIVE SYSTEM</span><h3>Spotify AI Operations</h3></div>
+              <span class="live-api-pill"><i></i><b id="liveApiStatus">Verbinde …</b></span>
+            </div>
+
+            <div class="live-metrics">
+              <div><span>MANAGED PLAYLISTS</span><strong id="livePlaylistCount">—</strong><small>im Agent verwaltet</small></div>
+              <div><span>ACTIVE AUTOMATIONS</span><strong id="liveAutomationCount">—</strong><small>aktuell aktiviert</small></div>
+              <div><span>API LATENCY</span><strong id="liveLatency">—</strong><small>Healthcheck</small></div>
+              <div><span>MODE</span><strong id="liveMode">LIVE</strong><small>Spotify AI Agent</small></div>
+            </div>
+
+            <div class="live-activity">
+              <div class="live-now">
+                <span class="eyebrow">NOW PLAYING / LIVE CONTEXT</span>
+                <div class="live-now-card">
+                  <i>♪</i>
+                  <div><strong id="liveTrack">Live-Kontext wird geladen</strong><small id="liveArtist">Spotify Connect</small></div>
+                  <span id="livePlaybackState">CHECKING</span>
+                </div>
+              </div>
+
+              <div class="live-schedule">
+                <span class="eyebrow">NEXT AUTOMATIONS</span>
+                <div id="liveNextUpdates" class="live-update-list">
+                  <div class="live-update-placeholder">Live-Daten werden geladen …</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <aside class="live-dashboard-side">
+            <div class="live-orbit">
+              <div class="live-orbit-ring"></div>
+              <span>✦</span>
+              <strong>AI Engine</strong>
+              <small>Intent → Search → Validate → Flow</small>
+            </div>
+            <div class="live-side-row"><span>Preview API</span><b>CONNECTED</b></div>
+            <div class="live-side-row"><span>Write Boundary</span><b>PROTECTED</b></div>
+            <div class="live-side-row"><span>Website Mode</span><b>READ + PREVIEW</b></div>
+            <a class="btn btn-primary" href="#demo">Echte KI-Preview testen <span>↓</span></a>
+          </aside>
+        </div>
+      </div>
+    </section>
+
     <section class="section platform-section" id="platform">
       <div class="container">
         <div class="section-heading reveal">
@@ -241,6 +307,10 @@
             <span class="eyebrow">01 · MUSIKWUNSCH</span>
             <h3>Was soll heute laufen?</h3>
             <p>Beschreibe Genre, Stimmung, Anlass, Dauer, Künstler oder Bekanntheitsgrad.</p>
+            <div class="demo-engine-bar">
+              <div><i></i><span>ENGINE</span><strong id="engineModeLabel">LIVE BACKEND</strong></div>
+              <button type="button" id="engineMode" class="engine-toggle active" aria-pressed="true"><span></span> Live KI</button>
+            </div>
             <div class="prompt-wrap">
               <textarea id="demoPrompt" rows="4" aria-label="Musikwunsch">Afro House Rooftop Sunset · 2 Stunden · 80% bekannte Songs</textarea>
               <button type="button" id="demoRun" aria-label="Vorschau erstellen">✦</button>
@@ -259,7 +329,7 @@
               <div class="active"><i>3</i><span>Validate</span></div>
               <div class="active"><i>4</i><span>Flow</span></div>
             </div>
-            <div class="read-only-note"><i>✓</i><span><b>Read-only Demo.</b> Keine Playlist wird erstellt oder verändert.</span></div>
+            <div class="read-only-note" id="demoSafetyNote"><i>✓</i><span><b>Preview-only.</b> Die Live-KI darf Tracks suchen und validieren, aber diese Website besitzt keinen Spotify-Create-Endpunkt.</span></div>
           </div>
 
           <div class="demo-preview" aria-live="polite">
@@ -276,7 +346,7 @@
               <div class="preview-tracks" id="resultTracks"></div>
               <div class="preview-bottom">
                 <span id="resultFoot">Dedupe aktiv · Artist-Limit aktiv · Flow sortiert</span>
-                <button class="btn btn-secondary btn-small" type="button" id="fakeCreate">In Spotify erstellen</button>
+                <button class="btn btn-secondary btn-small" type="button" id="fakeCreate">Im Live-System öffnen ↗</button>
               </div>
             </div>
           </div>
@@ -473,43 +543,77 @@
       </div>
     </section>
 
+
     <section class="section plans-section" id="plans">
       <div class="container">
         <div class="section-heading reveal">
-          <div><div class="kicker"><span></span> PRODUCT PACKAGES</div><h2>Vom Playlist-Tool bis zum Music Operations Stack.</h2></div>
-          <p>Die Website zeigt drei sinnvolle Ausbaustufen. Konkreter Umfang und Konditionen werden für den jeweiligen Einsatz festgelegt.</p>
+          <div><div class="kicker"><span></span> PRICING</div><h2>SaaS-Preise für unterschiedliche Musik-Workflows.</h2></div>
+          <p>Klare Einstiegspreise für den KI Spotify Agent. Alle Preise sind B2B-Nettoangaben zzgl. USt.; individuelle Integrationen und Sonderanforderungen werden separat kalkuliert.</p>
         </div>
 
-        <div class="plans-grid">
-          <article class="plan-card reveal">
+        <div class="billing-toggle reveal" role="group" aria-label="Abrechnungszeitraum">
+          <button class="active" type="button" data-billing="monthly">Monatlich</button>
+          <button type="button" data-billing="annual">Jährlich <span>−15%</span></button>
+        </div>
+
+        <div class="pricing-grid">
+          <article class="price-card reveal">
             <span class="eyebrow">CORE</span>
-            <h3>Playlist Intelligence</h3>
-            <p class="plan-sub">Für strukturierte KI-Playlist-Erstellung mit Qualitätsprüfung.</p>
-            <strong class="plan-price">Individuelles Setup</strong>
-            <ul><li>Playlist Engine</li><li>Preview-First Validation</li><li>Playlist Library</li><li>Web UI</li></ul>
-            <a class="btn btn-secondary" href="mailto:office@aikitz.at?subject=KI%20Spotify%20Agent%20Core">Core anfragen</a>
+            <h3>Playlist AI</h3>
+            <p>Für einzelne Nutzer und Teams, die KI-Playlists professionell planen und prüfen wollen.</p>
+            <div class="price"><small>ab</small><strong class="price-number" data-monthly="49" data-annual="42">€49</strong><span>/ Monat</span></div>
+            <small class="price-billing">monatlich abgerechnet</small>
+            <div class="setup-fee">Setup ab €299 einmalig</div>
+            <ul>
+              <li>AI Playlist Engine</li><li>Preview-First Quality Gate</li><li>Playlist Library</li><li>Genre-unabhängige Prompts</li><li>Web App</li>
+            </ul>
+            <a class="btn btn-secondary plan-contact" data-plan="Core" href="#contact">Core starten</a>
           </article>
 
-          <article class="plan-card featured reveal" data-delay="70">
-            <div class="recommended">EMPFOHLEN FÜR HOSPITALITY</div>
+          <article class="price-card reveal" data-delay="50">
+            <span class="eyebrow">PRO</span>
+            <h3>Automation Pro</h3>
+            <p>Für professionelle Musiksteuerung mit Automationen, Events und Remote Control.</p>
+            <div class="price"><small>ab</small><strong class="price-number" data-monthly="129" data-annual="110">€129</strong><span>/ Monat</span></div>
+            <small class="price-billing">monatlich abgerechnet</small>
+            <div class="setup-fee">Setup ab €690 einmalig</div>
+            <ul>
+              <li>Alles aus Core</li><li>Auto-DJ</li><li>Event Radar</li><li>Automation Scheduler</li><li>Telegram Control</li><li>Spotify Connect Context</li>
+            </ul>
+            <a class="btn btn-secondary plan-contact" data-plan="Pro" href="#contact">Pro starten</a>
+          </article>
+
+          <article class="price-card featured reveal" data-delay="100">
+            <div class="recommended">BEST FOR HOSPITALITY</div>
             <span class="eyebrow">HOSPITALITY</span>
             <h3>Music Operations</h3>
-            <p class="plan-sub">Für Bars, Restaurants und Hotels mit Tagesphasen und Events.</p>
-            <strong class="plan-price">Individuelles Setup</strong>
-            <ul><li>Alles aus Core</li><li>Auto-DJ</li><li>Event Radar</li><li>Daypart Rules</li><li>Telegram Control</li></ul>
-            <a class="btn btn-primary" href="mailto:office@aikitz.at?subject=KI%20Spotify%20Agent%20Hospitality">Hospitality anfragen <span>↗</span></a>
+            <p>Für Bars, Restaurants und Hotels mit Tagesphasen, Events und wiederkehrenden Musikabläufen.</p>
+            <div class="price"><small>ab</small><strong class="price-number" data-monthly="249" data-annual="212">€249</strong><span>/ Monat</span></div>
+            <small class="price-billing">monatlich abgerechnet</small>
+            <div class="setup-fee">Setup ab €1.490 einmalig</div>
+            <ul>
+              <li>Alles aus Pro</li><li>Hospitality Daypart Rules</li><li>Event-aware Workflows</li><li>Individuelle Musikprofile</li><li>Priority Onboarding</li><li>OpenAPI-ready Integration</li>
+            </ul>
+            <a class="btn btn-primary plan-contact" data-plan="Hospitality" href="#contact">Hospitality starten <span>↗</span></a>
           </article>
 
-          <article class="plan-card reveal" data-delay="140">
-            <span class="eyebrow">CUSTOM</span>
-            <h3>Integrated AI Stack</h3>
-            <p class="plan-sub">Für individuelle Abläufe, zusätzliche Systeme und Agent-Integrationen.</p>
-            <strong class="plan-price">Projektbasiert</strong>
-            <ul><li>Alles aus Hospitality</li><li>OpenAPI Integration</li><li>Custom Automations</li><li>Telegram / Agent Workflows</li><li>Individuelles Onboarding</li></ul>
-            <a class="btn btn-secondary" href="mailto:office@aikitz.at?subject=KI%20Spotify%20Agent%20Custom">Projekt besprechen</a>
+          <article class="price-card enterprise reveal" data-delay="150">
+            <span class="eyebrow">ENTERPRISE</span>
+            <h3>Custom AI Stack</h3>
+            <p>Für individuelle Agenten, Integrationen, spezielle Workflows und kundenspezifische Infrastruktur.</p>
+            <div class="price custom"><strong>Individuell</strong></div>
+            <small class="price-billing">projektbasiert</small>
+            <div class="setup-fee">Setup nach Umfang</div>
+            <ul>
+              <li>Alles aus Hospitality</li><li>Custom Integrationen</li><li>Eigene Agent-Workflows</li><li>Individuelle APIs</li><li>Deployment & Onboarding</li><li>Priorisierte Weiterentwicklung</li>
+            </ul>
+            <a class="btn btn-secondary plan-contact" data-plan="Enterprise" href="#contact">Projekt besprechen</a>
           </article>
         </div>
-        <p class="plans-note reveal">Keine öffentlichen Fixpreise hinterlegt. Leistungsumfang und Konditionen werden passend zum Projekt festgelegt.</p>
+
+        <div class="pricing-note reveal">
+          <span>Alle Preise netto zzgl. USt.</span><i></i><span>Jahrespreis = 12 Monate Vorauszahlung</span><i></i><span>Keine Spotify-Abogebühren enthalten</span>
+        </div>
       </div>
     </section>
 
@@ -521,12 +625,39 @@
           <p>Die Live Demo erklärt den Workflow. Das produktive Spotify-System bleibt separat unter spotify.kitzlabs.ai.</p>
         </div>
         <div class="faq-list reveal" data-delay="80">
-          <details open><summary>Ist die Demo mit meinem Spotify-Konto verbunden?</summary><p>Nein. Die Demo läuft lokal im Browser und schreibt keine Spotify-Daten.</p></details>
+          <details open><summary>Ist die Live Demo wirklich mit dem KI Spotify Agent verbunden?</summary><p>Ja. Im Live-Modus ruft die Produktwebsite den echten Preview-Endpunkt des laufenden Agents auf. Die Website hat bewusst keinen Create-Endpunkt und kann dadurch keine Playlist direkt veröffentlichen.</p></details>
           <details><summary>Funktioniert der Agent für alle Genres?</summary><p>Die Playlist-Engine ist genre-unabhängig konzipiert. In der Demo kannst du unter anderem Afro House, Schlager, Rock, Drum & Bass, Jazz und Pop testen.</p></details>
           <details><summary>Was bedeutet Preview-first?</summary><p>Der Agent erzeugt zuerst eine prüfbare Vorschau. Die produktive Erstellung oder Automation wird davon getrennt behandelt.</p></details>
           <details><summary>Kann der Agent für Hospitality eingesetzt werden?</summary><p>Die Module für Dayparts, Auto-DJ, Event Radar und Automationen sind für solche operativen Musik-Workflows ausgelegt.</p></details>
+          <details><summary>Was kosten die Pakete?</summary><p>Core startet bei €49/Monat, Pro bei €129/Monat und Hospitality bei €249/Monat, jeweils netto zzgl. USt. und einmaligem Setup. Jährliche Abrechnung reduziert den monatlichen Gegenwert um 15%.</p></details>
           <details><summary>Kann die Plattform erweitert werden?</summary><p>Die Architektur ist modular und kann um zusätzliche Apps, APIs, Agenten, Datenquellen und Workflows ergänzt werden.</p></details>
         </div>
+      </div>
+    </section>
+
+
+    <section class="section contact-section" id="contact">
+      <div class="container contact-shell reveal">
+        <div class="contact-copy">
+          <div class="kicker"><span></span> START YOUR AI MUSIC STACK</div>
+          <h2>Bereit für ein echtes Musiksystem?</h2>
+          <p>Beschreibe kurz deinen Einsatz. Die Anfrage wird direkt an AI Kitz weitergeleitet. Kein Login und keine Zahlungsdaten erforderlich.</p>
+          <div class="contact-badges"><span>✓ Persönliches Setup</span><span>✓ Live-System</span><span>✓ B2B Onboarding</span></div>
+        </div>
+
+        <form class="lead-form" id="leadForm">
+          <input class="hp-field" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <div class="form-grid">
+            <label><span>Name</span><input id="leadName" name="name" type="text" maxlength="80" required placeholder="Dein Name"></label>
+            <label><span>E-Mail</span><input id="leadEmail" name="email" type="email" maxlength="120" required placeholder="name@firma.at"></label>
+          </div>
+          <label><span>Unternehmen / Venue</span><input id="leadCompany" name="company" type="text" maxlength="120" placeholder="Hotel, Bar, Restaurant, Agentur …"></label>
+          <label><span>Projekt</span><textarea id="leadMessage" name="message" rows="5" maxlength="1000" required placeholder="Was soll der KI Spotify Agent für dich automatisieren?"></textarea></label>
+          <label class="consent-line"><input id="leadConsent" type="checkbox" required><span>Ich stimme zu, dass AI Kitz diese Angaben zur Bearbeitung meiner Anfrage verwendet.</span></label>
+          <button class="btn btn-primary lead-submit" id="leadSubmit" type="submit">Projektanfrage senden <span>↗</span></button>
+          <div class="form-status" id="leadStatus" aria-live="polite"></div>
+          <small>Alternativ: <a href="mailto:office@aikitz.at">office@aikitz.at</a></small>
+        </form>
       </div>
     </section>
 
@@ -535,11 +666,11 @@
         <div class="cta-card reveal">
           <div class="cta-aura" aria-hidden="true"></div>
           <span class="eyebrow">AI KITZ · MUSIC INTELLIGENCE</span>
-          <h2>Weniger Playlist-Handarbeit.<br>Mehr Musiksystem.</h2>
-          <p>Teste die interaktive Produktdemo oder öffne direkt das bestehende Spotify-System.</p>
+          <h2>Spotify-Automation als echtes SaaS-Produkt.</h2>
+          <p>Teste die echte KI-Preview, vergleiche die Pakete oder starte dein individuelles Setup mit AI Kitz.</p>
           <div class="hero-actions centered">
             <a class="btn btn-primary" href="#demo">Live Demo starten <span>✦</span></a>
-            <a class="btn btn-secondary" href="https://spotify.kitzlabs.ai/" target="_blank" rel="noreferrer">Live-System öffnen <span>↗</span></a>
+            <a class="btn btn-secondary" href="#plans">Preise vergleichen <span>→</span></a>
           </div>
         </div>
       </div>
@@ -563,14 +694,14 @@
       </div>
       <div class="footer-nav">
         <div><strong>Produkt</strong><a href="#platform">Plattform</a><a href="#demo">Live Demo</a><a href="#configurator">Konfigurator</a></div>
-        <div><strong>System</strong><a href="#architecture">Architektur</a><a href="#plans">Pakete</a><a href="https://spotify.kitzlabs.ai/" target="_blank" rel="noreferrer">Live App ↗</a></div>
-        <div><strong>AI Kitz</strong><a href="https://kitzlabs.ai/" target="_blank" rel="noreferrer">kitzlabs.ai ↗</a><a href="#top">Nach oben ↑</a></div>
+        <div><strong>System</strong><a href="#live-system">Live Integration</a><a href="#plans">Preise</a><a href="https://spotify.kitzlabs.ai/" target="_blank" rel="noreferrer">Live App ↗</a></div>
+        <div><strong>AI Kitz</strong><a href="#contact">Kontakt</a><a href="https://kitzlabs.ai/" target="_blank" rel="noreferrer">kitzlabs.ai ↗</a><a href="#top">Nach oben ↑</a></div>
       </div>
     </div>
     <div class="container footer-bottom"><span>© 2026 AI Kitz</span><span>Intelligent music operations.</span></div>
   </footer>
 
   <div class="mobile-sticky"><a class="btn btn-primary" href="https://spotify.kitzlabs.ai/" target="_blank" rel="noreferrer">Live-System öffnen ↗</a></div>
-  <script src="/app.js?v=20260927-ai-v3" defer></script>
+  <script src="/app.js?v=20260929-v4-1" defer></script>
 </body>
 </html>
