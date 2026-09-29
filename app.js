@@ -1,314 +1,160 @@
 (function(){
   "use strict";
-  const $=function(s,r){return (r||document).querySelector(s);};
-  const $$=function(s,r){return Array.from((r||document).querySelectorAll(s));};
+  const $=(s,r=document)=>r.querySelector(s);
+  const $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+  const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]));
 
-  const menuToggle=$(".menu-toggle"), mobileNav=$("#mobileNav");
-  if(menuToggle&&mobileNav){
-    menuToggle.addEventListener("click",function(){
-      const open=menuToggle.getAttribute("aria-expanded")==="true";
-      menuToggle.setAttribute("aria-expanded",String(!open));
-      mobileNav.classList.toggle("open",!open);
-      document.body.classList.toggle("menu-open",!open);
-    });
-    $$("#mobileNav a").forEach(function(link){
-      link.addEventListener("click",function(){
-        menuToggle.setAttribute("aria-expanded","false");
-        mobileNav.classList.remove("open");
-        document.body.classList.remove("menu-open");
-      });
-    });
+  const menu=$(".menu-toggle"),mobile=$("#mobileNav");
+  if(menu&&mobile){
+    menu.addEventListener("click",()=>{const open=menu.getAttribute("aria-expanded")==="true";menu.setAttribute("aria-expanded",String(!open));mobile.classList.toggle("open",!open);document.body.classList.toggle("menu-open",!open)});
+    $$("#mobileNav a").forEach(a=>a.addEventListener("click",()=>{menu.setAttribute("aria-expanded","false");mobile.classList.remove("open");document.body.classList.remove("menu-open")}));
   }
 
   const progress=$("#scrollProgress");
-  function updateProgress(){
-    if(!progress)return;
-    const max=Math.max(1,document.documentElement.scrollHeight-window.innerHeight);
-    progress.style.width=Math.min(100,(window.scrollY/max)*100)+"%";
-  }
-  window.addEventListener("scroll",updateProgress,{passive:true});updateProgress();
+  function updateProgress(){if(!progress)return;const max=Math.max(1,document.documentElement.scrollHeight-innerHeight);progress.style.width=Math.min(100,(scrollY/max)*100)+"%"}
+  addEventListener("scroll",updateProgress,{passive:true});updateProgress();
 
-  const glow=$("#cursorGlow");
-  if(glow&&matchMedia("(pointer:fine)").matches){
-    window.addEventListener("pointermove",function(e){
-      glow.style.left=e.clientX+"px";glow.style.top=e.clientY+"px";
-    },{passive:true});
-  }
-
-  const commandWindow=$("#commandWindow");
-  if(commandWindow&&matchMedia("(pointer:fine)").matches&&!matchMedia("(prefers-reduced-motion: reduce)").matches){
-    commandWindow.addEventListener("pointermove",function(e){
-      const r=commandWindow.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
-      commandWindow.style.transform="perspective(1500px) rotateY("+(x*4-2)+"deg) rotateX("+(-y*3+.8)+"deg)";
-    });
-    commandWindow.addEventListener("pointerleave",function(){
-      commandWindow.style.transform="perspective(1500px) rotateY(-2deg) rotateX(.8deg)";
-    });
-  }
-
-  const demoSets={
-    afro:{prompt:"Afro House Rooftop Sunset · 2 Stunden · 80% bekannte Songs",title:"Rooftop Sunset · Afro House",name:"Rooftop Sunset · 80% Familiar",score:"94",tags:["42 Songs","120 Min","Afro House","80% bekannt"],tracks:[["Move","Adam Port, Stryv","97"],["Thandaza","Keinemusik","95"],["Muyè","Rampa, &ME","94"],["Abalele","Kabza De Small","92"],["Yamore","MoBlack, Benja, Franc Fala","90"]]},
-    schlager:{prompt:"Schlager Party · 3 Stunden · bekannte Hits zum Mitsingen",title:"Schlager Party · Singalong",name:"Schlager Party · Best Known",score:"96",tags:["54 Songs","180 Min","Schlager","92% bekannt"],tracks:[["Atemlos durch die Nacht","Helene Fischer","98"],["Warum hast du nicht nein gesagt","Roland Kaiser","97"],["Ein Stern","DJ Ötzi, Nik P.","96"],["Verdammt, ich lieb dich","Matthias Reim","95"],["Cordula Grün","Josh.","94"]]},
-    rock:{prompt:"Classic Rock · 2 Stunden · bekannte Gitarren-Hymnen",title:"Classic Rock · Essentials",name:"Classic Rock · Crowd Favorites",score:"95",tags:["34 Songs","120 Min","Classic Rock","90% bekannt"],tracks:[["Don't Stop Believin'","Journey","98"],["Another One Bites the Dust","Queen","97"],["Sweet Child O' Mine","Guns N' Roses","96"],["Summer of '69","Bryan Adams","95"],["The Boys Are Back in Town","Thin Lizzy","92"]]},
-    dnb:{prompt:"Drum & Bass · 90 Minuten · energetic · modern & known",title:"Drum & Bass · High Energy",name:"DNB · Modern Energy",score:"93",tags:["31 Songs","90 Min","Drum & Bass","72% bekannt"],tracks:[["Baddadan","Chase & Status","97"],["Disconnect","Becky Hill, Chase & Status","95"],["Afterglow","Wilkinson","94"],["Ready To Fly","Sub Focus, Dimension","93"],["Desire","Sub Focus, Dimension","91"]]},
-    jazz:{prompt:"Dinner Jazz · 2 Stunden · elegant · warm · unobtrusive",title:"Dinner Jazz · Warm Evening",name:"Dinner Jazz · Elegant Flow",score:"95",tags:["36 Songs","120 Min","Jazz","68% bekannt"],tracks:[["The Look of Love","Diana Krall","96"],["Come Away With Me","Norah Jones","95"],["My Funny Valentine","Chet Baker","94"],["Feeling Good","Nina Simone","93"],["Blue in Green","Miles Davis","91"]]},
-    pop:{prompt:"Pop Hits · 2 Stunden · upbeat · bekannte Songs · international",title:"Pop Hits · Feel Good",name:"Pop Hits · High Familiarity",score:"94",tags:["40 Songs","120 Min","Pop","90% bekannt"],tracks:[["Espresso","Sabrina Carpenter","97"],["Blinding Lights","The Weeknd","97"],["As It Was","Harry Styles","96"],["Levitating","Dua Lipa","95"],["Flowers","Miley Cyrus","94"]]}
+  const viewData={
+    playlist:{eyebrow:"PLAYLIST",title:"Deine Musik – sofort als klare Vorschau.",text:"Du siehst Name, Dauer, Stimmung und Tracks, bevor du die Playlist verwendest.",benefits:["Playlist in Sekunden planen","Dauer und Musikstil sichtbar","Tracks vorab prüfen"],screen:{head:"Sunset Dinner Flow",pill:"42 Songs",hero:"Rooftop Sunset · Dinner",rows:[["01","Move","Adam Port, Stryv","✓"],["02","Inner Light","Eli & Fur","✓"],["03","Dreams","Fleetwood Mac","✓"],["04","The Look of Love","Diana Krall","✓"]]}},
+    live:{eyebrow:"LIVE MUSIC VIEW",title:"Auf einen Blick sehen, was gerade läuft.",text:"Du siehst den aktuellen Track, die Stimmung und was als Nächstes geplant ist.",benefits:["Aktueller Track sichtbar","Nächster Musikmodus","Ideal für Teams und Schichtwechsel"],screen:{head:"Live Music",pill:"● LIVE",hero:"Dinner Mode · aktiv",rows:[["♪","Music Sounds Better","Rampa","PLAYING"],["→","Next: Dreams","Fleetwood Mac","19:07"],["◉","Dinner Mode","bis 22:00","AKTIV"]]}},
+    dayparts:{eyebrow:"TAGESPHASEN",title:"Andere Musik, wenn sich dein Betrieb verändert.",text:"Frühstück, Lunch, Sunset, Dinner und Late Night können eigene Musikrichtungen bekommen.",benefits:["Automatische Wechsel","Weniger manuelle Arbeit","Konsistente Stimmung"],screen:{head:"Tagesplan",pill:"AUTOMATISCH",hero:"Heute · Samstag",dayparts:true}},
+    requests:{eyebrow:"GÄSTE-WÜNSCHE",title:"Musikwünsche direkt vom Handy.",text:"Gäste scannen den QR-Code und senden Song, Genre oder Stimmung – ohne dein Team zu unterbrechen.",benefits:["QR-Code am Tisch oder an der Bar","Einfache mobile Ansicht","Passend zum Musikprofil"],screen:{head:"Gäste-Wünsche",pill:"NEU",hero:"3 neue Wünsche",rows:[["♡","Aperol Spritz","von Emma","GERADE"],["♡","Pedro","von Max","2 MIN"],["♡","Beautiful Things","von Lara","6 MIN"]]}}
   };
 
-  const tours={
-    engine:{eyebrow:"PLAYLIST ENGINE",title:"Von natürlicher Sprache zur validierten Playlist.",text:"Genre, Stimmung, Dauer, Anlass, Künstler oder Bekanntheitsgrad werden als Intent strukturiert und anschließend in eine prüfbare Playlist-Vorschau übersetzt.",points:["Musikwünsche in natürlicher Sprache","Genre- und Mood-Kontext","Bekanntheitsgrad und Dauer","Flow vor der Erstellung"],head:["Playlist Plan","PREVIEW READY"],rows:[["✦","Intent erkannt","Afro House · Sunset · 120 Min","READY"],["⌕","Search Strategy","Known + relevant tracks","DONE"],["✓","Validation","Dedupe · Artist limit","PASS"],["↝","Flow","Energy curve sorted","94/100"]]},
-    quality:{eyebrow:"QUALITY GATE",title:"Qualität wird vor dem Spotify-Write sichtbar.",text:"Die Vorschau trennt Planung und produktive Aktion. So können Track-Auswahl, Duplikate, Artist-Verteilung und musikalischer Flow vorab geprüft werden.",points:["Preview vor Publish","Dedupe und Wiederholungsregeln","Genre-/Mood-Match","Qualitätsscore als Signal"],head:["Quality Gate","PASS"],rows:[["✓","Genre Match","Target aligned","96"],["✓","Familiarity","Requested ratio","88"],["✓","Artist Spread","Repeat limit","PASS"],["✓","Flow","Energy progression","93"]]},
-    autodj:{eyebrow:"AUTO-DJ",title:"Musikfluss über Tagesphasen und Regeln steuern.",text:"Auto-DJ verbindet Playlist-Kontext, Tagesphase, Energie und Wiederholungsregeln. Automationen bleiben mit Status und Kontext nachvollziehbar.",points:["Daypart-Kontext","Queue- und Energie-Regeln","Bekanntheit je Zeitfenster","Kontrollierte Updates"],head:["Auto-DJ","4 RULES"],rows:[["11","Brunch Warm-Up","Acoustic · Soul","LOW"],["16","Afternoon Lounge","Nu Disco · Chill House","MID"],["19","Dinner Prime","Modern Classics · Soul","MID+"],["22","Late Night","House · Known Hits","HIGH"]]},
-    events:{eyebrow:"EVENT RADAR",title:"Events werden zu vorbereiteten Musik-Jobs.",text:"Anlass, Datum und Musikprofil können in einen klaren Workflow überführt werden: Plan, Preview, Freigabe und optional zeitgesteuerte Automation.",points:["Event-Kontext","Vorab-Playlists","Specials und Feiertage","Status statt Blindflug"],head:["Event Radar","3 UPCOMING"],rows:[["FR","Rooftop Closing","Afro House · Sunset","PREVIEW"],["SA","Dinner Night","Soul · Jazz · Classics","READY"],["SO","Brunch Session","Feel Good · Pop","PLAN"]]}
-  };
-
-  function esc(v){return String(v).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c];});}
-
-  function renderTour(key){
-    const t=tours[key];if(!t)return;
-    $("#tourEyebrow").textContent=t.eyebrow;$("#tourTitle").textContent=t.title;$("#tourText").textContent=t.text;
-    $("#tourPoints").innerHTML=t.points.map(function(x){return '<div class="tour-point"><i>✓</i><span>'+esc(x)+'</span></div>';}).join("");
-    $("#tourVisual").innerHTML='<div class="visual-head"><strong>'+esc(t.head[0])+'</strong><span>'+esc(t.head[1])+'</span></div>'+t.rows.map(function(r){return '<div class="visual-row"><i>'+esc(r[0])+'</i><div><strong>'+esc(r[1])+'</strong><small>'+esc(r[2])+'</small></div><em>'+esc(r[3])+'</em></div>';}).join("");
-  }
-  $$("[data-tour]").forEach(function(btn){
-    btn.addEventListener("click",function(){
-      $$("[data-tour]").forEach(function(b){b.classList.remove("active");b.setAttribute("aria-selected","false");});
-      btn.classList.add("active");btn.setAttribute("aria-selected","true");renderTour(btn.dataset.tour);
-    });
-  });
-
-  function renderDemo(set){
-    if(!set)return;
-    $("#demoPrompt").value=set.prompt;$("#demoTitle").textContent=set.title;$("#resultName").textContent=set.name;$("#resultScore").textContent=set.score;
-    $("#resultMeta").innerHTML=set.tags.map(function(x){return "<span>"+esc(x)+"</span>";}).join("");
-    $("#resultTracks").innerHTML=set.tracks.map(function(t,i){return '<div class="preview-track"><b>'+String(i+1).padStart(2,"0")+'</b><div><strong>'+esc(t[0])+'</strong><small>'+esc(t[1])+'</small></div><em>'+esc(t[2])+'</em></div>';}).join("");
-    $("#demoQuality").textContent="QUALITY PASS";$("#resultFoot").textContent="Dedupe aktiv · Artist-Limit aktiv · Flow sortiert";
-  }
-  function chooseSet(text){
-    const i=String(text||"").toLowerCase();
-    if(i.includes("schlager"))return demoSets.schlager;if(i.includes("rock")||i.includes("gitar"))return demoSets.rock;if(i.includes("drum")||i.includes("dnb"))return demoSets.dnb;if(i.includes("jazz"))return demoSets.jazz;if(i.includes("pop")||i.includes("charts"))return demoSets.pop;if(i.includes("afro")||i.includes("house"))return demoSets.afro;
-    return {prompt:String(text||"Individuelle Playlist"),title:"AI Playlist · Custom Intent",name:"Individuelle Playlist · Preview",score:"92",tags:["AI Preview","Genre erkannt","Flow sortiert","Dedupe aktiv"],tracks:[["Track Match 01","AI Search Result","96"],["Track Match 02","AI Search Result","94"],["Track Match 03","AI Search Result","93"],["Track Match 04","AI Search Result","91"],["Track Match 05","AI Search Result","90"]]};
-  }
-  $$(".preset-row [data-demo]").forEach(function(btn){
-    btn.addEventListener("click",function(){
-      $$(".preset-row [data-demo]").forEach(function(b){b.classList.remove("active");});btn.classList.add("active");renderDemo(demoSets[btn.dataset.demo]);
-    });
-  });
-  let livePreviewMode=true;
-
-  async function runLivePreview(input){
-    $("#demoQuality").textContent="LIVE AI · ANALYSING…";
-    $("#resultFoot").textContent="Live Preview wird vom KI Spotify Agent erzeugt …";
-    try{
-      const durationMatch=String(input).match(/(\d+)\s*(?:stunden|std|hours?)/i);
-      const durationMinutes=durationMatch?Math.min(600,Math.max(30,Number(durationMatch[1])*60)):120;
-      const response=await fetch("/live/preview",{
-        method:"POST",
-        headers:{"content-type":"application/json"},
-        body:JSON.stringify({prompt:input,durationMinutes:durationMinutes,trackCount:40,contextMode:"ignore"})
-      });
-      const data=await response.json();
-      if(!response.ok||!data.ok||!data.preview)throw new Error(data.error||"Live Preview fehlgeschlagen");
-      const p=data.preview;
-      $("#demoTitle").textContent=p.name||"AI Playlist Preview";
-      $("#resultName").textContent=p.name||"Live KI Preview";
-      $("#resultScore").textContent=String(Math.round(Number(p.premiumScore||90)));
-      const tags=[
-        (p.trackCount||0)+" Songs",
-        (p.durationMinutes||durationMinutes)+" Min",
-        Array.isArray(p.genres)&&p.genres[0]?p.genres[0]:"Live AI",
-        p.qualityStatus==="pass"?"Quality Pass":"Quality Check"
-      ];
-      $("#resultMeta").innerHTML=tags.map(function(x){return "<span>"+esc(x)+"</span>";}).join("");
-      const tracks=Array.isArray(p.tracks)?p.tracks:[];
-      $("#resultTracks").innerHTML=tracks.slice(0,8).map(function(t,i){
-        return '<div class="preview-track"><b>'+String(i+1).padStart(2,"0")+'</b><div><strong>'+esc(t.title||"Track")+'</strong><small>'+esc(t.artist||"Spotify")+'</small></div><em>'+esc(Math.round(Number(t.premiumScore||p.premiumScore||90)))+'</em></div>';
-      }).join("");
-      $("#demoQuality").textContent="LIVE AI · "+String(p.qualityStatus||"PASS").toUpperCase();
-      $("#resultFoot").textContent="Echte Live Preview · kein Spotify-Write · Quality Gate aktiv";
-    }catch(error){
-      $("#demoQuality").textContent="LIVE FALLBACK";
-      $("#resultFoot").textContent="Live Engine momentan nicht verfügbar · lokale Demo aktiv";
-      setTimeout(function(){renderDemo(chooseSet(input));},220);
+  function renderView(key){
+    const d=viewData[key];if(!d)return;
+    $("#viewEyebrow").textContent=d.eyebrow;$("#viewTitle").textContent=d.title;$("#viewText").textContent=d.text;
+    $("#viewBenefits").innerHTML=d.benefits.map(x=>"<li>"+esc(x)+"</li>").join("");
+    let body='<div class="customer-ui"><div class="ui-head"><strong>'+esc(d.screen.head)+'</strong><span>'+esc(d.screen.pill)+'</span></div><div class="ui-hero"><strong>'+esc(d.screen.hero)+'</strong><p>KI Spotify Agent · deine Musik übersichtlich gesteuert.</p></div>';
+    if(d.screen.dayparts){
+      body+='<div class="daypart-mini"><div><span>08:00</span><strong>Breakfast</strong></div><div><span>12:00</span><strong>Lunch</strong></div><div class="active"><span>17:00</span><strong>Sunset</strong></div><div><span>20:00</span><strong>Dinner</strong></div></div>';
+    }else{
+      body+=(d.screen.rows||[]).map(r=>'<div class="ui-row"><i>'+esc(r[0])+'</i><div><strong>'+esc(r[1])+'</strong><small>'+esc(r[2])+'</small></div><em>'+esc(r[3])+'</em></div>').join("");
     }
+    body+="</div>";$("#viewScreen").innerHTML=body;
   }
+  $$(".view-tab").forEach(b=>b.addEventListener("click",()=>{$$(".view-tab").forEach(x=>x.classList.remove("active"));b.classList.add("active");renderView(b.dataset.view)}));renderView("playlist");
 
-  $("#engineMode")&&$("#engineMode").addEventListener("click",function(){
-    livePreviewMode=!livePreviewMode;
-    this.classList.toggle("active",livePreviewMode);
-    this.setAttribute("aria-pressed",String(livePreviewMode));
-    $("#engineModeLabel").textContent=livePreviewMode?"LIVE BACKEND":"LOCAL DEMO";
-    $("#demoSafetyNote").innerHTML=livePreviewMode
-      ? '<i>✓</i><span><b>Preview-only.</b> Die Live-KI darf Tracks suchen und validieren, aber diese Website besitzt keinen Spotify-Create-Endpunkt.</span>'
-      : '<i>✓</i><span><b>Lokale Demo.</b> Keine Anfrage wird an das Backend gesendet.</span>';
-  });
-
-  $("#demoRun")&&$("#demoRun").addEventListener("click",function(){
-    const input=$("#demoPrompt").value.trim();if(!input){$("#demoPrompt").focus();return;}
-    $$(".preset-row [data-demo]").forEach(function(b){b.classList.remove("active");});
-    if(livePreviewMode){runLivePreview(input);}else{$("#demoQuality").textContent="ANALYSING…";setTimeout(function(){renderDemo(chooseSet(input));},300);}
-  });
-  $("#demoPrompt")&&$("#demoPrompt").addEventListener("keydown",function(e){if((e.metaKey||e.ctrlKey)&&e.key==="Enter"){e.preventDefault();$("#demoRun").click();}});
-  $("#fakeCreate")&&$("#fakeCreate").addEventListener("click",function(){$("#demoQuality").textContent="WRITE GESCHÜTZT";$("#resultFoot").textContent="Produktive Erstellung erfolgt ausschließlich im Live-System nach Freigabe";window.open("https://spotify.kitzlabs.ai/","_blank","noopener");});
-
-  function setHealth(ok,latency){
-    const full=ok?"Spotify System live":"Live-System verfügbar",short=ok?"Online":"Verfügbar";
-    if($("#navHealth"))$("#navHealth").textContent=ok?"System live":"Status";if($("#heroHealth"))$("#heroHealth").textContent=full;if($("#floatHealth"))$("#floatHealth").textContent=short;if($("#floatLatency"))$("#floatLatency").textContent=latency?"Healthcheck · "+latency+" ms":"Read-only Healthcheck";
-  }
-  (function(){
-    const started=performance.now();
-    fetch("/live/health",{method:"GET",cache:"no-store"}).then(function(r){if(!r.ok)throw new Error("offline");return r.text();}).then(function(){setHealth(true,Math.max(1,Math.round(performance.now()-started)));}).catch(function(){setHealth(false,null);});
-  })();
-
-  const revealItems=$$(".reveal");
-  if("IntersectionObserver" in window){
-    const observer=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){const delay=parseInt(entry.target.getAttribute("data-delay")||"0",10);setTimeout(function(){entry.target.classList.add("in");},delay);observer.unobserve(entry.target);}});},{threshold:.07});
-    revealItems.forEach(function(el){observer.observe(el);});
-  }else{revealItems.forEach(function(el){el.classList.add("in");});}
-
-
-  const configState={venue:"bar",goal:"automation",scale:"single"};
-  const configLabels={
-    venue:{bar:"Bar / Club",hotel:"Hotel",restaurant:"Restaurant",event:"Event"},
-    goal:{automation:"Automation",quality:"Qualität",control:"Steuerung"},
-    scale:{single:"1 Standort",small:"2–5 Bereiche",custom:"Individuell"}
+  const fallback={
+    afro:{prompt:"Afro House Rooftop Sunset · 2 Stunden · 80% bekannte Songs",title:"Rooftop Sunset",name:"Afro House · Sunset",score:"94",tags:["42 Songs","120 Min","Afro House"],tracks:[["Move","Adam Port, Stryv","97"],["Thandaza","Keinemusik","95"],["Muyè","Rampa, &ME","94"],["Yamore","MoBlack, Benja, Franc Fala","90"]]},
+    dinner:{prompt:"Dinner · 3 Stunden · elegant · modern · bekannte Songs",title:"Dinner Evening",name:"Modern Dinner · Elegant Flow",score:"95",tags:["48 Songs","180 Min","Dinner"],tracks:[["The Look of Love","Diana Krall","96"],["Come Away With Me","Norah Jones","95"],["Dreams","Fleetwood Mac","94"],["Inner Light","Eli & Fur","93"]]},
+    schlager:{prompt:"Schlager Party · 3 Stunden · bekannte Hits zum Mitsingen",title:"Schlager Party",name:"Schlager · Singalong",score:"96",tags:["54 Songs","180 Min","Schlager"],tracks:[["Atemlos durch die Nacht","Helene Fischer","98"],["Warum hast du nicht nein gesagt","Roland Kaiser","97"],["Ein Stern","DJ Ötzi, Nik P.","96"],["Verdammt, ich lieb dich","Matthias Reim","95"]]},
+    rock:{prompt:"Classic Rock · 2 Stunden · bekannte Gitarren-Hymnen",title:"Classic Rock",name:"Rock · Crowd Favorites",score:"95",tags:["34 Songs","120 Min","Classic Rock"],tracks:[["Don't Stop Believin'","Journey","98"],["Another One Bites the Dust","Queen","97"],["Sweet Child O' Mine","Guns N' Roses","96"],["Summer of '69","Bryan Adams","95"]]},
+    charts:{prompt:"Charts · 2 Stunden · aktuelle und bekannte Pop Hits",title:"Current Hits",name:"Charts · Feel Good",score:"94",tags:["40 Songs","120 Min","Charts"],tracks:[["Espresso","Sabrina Carpenter","97"],["Blinding Lights","The Weeknd","97"],["As It Was","Harry Styles","96"],["Flowers","Miley Cyrus","94"]]}
   };
-
-  function configData(state){
-    const venueMap={
-      bar:{title:"Hospitality Control Stack",text:"Für Bar- und Clubbetrieb mit wechselnden Tagesphasen, Event-Kontext und kontrollierter Playlist-Automation.",mods:[["✦","Playlist Engine","Intent + Preview"],["↻","Auto-DJ","Daypart Flow"],["◇","Event Radar","Specials + Termine"]]},
-      hotel:{title:"Hotel Music Operations",text:"Für Lobby, Gastro und wechselnde Tagesphasen mit klarer Musikplanung und steuerbaren Automationen.",mods:[["✦","Playlist Engine","Music profiles"],["↻","Auto-DJ","Daypart rules"],["◉","Spotify Connect","Playback context"]]},
-      restaurant:{title:"Restaurant Daypart Stack",text:"Für Lunch, Dinner und spätere Tagesphasen mit planbaren Musikprofilen und Qualitätskontrolle.",mods:[["✦","Playlist Engine","Lunch + Dinner"],["✓","Quality Gate","Preview-first"],["⚙","Scheduler","Recurring jobs"]]},
-      event:{title:"Event Music Workflow",text:"Für Musikbriefings, Event-Kontext und vorbereitete Playlists mit kontrollierter Freigabe.",mods:[["◇","Event Radar","Event context"],["✦","Playlist Engine","Briefing → Preview"],["⌁","Telegram","Remote approval"]]}
-    };
-    const base=venueMap[state.venue];
-    const extra=state.goal==="quality"?["✓","Quality Gate","Validation + Dedupe"]:state.goal==="control"?["⌁","Telegram Control","Remote control"]:["⚙","Automation Scheduler","Recurring workflows"];
-    const scale=state.scale==="small"?["↗","OpenAPI","Multiple workflows"]:state.scale==="custom"?["↗","OpenAPI","Custom integration"]:["◉","Spotify Connect","Live context"];
-    return {title:base.title,text:base.text,mods:base.mods.concat([extra,scale])};
+  function renderDemo(d){
+    $("#demoPrompt").value=d.prompt;$("#demoTitle").textContent=d.title;$("#resultName").textContent=d.name;$("#resultScore").textContent=d.score;$("#resultMeta").innerHTML=d.tags.map(x=>"<span>"+esc(x)+"</span>").join("");$("#resultTracks").innerHTML=d.tracks.map((t,i)=>'<div class="demo-track"><b>'+String(i+1).padStart(2,"0")+'</b><div><strong>'+esc(t[0])+'</strong><small>'+esc(t[1])+'</small></div><em>'+esc(t[2])+'</em></div>').join("");$("#demoQuality").textContent="BEREIT";$("#resultFoot").textContent="Vorschau bereit";
   }
+  $$(".preset-row [data-demo]").forEach(b=>b.addEventListener("click",()=>{$$(".preset-row [data-demo]").forEach(x=>x.classList.remove("active"));b.classList.add("active");renderDemo(fallback[b.dataset.demo])}));
 
-  function renderConfigurator(){
-    if(!$("#configModules"))return;
-    const data=configData(configState);
-    $("#configTitle").textContent=data.title;
-    $("#configBadge").textContent=configLabels.goal[configState.goal].toUpperCase();
-    $("#configText").textContent=data.text+" Schwerpunkt: "+configLabels.goal[configState.goal]+". Umfang: "+configLabels.scale[configState.scale]+".";
-    $("#configModules").innerHTML=data.mods.map(function(m){
-      return '<div class="config-module"><i>'+esc(m[0])+'</i><div><strong>'+esc(m[1])+'</strong><small>'+esc(m[2])+'</small></div></div>';
-    }).join("");
-    const subject="KI Spotify Agent Anfrage · "+configLabels.venue[configState.venue]+" · "+configLabels.goal[configState.goal];
-    const body="Hallo AI Kitz,%0D%0A%0D%0Aich interessiere mich für den KI Spotify Agent.%0D%0AEinsatz: "+encodeURIComponent(configLabels.venue[configState.venue])+"%0D%0ASchwerpunkt: "+encodeURIComponent(configLabels.goal[configState.goal])+"%0D%0AUmfang: "+encodeURIComponent(configLabels.scale[configState.scale])+"%0D%0A%0D%0ABitte um weitere Informationen.";
-    $("#configContact").href="mailto:office@aikitz.at?subject="+encodeURIComponent(subject)+"&body="+body;
-  }
-
-  $$("[data-config-group]").forEach(function(btn){
-    btn.addEventListener("click",function(){
-      const group=btn.dataset.configGroup;
-      const value=btn.dataset.value;
-      configState[group]=value;
-      $$('[data-config-group="'+group+'"]').forEach(function(b){b.classList.remove("active");});
-      btn.classList.add("active");
-      renderConfigurator();
-    });
-  });
-
-
-  async function refreshLiveSystem(){
-    const started=performance.now();
+  async function livePreview(){
+    const prompt=$("#demoPrompt").value.trim();if(!prompt){$("#demoPrompt").focus();return}
+    $("#demoQuality").textContent="KI ERSTELLT …";$("#resultFoot").textContent="Live-Vorschau wird erstellt …";
     try{
-      const [healthRes,statsRes,playingRes]=await Promise.all([
-        fetch("/live/health",{cache:"no-store"}),
-        fetch("/live/stats",{cache:"no-store"}),
-        fetch("/live/now-playing",{cache:"no-store"})
-      ]);
-      const health=await healthRes.json();
-      const stats=await statsRes.json();
-      const playing=await playingRes.json();
-      const latency=Math.max(1,Math.round(performance.now()-started));
-      if($("#liveApiStatus"))$("#liveApiStatus").textContent=health.ok?"LIVE CONNECTED":"DEGRADED";
-      if($("#liveLatency"))$("#liveLatency").textContent=latency+" ms";
-      if($("#liveMode"))$("#liveMode").textContent=String(health.mode||"live").toUpperCase();
-
-      const s=stats.stats||{};
-      if($("#livePlaylistCount"))$("#livePlaylistCount").textContent=String(s.playlistCount??"—");
-      if($("#liveAutomationCount"))$("#liveAutomationCount").textContent=String(s.activeAutomationCount??"—");
-      const updates=Array.isArray(s.nextUpdates)?s.nextUpdates.slice(0,3):[];
-      if($("#liveNextUpdates")){
-        $("#liveNextUpdates").innerHTML=updates.length
-          ? updates.map(function(u){return '<div class="live-update"><strong>'+esc(u.playlistName||u.name||"Automation")+'</strong><span>'+esc(u.cronExpression||"scheduled")+'</span></div>';}).join("")
-          : '<div class="live-update-placeholder">Zeitplan-Details geschützt · '+String(s.activeAutomationCount??0)+' Automationen aktiv.</div>';
-      }
-
-      const np=(playing&&playing.nowPlaying)||{};
-      const pb=np.playback||{};
-      const item=pb.item||pb.track||{};
-      const track=item.name||np.activePlaylist?.name||"Kein aktiver Track";
-      let artist="Spotify Connect";
-      if(Array.isArray(item.artists)&&item.artists[0])artist=item.artists.map(function(a){return a.name||a;}).join(", ");
-      if($("#liveTrack"))$("#liveTrack").textContent=track;
-      if($("#liveArtist"))$("#liveArtist").textContent=artist;
-      if($("#livePlaybackState"))$("#livePlaybackState").textContent=pb.is_playing?"PLAYING":String(np.status||"IDLE").toUpperCase();
-    }catch(error){
-      if($("#liveApiStatus"))$("#liveApiStatus").textContent="RECONNECTING";
-      if($("#livePlaybackState"))$("#livePlaybackState").textContent="OFFLINE";
-    }
+      const h=prompt.match(/(\d+)\s*(?:stunden?|std|hours?)/i);const duration=h?Math.max(30,Math.min(240,Number(h[1])*60)):120;
+      const res=await fetch("/live/preview",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({prompt,durationMinutes:duration,trackCount:30})});
+      const data=await res.json();if(!res.ok||!data.ok||!data.preview)throw new Error("preview");
+      const p=data.preview;$("#demoTitle").textContent=p.name||"KI Playlist";$("#resultName").textContent=p.name||"Live Preview";$("#resultScore").textContent=String(Math.round(Number(p.premiumScore||90)));
+      const tags=[(p.trackCount||0)+" Songs",(p.durationMinutes||duration)+" Min",Array.isArray(p.genres)&&p.genres[0]?p.genres[0]:"KI Playlist"];$("#resultMeta").innerHTML=tags.map(x=>"<span>"+esc(x)+"</span>").join("");
+      const tracks=Array.isArray(p.tracks)?p.tracks:[];$("#resultTracks").innerHTML=tracks.slice(0,6).map((t,i)=>'<div class="demo-track"><b>'+String(i+1).padStart(2,"0")+'</b><div><strong>'+esc(t.title||"Track")+'</strong><small>'+esc(t.artist||"Spotify")+'</small></div><em>✓</em></div>').join("");
+      $("#demoQuality").textContent="LIVE VORSCHAU";$("#resultFoot").textContent="Echte KI-Vorschau · keine Playlist veröffentlicht";
+    }catch(e){$("#demoQuality").textContent="DEMO";$("#resultFoot").textContent="Live-Vorschau momentan nicht erreichbar · Demo angezeigt";renderDemo(fallback.afro)}
   }
+  $("#demoRun")?.addEventListener("click",livePreview);
+  $("#demoPrompt")?.addEventListener("keydown",e=>{if((e.metaKey||e.ctrlKey)&&e.key==="Enter"){e.preventDefault();livePreview()}});renderDemo(fallback.afro);
 
-  $$("[data-billing]").forEach(function(btn){
-    btn.addEventListener("click",function(){
-      $$("[data-billing]").forEach(function(b){b.classList.remove("active");});
-      btn.classList.add("active");
-      const annual=btn.dataset.billing==="annual";
-      $$(".price-number[data-monthly]").forEach(function(el){
-        el.textContent="€"+(annual?el.dataset.annual:el.dataset.monthly);
-      });
-      $(".price-billing:not(.fixed-billing)").forEach(function(el){el.textContent=annual?"monatlicher Gegenwert · jährlich abgerechnet":"monatlich abgerechnet";});
-    });
+  async function health(){
+    const start=performance.now();
+    try{const r=await fetch("/live/health",{cache:"no-store"});if(!r.ok)throw new Error();$("#systemStatus").textContent="System online";$("#heroLatency").textContent="Live verbunden · "+Math.max(1,Math.round(performance.now()-start))+" ms"}catch(e){$("#systemStatus").textContent="System verfügbar";$("#heroLatency").textContent="Verbindung verfügbar"}
+  }health();
+
+  $$("[data-billing]").forEach(b=>b.addEventListener("click",()=>{$$("[data-billing]").forEach(x=>x.classList.remove("active"));b.classList.add("active");const annual=b.dataset.billing==="annual";$$(".price-number[data-monthly]").forEach(el=>el.textContent="€"+(annual?el.dataset.annual:el.dataset.monthly));$$(".price-billing:not(.fixed-billing)").forEach(el=>el.textContent=annual?"monatlicher Gegenwert · jährlich abgerechnet":"monatlich abgerechnet")}));
+  $$(".plan-contact").forEach(a=>a.addEventListener("click",()=>{if($("#leadMessage"))$("#leadMessage").value="Ich interessiere mich für das Paket "+(a.dataset.plan||"")+". Bitte sendet mir Details zum passenden Setup."}));
+
+  const form=$("#leadForm");
+  if(form)form.addEventListener("submit",async e=>{
+    e.preventDefault();if(form.querySelector('input[name="website"]')?.value)return;
+    const submit=$("#leadSubmit"),status=$("#leadStatus"),payload={name:$("#leadName").value.trim(),email:$("#leadEmail").value.trim(),company:$("#leadCompany").value.trim(),message:$("#leadMessage").value.trim()};
+    if(!payload.name||!payload.email||!payload.message||!$("#leadConsent").checked)return;
+    submit.disabled=true;submit.textContent="Wird gesendet …";status.className="form-status";status.textContent="";
+    try{const r=await fetch("/live/contact",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(payload)});const d=await r.json();if(!r.ok||!d.ok)throw new Error();status.textContent="✓ Anfrage wurde an AI Kitz übermittelt.";form.reset()}
+    catch(err){status.className="form-status error";status.innerHTML='Senden nicht möglich. Bitte an <a href="mailto:office@aikitz.at">office@aikitz.at</a> schreiben.'}
+    finally{submit.disabled=false;submit.innerHTML='Projektanfrage senden <span>↗</span>'}
   });
 
-  $$(".plan-contact").forEach(function(link){
-    link.addEventListener("click",function(){
-      const plan=link.dataset.plan||"";
-      if($("#leadMessage"))$("#leadMessage").value="Ich interessiere mich für den Plan "+plan+". Bitte sendet mir Details zum passenden Setup.";
-    });
-  });
 
-  const leadForm=$("#leadForm");
-  if(leadForm){
-    leadForm.addEventListener("submit",async function(event){
-      event.preventDefault();
-      const honeypot=leadForm.querySelector('input[name="website"]');
-      if(honeypot&&honeypot.value)return;
-      const submit=$("#leadSubmit"),status=$("#leadStatus");
-      const name=$("#leadName").value.trim();
-      const email=$("#leadEmail").value.trim();
-      const company=$("#leadCompany").value.trim();
-      const message=$("#leadMessage").value.trim();
-      if(!name||!email||!message||!$("#leadConsent").checked)return;
-      submit.disabled=true;submit.textContent="Wird gesendet …";status.className="form-status";status.textContent="";
-      try{
-        const response=await fetch("/live/contact",{
-          method:"POST",
-          headers:{"content-type":"application/json"},
-          body:JSON.stringify({name:name,page:"kispotify.kitzlabs.ai · V4",message:"E-Mail: "+email+"\nUnternehmen: "+(company||"—")+"\n\n"+message})
-        });
-        const data=await response.json();
-        if(!response.ok||!data.ok)throw new Error(data.error||"Senden fehlgeschlagen");
-        status.textContent="✓ Anfrage wurde direkt an AI Kitz übermittelt.";
-        leadForm.reset();
-      }catch(error){
-        status.className="form-status error";
-        status.innerHTML='Senden nicht möglich. Bitte direkt an <a href="mailto:office@aikitz.at">office@aikitz.at</a> schreiben.';
-      }finally{
-        submit.disabled=false;submit.innerHTML='Projektanfrage senden <span>↗</span>';
-      }
-    });
+  const venueData={
+    bar:{eyebrow:"BAR & LOUNGE",title:"Von Sunset bis Late Night – ohne Playlist-Wechsel.",text:"Der Agent wechselt die Musik passend zu Tageszeit, Gäste-Stimmung und Event.",flow:[["17:00","Sunset"],["20:00","Dinner"],["23:00","Late Night"],["01:00","Closing"]],active:0,now:"Sunset · Chill House",next:"Dinner ab 20:00"},
+    hotel:{eyebrow:"HOTEL",title:"Ein Musiksystem für alle Tagesphasen im Hotel.",text:"Breakfast, Lobby, Spa und Rooftop können jeweils ihren eigenen Stil bekommen.",flow:[["07:00","Breakfast"],["11:00","Lobby"],["15:00","Spa"],["18:00","Rooftop"]],active:1,now:"Lobby · Modern Easy",next:"Spa ab 15:00"},
+    restaurant:{eyebrow:"RESTAURANT",title:"Von Lunch bis Dinner – konstant passend.",text:"Die Musik bleibt elegant und entwickelt sich mit Auslastung und Tageszeit.",flow:[["11:30","Lunch"],["16:00","Aperitif"],["19:00","Dinner"],["22:00","Late Dinner"]],active:2,now:"Dinner · Modern Classics",next:"Late Dinner ab 22:00"},
+    event:{eyebrow:"EVENT",title:"Ein eigener Musikflow nur für dein Event.",text:"Warm-up, Main, Peak und Closing können für den Abend geplant werden.",flow:[["18:00","Warm-up"],["20:00","Main"],["22:30","Peak"],["01:00","Closing"]],active:1,now:"Main · Event Flow",next:"Peak ab 22:30"}
+  };
+  function renderVenue(key){
+    const d=venueData[key];if(!d||!$("#venueFlow"))return;
+    $("#venueEyebrow").textContent=d.eyebrow;$("#venueTitle").textContent=d.title;$("#venueText").textContent=d.text;$("#venueNow").textContent=d.now;$("#venueNext").textContent=d.next;
+    $("#venueFlow").innerHTML=d.flow.map((x,i)=>'<div class="'+(i===d.active?"active":"")+'"><span>'+esc(x[0])+'</span><strong>'+esc(x[1])+'</strong></div>').join("");
+  }
+  $$(".venue-option").forEach(btn=>btn.addEventListener("click",()=>{$$(".venue-option").forEach(b=>b.classList.remove("active"));btn.classList.add("active");renderVenue(btn.dataset.venue)}));renderVenue("bar");
+
+  const storyData={
+    prompt:{head:"Playlist Studio",pill:"AI READY",html:'<div class="story-prompt">Rooftop Sunset · 2 Stunden · Afro House · bekannte Songs</div><div class="story-ai"><i>✦</i><span>Verstanden. Ich plane einen entspannten Start und steigere die Energie Richtung Dinner.</span></div><div class="story-list"><div class="story-track"><b>01</b><div><strong>Move</strong><small>Adam Port, Stryv</small></div><em>READY</em></div><div class="story-track"><b>02</b><div><strong>Inner Light</strong><small>Eli & Fur</small></div><em>READY</em></div><div class="story-track"><b>03</b><div><strong>Dreams</strong><small>Fleetwood Mac</small></div><em>READY</em></div></div>'},
+    preview:{head:"Playlist Preview",pill:"42 SONGS",html:'<div class="ui-hero"><strong>Sunset Dinner Flow</strong><p>120 Minuten · Afro House · bekannte Songs</p></div><div class="story-list"><div class="story-track"><b>01</b><div><strong>Move</strong><small>Adam Port, Stryv</small></div><em>✓</em></div><div class="story-track"><b>02</b><div><strong>Thandaza</strong><small>Keinemusik</small></div><em>✓</em></div><div class="story-track"><b>03</b><div><strong>Muyè</strong><small>Rampa, &ME</small></div><em>✓</em></div><div class="story-track"><b>04</b><div><strong>Dreams</strong><small>Fleetwood Mac</small></div><em>✓</em></div></div>'},
+    dayparts:{head:"Music Day",pill:"AUTOMATISCH",html:'<div class="story-event"><div class="story-event-card"><span>08:00</span><strong>Breakfast</strong><em>SOFT</em></div><div class="story-event-card"><span>12:00</span><strong>Lunch</strong><em>RELAXED</em></div><div class="story-event-card active"><span>17:00</span><strong>Sunset</strong><em>AKTIV</em></div><div class="story-event-card"><span>20:00</span><strong>Dinner</strong><em>NEXT</em></div></div>'},
+    guest:{head:"Guest Wishes",pill:"QR LIVE",html:'<div class="story-phone"><div class="story-phone-inner"><div class="story-phone-notch"></div><span class="eyebrow">DEIN MUSIKWUNSCH</span><h4>Was möchtest du hören?</h4><p>Wähle eine Stimmung oder schreib direkt deinen Wunsch.</p><div><span class="phone-chip active">Feiern</span><span class="phone-chip">Chill</span><span class="phone-chip">Sommer</span></div><div><span class="phone-chip active">House</span><span class="phone-chip">Pop</span><span class="phone-chip">Charts</span></div><div class="phone-field">Beautiful Things · Benson Boone</div><div class="phone-send">Wunsch senden ↗</div></div></div>'},
+    live:{head:"Live Music",pill:"● PLAYING",html:'<div class="ui-hero"><strong>Music Sounds Better</strong><p>Rampa · Dinner Mode</p></div><div class="story-list"><div class="story-track"><b>♪</b><div><strong>Music Sounds Better</strong><small>Rampa</small></div><em>PLAYING</em></div><div class="story-track"><b>→</b><div><strong>Dreams</strong><small>Fleetwood Mac</small></div><em>NEXT</em></div><div class="story-track"><b>20</b><div><strong>Dinner Mode</strong><small>bis 23:00</small></div><em>AKTIV</em></div></div>'},
+    event:{head:"Event Mode",pill:"TONIGHT",html:'<div class="story-event"><div class="story-event-card"><span>20:00</span><strong>Dinner</strong><em>PAUSED</em></div><div class="story-event-card active"><span>21:00</span><strong>Rooftop Night</strong><em>EVENT MODE</em></div><div class="story-event-card"><span>01:00</span><strong>Late Night</strong><em>RESUMES</em></div></div>'}
+  };
+  function renderStory(key){const d=storyData[key];if(!d||!$("#storyWindow"))return;$("#storyWindow").innerHTML='<div class="story-ui"><div class="story-ui-head"><strong>'+esc(d.head)+'</strong><span>'+esc(d.pill)+'</span></div>'+d.html+'</div>'}
+  renderStory("prompt");
+  const storySteps=$$(".story-step");
+  if("IntersectionObserver"in window){
+    const storyObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){storySteps.forEach(s=>s.classList.remove("active"));e.target.classList.add("active");renderStory(e.target.dataset.story)}}),{rootMargin:"-34% 0px -45% 0px",threshold:.05});
+    storySteps.forEach(s=>storyObserver.observe(s));
   }
 
-  refreshLiveSystem();
-  window.setInterval(refreshLiveSystem,45000);
+  const timelineData={
+    breakfast:{label:"08:00 · BREAKFAST",title:"Ruhig in den Tag starten.",text:"Soft Pop und Acoustic begleiten Frühstück und frühen Morgen.",energy:"LOW",familiar:"80%"},
+    lunch:{label:"12:00 · LUNCH",title:"Locker, bekannt und unaufdringlich.",text:"Soul und Easy Listening halten die Atmosphäre angenehm.",energy:"LOW+",familiar:"75%"},
+    sunset:{label:"17:00 · SUNSET",title:"Entspannt starten. Langsam Energie aufbauen.",text:"Chill House und Nu Disco schaffen den Übergang von Nachmittag zu Abend.",energy:"MEDIUM",familiar:"70%"},
+    dinner:{label:"20:00 · DINNER",title:"Elegant, warm und konstant.",text:"Modern Classics und Soul unterstützen Dinner ohne zu dominieren.",energy:"MEDIUM+",familiar:"85%"},
+    night:{label:"23:00 · LATE NIGHT",title:"Mehr Energie, mehr bekannte Songs.",text:"House und Crowd Favorites bringen den Abend in die späte Phase.",energy:"HIGH",familiar:"90%"}
+  };
+  const timelineKeys=["breakfast","lunch","sunset","dinner","night"];
+  function renderTimeline(key){
+    const d=timelineData[key],idx=timelineKeys.indexOf(key);if(!d||!$("#timelineDetail"))return;
+    $$(".timeline-point").forEach(b=>b.classList.toggle("active",b.dataset.time===key));
+    if($("#timelineProgress")){if(innerWidth<=700)$("#timelineProgress").style.height=((idx/(timelineKeys.length-1))*100)+"%";else $("#timelineProgress").style.width=((idx/(timelineKeys.length-1))*100)+"%";}
+    $("#timelineDetail").innerHTML='<div><span class="eyebrow">'+esc(d.label)+'</span><h3>'+esc(d.title)+'</h3><p>'+esc(d.text)+'</p></div><div class="energy-card"><span>ENERGIE</span><div class="energy-bars"><i></i><i></i><i></i><i class="on"></i><i></i></div><strong>'+esc(d.energy)+'</strong></div><div class="familiar-card"><span>BEKANNTE SONGS</span><strong>'+esc(d.familiar)+'</strong><small>gezielt steuerbar</small></div>';
+  }
+  $$(".timeline-point").forEach(b=>b.addEventListener("click",()=>renderTimeline(b.dataset.time)));renderTimeline("sunset");
+  addEventListener("resize",()=>renderTimeline($(".timeline-point.active")?.dataset.time||"sunset"),{passive:true});
 
-  renderConfigurator();
+  $("#baToggle")?.addEventListener("click",function(){this.classList.toggle("on");$(".before-card")?.classList.toggle("active");$(".after-card")?.classList.toggle("active")});
 
-  renderTour("engine");renderDemo(demoSets.afro);
+  const finder={venue:"single",automation:"basic",guest:"no"};
+  function renderFinder(){
+    let plan="Core",title="Playlist AI",text="Ideal, wenn du professionelle KI-Playlists erstellen und vorab prüfen möchtest.";
+    if(finder.venue==="multi"){plan="Enterprise";title="Custom Music AI";text="Für mehrere Standorte und individuelle Erweiterungen ist Enterprise die passende Basis."}
+    else if(finder.venue==="hospitality"||finder.guest==="yes"){plan="Hospitality";title="Music Operations";text="Für Hospitality, QR Gäste-Wünsche, Musikprofile und mehrere Bereiche ist Hospitality die stärkste Wahl."}
+    else if(finder.automation==="advanced"){plan="Pro";title="Music Control";text="Für Tagesphasen, Events und laufende Musikautomation passt Pro am besten."}
+    $("#finderPlan").textContent=plan.toUpperCase();$("#finderTitle").textContent=title;$("#finderText").textContent=text;$("#finderCta").textContent=plan+" ansehen →";
+  }
+  $$("[data-finder]").forEach(btn=>btn.addEventListener("click",()=>{const group=btn.dataset.finder;finder[group]=btn.dataset.value;$$(`[data-finder="${group}"]`).forEach(b=>b.classList.remove("active"));btn.classList.add("active");renderFinder()}));renderFinder();
+
+  const modalData={
+    qr:{eyebrow:"GUEST EXPERIENCE",title:"Gäste-Wünsche per QR-Code",text:"Deine Gäste scannen einen Code, wählen Stimmung oder Song und senden ihren Wunsch direkt über eine mobile Ansicht.",points:["Kein App-Download nötig","QR-Code am Tisch, an der Bar oder im Hotel","Optional in Pro, inklusive ab Hospitality"],visual:'<div class="story-phone"><div class="story-phone-inner"><div class="story-phone-notch"></div><span class="eyebrow">MUSIKWUNSCH</span><h4>Was möchtest du hören?</h4><div><span class="phone-chip active">Feiern</span><span class="phone-chip">Chill</span></div><div class="phone-field">Beautiful Things</div><div class="phone-send">Wunsch senden ↗</div></div></div>'},
+    dayparts:{eyebrow:"AUTOMATION",title:"Musik nach Tageszeit",text:"Der Musikstil verändert sich automatisch mit deinem Betrieb – von Frühstück bis Late Night.",points:["Eigene Musikprofile pro Phase","Events können den normalen Ablauf temporär ersetzen","Ideal für Bars, Restaurants und Hotels"],visual:'<div class="story-event"><div class="story-event-card"><span>08:00</span><strong>Breakfast</strong><em>SOFT</em></div><div class="story-event-card active"><span>17:00</span><strong>Sunset</strong><em>AKTIV</em></div><div class="story-event-card"><span>20:00</span><strong>Dinner</strong><em>NEXT</em></div></div>'},
+    event:{eyebrow:"EVENT MODE",title:"Events mit eigenem Musikflow",text:"Special Nights, Rooftop Events oder Brunch können für einen definierten Zeitraum den normalen Musikplan ersetzen.",points:["Event startet und endet gezielt","Normaler Musikflow läuft danach weiter","Eigene Stimmung für jeden Anlass"],visual:'<div class="story-event"><div class="story-event-card"><span>20:00</span><strong>Dinner</strong><em>PAUSED</em></div><div class="story-event-card active"><span>21:00</span><strong>Rooftop Night</strong><em>EVENT</em></div><div class="story-event-card"><span>01:00</span><strong>Late Night</strong><em>RESUMES</em></div></div>'}
+  };
+  function openModal(key){const d=modalData[key];if(!d)return;$("#modalEyebrow").textContent=d.eyebrow;$("#modalTitle").textContent=d.title;$("#modalText").textContent=d.text;$("#modalPoints").innerHTML=d.points.map(p=>'<div><i>✓</i><span>'+esc(p)+'</span></div>').join("");$("#modalVisual").innerHTML=d.visual;$("#featureModal").classList.add("open");$("#featureModal").setAttribute("aria-hidden","false");document.body.style.overflow="hidden"}
+  function closeModal(){if(!$("#featureModal"))return;$("#featureModal").classList.remove("open");$("#featureModal").setAttribute("aria-hidden","true");document.body.style.overflow=""}
+  $$(".feature-open").forEach(b=>b.addEventListener("click",()=>openModal(b.dataset.feature)));$(".feature-modal-backdrop")?.addEventListener("click",closeModal);$(".feature-modal-close")?.addEventListener("click",closeModal);addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
+
+  if(matchMedia("(pointer:fine)").matches && !matchMedia("(prefers-reduced-motion:reduce)").matches){
+    const heroProduct=$(".hero-product");if(heroProduct)heroProduct.addEventListener("pointermove",e=>{const r=heroProduct.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;const screen=$(".hero-screen");if(screen)screen.style.transform='perspective(1500px) rotateY('+(x*3)+'deg) rotateX('+(-y*2)+'deg) translateY(-2px)'});
+    heroProduct?.addEventListener("pointerleave",()=>{const screen=$(".hero-screen");if(screen)screen.style.transform=""});
+  }
+
+
+  const reveal=$$(".reveal");if("IntersectionObserver"in window){const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add("in"),Number(e.target.dataset.delay||0));io.unobserve(e.target)}}),{threshold:.07});reveal.forEach(x=>io.observe(x))}else reveal.forEach(x=>x.classList.add("in"));
 })();

@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#08090b"><title>Musikwunsch · KI Spotify Agent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--red:#ff1744;--green:#1ed760;--line:rgba(255,255,255,.09)}*{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:Sora,-apple-system,sans-serif;color:#f7f7f5;background:radial-gradient(circle at 70% 0,rgba(255,23,68,.15),transparent 26rem),linear-gradient(180deg,#08090b,#0b0d10);padding:20px}.app{width:min(480px,100%);margin:auto}.brand{display:flex;align-items:center;gap:10px;margin:8px 0 24px}.logo{width:42px;height:42px;border:1px solid var(--line);border-radius:13px;display:grid;place-items:center;background:#12151a;color:var(--red);font-size:18px}.brand strong{font-size:13px}.brand small{display:block;color:#646c77;font-size:7px;margin-top:3px;letter-spacing:.1em}.card{border:1px solid var(--line);border-radius:24px;background:linear-gradient(145deg,rgba(18,21,25,.96),rgba(10,12,14,.98));padding:24px;box-shadow:0 30px 80px rgba(0,0,0,.35)}.eyebrow{color:#69717b;font-size:7px;letter-spacing:.13em}.card h1{font-size:31px;line-height:1.06;letter-spacing:-.05em;font-weight:500;margin:10px 0 10px}.lead{color:#9299a3;font-size:11px;line-height:1.65;margin:0 0 24px}.group{margin-top:22px}.group>span{display:block;color:#777f89;font-size:8px;margin-bottom:10px}.chips{display:flex;gap:7px;flex-wrap:wrap}.chip{border:1px solid var(--line);background:rgba(255,255,255,.025);color:#858d97;border-radius:999px;padding:9px 12px;font-size:8px}.chip.active{border-color:rgba(255,23,68,.22);background:rgba(255,23,68,.08);color:#ff8aa0}.wish{margin-top:18px}.wish input{width:100%;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.025);padding:14px;color:#fff;outline:none;font:inherit;font-size:10px}.wish input:focus{border-color:rgba(255,23,68,.35);box-shadow:0 0 0 3px rgba(255,23,68,.05)}.send{width:100%;height:50px;border:0;border-radius:13px;background:linear-gradient(135deg,#ff204e,#be0d36);color:#fff;font-weight:600;margin-top:14px;box-shadow:0 12px 32px rgba(255,23,68,.2)}.note{display:flex;gap:8px;align-items:flex-start;margin-top:14px;color:#626a74;font-size:7px;line-height:1.5}.note i{color:var(--green);font-style:normal}.success{display:none;text-align:center;padding:32px 6px}.success.show{display:block}.form.hide{display:none}.success-icon{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;margin:0 auto 18px;background:rgba(30,215,96,.06);border:1px solid rgba(30,215,96,.14);color:#8de5aa;font-size:24px}.success h2{font-size:25px;font-weight:500;letter-spacing:-.04em}.success p{color:#89919b;font-size:10px;line-height:1.65}.back{display:inline-flex;margin-top:15px;color:#bbbfc6;font-size:8px}.demo{margin:18px auto 0;text-align:center;color:#555d67;font-size:6px}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="brand"><div class="logo">✦</div><div><strong>KI Spotify Agent</strong><small>GÄSTE · MUSIK · EINFACH</small></div></div>
+  <div class="card">
+    <div class="form" id="form">
+      <span class="eyebrow">DEIN MUSIKWUNSCH</span>
+      <h1>Was möchtest du hören?</h1>
+      <p class="lead">Wähle eine Stimmung oder schreib direkt deinen Musikwunsch.</p>
+      <div class="group"><span>Stimmung</span><div class="chips" id="moods"><button class="chip active" type="button">Feiern</button><button class="chip" type="button">Chill</button><button class="chip" type="button">Romantisch</button><button class="chip" type="button">Sommer-Feeling</button></div></div>
+      <div class="group"><span>Genre</span><div class="chips" id="genres"><button class="chip active" type="button">Pop</button><button class="chip" type="button">House</button><button class="chip" type="button">Hip Hop</button><button class="chip" type="button">Rock</button><button class="chip" type="button">Schlager</button><button class="chip" type="button">Charts</button></div></div>
+      <div class="wish"><input id="wish" maxlength="100" placeholder="Song, Künstler oder Wunsch eingeben …"></div>
+      <button class="send" id="send" type="button">Musikwunsch senden ↗</button>
+      <div class="note"><i>✓</i><span>Demo-Ansicht: Dein Wunsch verändert keine echte Spotify-Playlist.</span></div>
+    </div>
+    <div class="success" id="success"><div class="success-icon">✓</div><span class="eyebrow">WUNSCH EMPFANGEN</span><h2>Danke für deinen Musikwunsch.</h2><p>In einem echten Guest-Wish-Setup wird der Wunsch passend zur aktuellen Musikstimmung berücksichtigt.</p><a class="back" href="#" id="again">Noch einen Wunsch senden →</a></div>
+  </div>
+  <div class="demo">KI Spotify Agent · Guest Wish Demo</div>
+</div>
+<script>
+document.querySelectorAll('.chips').forEach(group=>group.querySelectorAll('.chip').forEach(btn=>btn.addEventListener('click',()=>{group.querySelectorAll('.chip').forEach(b=>b.classList.remove('active'));btn.classList.add('active')})));
+document.getElementById('send').addEventListener('click',()=>{document.getElementById('form').classList.add('hide');document.getElementById('success').classList.add('show')});
+document.getElementById('again').addEventListener('click',e=>{e.preventDefault();document.getElementById('success').classList.remove('show');document.getElementById('form').classList.remove('hide');document.getElementById('wish').value=''});
+</script>
+</body>
+</html>
