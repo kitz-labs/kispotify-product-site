@@ -33,7 +33,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=20260929-v6-3">
+  <link rel="stylesheet" href="/styles.css?v=20260929-v6-5">
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -345,8 +345,15 @@
             <h3>So fühlt sich das Feature für Gäste an.</h3>
             <p>Vom Scan bis zum Musikwunsch: ein kurzer visueller Ablauf für Bar, Restaurant oder Hotel.</p>
           </div>
-          <div class="video-wrap">
-            <video autoplay muted loop playsinline controls preload="metadata" poster="/assets/v6/qr-guest-hero.webp">
+          <div class="video-wrap" id="qrVideoWrap">
+            <div class="video-fallback-demo" aria-hidden="true">
+              <div class="vf-step vf-qr"><span></span><b>QR</b><small>SCANNEN</small></div>
+              <i>→</i>
+              <div class="vf-step vf-wish"><b>♪</b><strong>Musikwunsch</strong><small>Beautiful Things</small><em>Wunsch senden</em></div>
+              <i>→</i>
+              <div class="vf-step vf-live"><span>LIVE</span><strong>Wunsch empfangen</strong><small>passt zum Musikprofil</small></div>
+            </div>
+            <video id="qrFeatureVideo" autoplay muted loop playsinline controls preload="auto" poster="/assets/v6/qr-guest-hero.webp" aria-label="Demo des QR Gäste-Wunsch-Systems">
               <source src="/assets/v6/qr-guest-wishes-v6.mp4" type="video/mp4">
             </video>
           </div>
@@ -711,6 +718,6 @@
 
   <div class="mobile-sticky"><a class="btn btn-primary" href="#contact">Demo & Setup anfragen ↗</a></div>
 
-  <script src="/app.js?v=20260929-v6-3" defer></script>
+  <script src="/app.js?v=20260929-v6-5" defer></script>
 </body>
 </html>
