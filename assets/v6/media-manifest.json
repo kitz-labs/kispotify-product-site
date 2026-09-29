@@ -1,5 +1,5 @@
 {
-  "version": "6.5",
+  "version": "6.6",
   "generated": "2026-09-29",
   "policy": {
     "openart": false,
@@ -8,8 +8,44 @@
     "upstream": "https://github.com/FFmpeg/FFmpeg"
   },
   "assets": [
-    {"file":"product-film-v6.mp4","durationSeconds":10,"width":1280,"height":720,"codec":"h264","pixelFormat":"yuv420p","usage":"product motion showcase"},
-    {"file":"qr-guest-wishes-v6.mp4","durationSeconds":8,"width":1280,"height":720,"codec":"h264","pixelFormat":"yuv420p","usage":"QR guest wish feature"},
-    {"file":"daypart-timeline-v6.mp4","durationSeconds":10,"width":1280,"height":720,"codec":"h264","pixelFormat":"yuv420p","usage":"hospitality timeline"}
+    {
+      "file": "product-film-v6.mp4",
+      "durationSeconds": 10,
+      "width": 1280,
+      "height": 720,
+      "codec": "h264",
+      "pixelFormat": "yuv420p",
+      "usage": "product motion showcase"
+    },
+    {
+      "file": "qr-guest-wishes-v6.mp4",
+      "durationSeconds": 8,
+      "width": 1280,
+      "height": 720,
+      "codec": "h264",
+      "pixelFormat": "yuv420p",
+      "usage": "QR guest wish feature"
+    },
+    {
+      "file": "daypart-timeline-v6.mp4",
+      "durationSeconds": 10,
+      "width": 1280,
+      "height": 720,
+      "codec": "h264",
+      "pixelFormat": "yuv420p",
+      "usage": "hospitality timeline"
+    },
+    {
+      "file": "qr-guest-hero.webp",
+      "type": "image/webp",
+      "source": "frame from qr-guest-wishes-v6.mp4",
+      "usage": "QR guest wish hero and poster"
+    },
+    {
+      "file": "hospitality-rooftop.webp",
+      "type": "image/webp",
+      "source": "frame from product-film-v6.mp4",
+      "usage": "hospitality/product poster"
+    }
   ]
 }
