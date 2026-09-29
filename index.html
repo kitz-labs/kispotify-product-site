@@ -27,7 +27,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=20260929-v4-1">
+  <link rel="stylesheet" href="/styles.css?v=20260929-v4-2">
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -299,7 +299,7 @@
       <div class="container">
         <div class="section-heading reveal">
           <div><div class="kicker"><span></span> INTERACTIVE DEMO</div><h2>Teste den Playlist-Flow.</h2></div>
-          <p>Die Demo läuft vollständig im Browser. Sie simuliert die Produktlogik und verändert keine Spotify-Daten.</p>
+          <p>Im Live-Modus nutzt die Demo den echten Preview-Endpunkt des KI Spotify Agent. Lokal steht zusätzlich ein schneller Browser-Fallback bereit. Es werden keine Spotify-Playlists veröffentlicht.</p>
         </div>
 
         <div class="demo-shell reveal">
@@ -516,7 +516,7 @@
         <div class="trust-copy reveal">
           <div class="kicker"><span></span> QUALITY & CONTROL</div>
           <h2>Automation ohne Blindflug.</h2>
-          <p>Die Produktlogik ist Preview-first. Die Produktwebsite selbst hat keinen Spotify-Schreibzugriff und liest für den Live-Status ausschließlich den öffentlichen Health-Endpunkt.</p>
+          <p>Die Produktlogik ist Preview-first. Die Produktwebsite nutzt ausschließlich begrenzte Public-Status-, Preview- und Kontakt-Endpunkte; Create-, Delete-, Playback- und OAuth-Aktionen sind hier nicht verfügbar.</p>
         </div>
         <div class="guardrails reveal" data-delay="100">
           <div><i>01</i><section><strong>Preview vor Publish</strong><span>Plan und Track-Auswahl bleiben vor dem Write sichtbar.</span></section><em>ACTIVE</em></div>
@@ -602,7 +602,7 @@
             <h3>Custom AI Stack</h3>
             <p>Für individuelle Agenten, Integrationen, spezielle Workflows und kundenspezifische Infrastruktur.</p>
             <div class="price custom"><strong>Individuell</strong></div>
-            <small class="price-billing">projektbasiert</small>
+            <small class="price-billing fixed-billing">projektbasiert</small>
             <div class="setup-fee">Setup nach Umfang</div>
             <ul>
               <li>Alles aus Hospitality</li><li>Custom Integrationen</li><li>Eigene Agent-Workflows</li><li>Individuelle APIs</li><li>Deployment & Onboarding</li><li>Priorisierte Weiterentwicklung</li>
@@ -702,6 +702,6 @@
   </footer>
 
   <div class="mobile-sticky"><a class="btn btn-primary" href="https://spotify.kitzlabs.ai/" target="_blank" rel="noreferrer">Live-System öffnen ↗</a></div>
-  <script src="/app.js?v=20260929-v4-1" defer></script>
+  <script src="/app.js?v=20260929-v4-2" defer></script>
 </body>
 </html>
