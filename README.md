@@ -1,4 +1,4 @@
-# KI Spotify Agent — Product Website V6.6
+# KI Spotify Agent — Product Website V6.7
 
 Premium Customer-facing SaaS Product Website für den KI Spotify Agent von AI Kitz.
 
@@ -7,7 +7,7 @@ Premium Customer-facing SaaS Product Website für den KI Spotify Agent von AI Ki
 - Product App: https://spotify.kitzlabs.ai/
 - Guest Wish Demo: https://kispotify.kitzlabs.ai/guest-wish.html
 
-## V6.6 · Premium Interactive SaaS Experience · 2026-09-29
+## V6.7 · Premium Interactive SaaS Experience · 2026-09-29
 - komplett customer-facing; keine Admin-/Backend-Inhalte im sichtbaren Frontend
 - neuer Cinematic Hero mit Product Window, Floating Cards und Guest Wish Toast
 - interaktiver Venue Selector für Bar, Hotel, Restaurant und Event
@@ -111,3 +111,12 @@ Im sichtbaren Frontend werden nur Funktionen erklärt, die ein Kunde verstehen u
 - Posters werden aus den finalen Videos extrahiert; keine OpenArt-Runtime oder OpenArt-Generierung ist Teil der V6.6 Pipeline.
 - QR Hero Poster: Frame aus `qr-guest-wishes-v6.mp4`.
 - Hospitality Poster: Frame aus `product-film-v6.mp4`.
+
+
+## V6.7 Accessibility & Performance Pass
+- alle drei Video-Loops starten nur im sichtbaren Viewport
+- keine nativen Browser-Controls mehr im Premium UI
+- eigene Pause/Play-Steuerung pro Video
+- User-Pause wird respektiert und nicht durch Scroll-Observer überschrieben
+- prefers-reduced-motion stoppt automatische Wiedergabe
+- Video-Preload auf metadata begrenzt
