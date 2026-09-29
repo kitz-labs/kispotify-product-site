@@ -174,6 +174,45 @@
 
   const reducedMotion=matchMedia("(prefers-reduced-motion:reduce)");if(reducedMotion.matches)$$("video[autoplay]").forEach(v=>{v.removeAttribute("autoplay");v.pause()});
 
+  function setupVideoFallback(videoSelector,wrapSelector){
+    const video=$(videoSelector),wrap=$(wrapSelector);if(!video||!wrap)return;
+    const ready=()=>{wrap.classList.remove("video-fallback-active");wrap.classList.add("video-ready")};
+    const fallback=()=>{if(video.readyState<2)wrap.classList.add("video-fallback-active")};
+    video.addEventListener("loadeddata",ready,{once:true});
+    video.addEventListener("playing",ready,{once:true});
+    video.addEventListener("error",fallback,{once:true});
+    setTimeout(fallback,2800);
+  }
+  const motionShowcaseVideos=$$("#motion video");
+  if(motionShowcaseVideos.length){
+    const setShellState=(video,playing)=>{
+      const shell=video.closest(".motion-video-shell");
+      if(shell)shell.classList.toggle("is-paused",!playing);
+    };
+    motionShowcaseVideos.forEach(video=>{
+      video.muted=true;
+      video.addEventListener("error",()=>video.closest(".motion-video-shell")?.classList.add("video-error"));
+      video.addEventListener("playing",()=>setShellState(video,true));
+      video.addEventListener("pause",()=>setShellState(video,false));
+      setShellState(video,true);
+    });
+    if("IntersectionObserver"in window&&!matchMedia("(prefers-reduced-motion:reduce)").matches){
+      const mediaObserver=new IntersectionObserver(entries=>{
+        entries.forEach(entry=>{
+          const video=entry.target;
+          if(entry.isIntersecting&&entry.intersectionRatio>.35){video.play().catch(()=>{});}
+          else{video.pause();}
+        });
+      },{threshold:[0,.35,.7]});
+      motionShowcaseVideos.forEach(video=>mediaObserver.observe(video));
+    }else if(matchMedia("(prefers-reduced-motion:reduce)").matches){
+      motionShowcaseVideos.forEach(video=>video.pause());
+    }
+  }
+
+  setupVideoFallback("#productFilm","#productFilmWrap");
+  setupVideoFallback("#daypartFilm","#daypartFilmWrap");
+
   const qrVideo=$("#qrFeatureVideo"),qrVideoWrap=$("#qrVideoWrap");
   if(qrVideo&&qrVideoWrap){
     const videoReady=()=>{qrVideoWrap.classList.remove("video-fallback-active");qrVideoWrap.classList.add("video-ready")};
