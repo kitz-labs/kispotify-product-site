@@ -45,6 +45,8 @@ Alle Preise netto zzgl. USt.
 - /assets/v6/qr-guest-hero.webp
 - /assets/v6/hospitality-rooftop.webp
 - /assets/v6/qr-guest-wishes-v6.mp4
+- /assets/v6/product-film-v6.mp4
+- /assets/v6/daypart-timeline-v6.mp4
 - /assets/v5/guest-wish-qr.svg
 
 ## Safety
@@ -85,3 +87,12 @@ Im sichtbaren Frontend werden nur Funktionen erklärt, die ein Kunde verstehen u
 - OpenArt is not used for this project.
 - Video assets and motion references must come from GitHub-based tooling/workflows or Hugging Face models.
 - The live website keeps a native CSS/JS animated fallback so the customer experience never depends on an external video service.
+
+
+## V6 Motion Layer
+- zentraler Showcase mit 10s Product Flow, 8s QR Guest Wish und 10s Daypart/Timeline Film
+- Videos: H.264 / yuv420p / 1280x720 / faststart
+- Wiedergabe wird viewport-basiert gestartet und pausiert, um Mobile-Performance zu schonen
+- prefers-reduced-motion wird respektiert
+- native CSS/JS Fallbacks bleiben aktiv
+- Render-Workflow verwendet FFmpeg/Open-Source-Tooling; OpenArt ist ausgeschlossen
