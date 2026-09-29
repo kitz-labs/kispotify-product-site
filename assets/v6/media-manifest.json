@@ -1,0 +1,15 @@
+{
+  "version": "6.5",
+  "generated": "2026-09-29",
+  "policy": {
+    "openart": false,
+    "external_video_runtime": false,
+    "renderer": "FFmpeg",
+    "upstream": "https://github.com/FFmpeg/FFmpeg"
+  },
+  "assets": [
+    {"file":"product-film-v6.mp4","durationSeconds":10,"width":1280,"height":720,"codec":"h264","pixelFormat":"yuv420p","usage":"product motion showcase"},
+    {"file":"qr-guest-wishes-v6.mp4","durationSeconds":8,"width":1280,"height":720,"codec":"h264","pixelFormat":"yuv420p","usage":"QR guest wish feature"},
+    {"file":"daypart-timeline-v6.mp4","durationSeconds":10,"width":1280,"height":720,"codec":"h264","pixelFormat":"yuv420p","usage":"hospitality timeline"}
+  ]
+}
