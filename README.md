@@ -17,7 +17,7 @@ Premium Customer-facing SaaS Product Website für den KI Spotify Agent von AI Ki
 - Feature-Detail-Modals statt überladener Startseite
 - echtes QR Guest Wish Demo UI
 - neue Hospitality-Bilder
-- animierter QR/Hospitality Produktclip als lokales MP4
+- animierter QR/Hospitality Produktclip als lokales H.264 MP4 mit CSS-Fallback für Browser ohne Videowiedergabe
 - große interaktive Music Timeline
 - Event Override Visual
 - Vorher/Nachher Vergleich
@@ -29,6 +29,8 @@ Premium Customer-facing SaaS Product Website für den KI Spotify Agent von AI Ki
 - pointer-based Hero Parallax, Track Cascade, Scan-Line, Floating Toasts, Scroll Reveal
 - prefers-reduced-motion Support
 - responsive Desktop / Tablet / Mobile
+- OpenGraph / Twitter Social Preview mit V6 Hero Asset
+- zugängliche Feature-Modals mit Fokusführung und Escape/Tab-Handling
 
 ## Pricing
 - Core ab €49/Monat + Setup ab €299
