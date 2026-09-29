@@ -183,31 +183,38 @@
     video.addEventListener("error",fallback,{once:true});
     setTimeout(fallback,2800);
   }
-  const motionShowcaseVideos=$$("#motion video");
-  if(motionShowcaseVideos.length){
-    const setShellState=(video,playing)=>{
-      const shell=video.closest(".motion-video-shell");
-      if(shell)shell.classList.toggle("is-paused",!playing);
-    };
-    motionShowcaseVideos.forEach(video=>{
-      video.muted=true;
-      video.addEventListener("error",()=>video.closest(".motion-video-shell")?.classList.add("video-error"));
-      video.addEventListener("playing",()=>setShellState(video,true));
-      video.addEventListener("pause",()=>setShellState(video,false));
-      setShellState(video,true);
-    });
-    if("IntersectionObserver"in window&&!matchMedia("(prefers-reduced-motion:reduce)").matches){
-      const mediaObserver=new IntersectionObserver(entries=>{
-        entries.forEach(entry=>{
-          const video=entry.target;
-          if(entry.isIntersecting&&entry.intersectionRatio>.35){video.play().catch(()=>{});}
-          else{video.pause();}
-        });
-      },{threshold:[0,.35,.7]});
-      motionShowcaseVideos.forEach(video=>mediaObserver.observe(video));
-    }else if(matchMedia("(prefers-reduced-motion:reduce)").matches){
-      motionShowcaseVideos.forEach(video=>video.pause());
-    }
+  const smartVideos=$$(".smart-loop-video");
+  const reducedMotionQuery=matchMedia("(prefers-reduced-motion:reduce)");
+  function syncVideoToggle(video){
+    const button=$('[data-video-toggle="#'+video.id+'"]');
+    if(!button)return;
+    const paused=video.paused;
+    button.innerHTML=paused?'▶ <span>Abspielen</span>':'Ⅱ <span>Pause</span>';
+    button.setAttribute("aria-label",paused?"Animation abspielen":"Animation pausieren");
+  }
+  smartVideos.forEach(video=>{
+    video.muted=true;
+    video.dataset.userPaused="false";
+    video.addEventListener("play",()=>syncVideoToggle(video));
+    video.addEventListener("pause",()=>syncVideoToggle(video));
+    video.addEventListener("error",()=>video.closest(".motion-video-shell,.video-wrap,.timeline-video-player")?.classList.add("video-error"));
+    syncVideoToggle(video);
+  });
+  $$("[data-video-toggle]").forEach(button=>button.addEventListener("click",()=>{
+    const video=$(button.dataset.videoToggle);if(!video)return;
+    if(video.paused){video.dataset.userPaused="false";video.play().catch(()=>{});}
+    else{video.dataset.userPaused="true";video.pause();}
+    syncVideoToggle(video);
+  }));
+  if("IntersectionObserver"in window&&!reducedMotionQuery.matches){
+    const mediaObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
+      const video=entry.target;
+      if(entry.isIntersecting&&entry.intersectionRatio>.35&&video.dataset.userPaused!=="true")video.play().catch(()=>{});
+      else if(!entry.isIntersecting||entry.intersectionRatio<=.15)video.pause();
+    }),{threshold:[0,.15,.35,.7]});
+    smartVideos.forEach(video=>mediaObserver.observe(video));
+  }else{
+    smartVideos.forEach(video=>video.pause());
   }
 
   setupVideoFallback("#productFilm","#productFilmWrap");
